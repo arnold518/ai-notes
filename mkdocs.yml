@@ -8,7 +8,6 @@ theme:
   name: material
   features:
     - content.code.copy
-    - navigation.sections
     - header.autohide
     - navigation.instant
     - navigation.tracking
@@ -91,34 +90,35 @@ extra:
 
 nav:
   - Home: index.md
-  - Mathematical Foundations of Deep Neural Networks:
-      - MFDNN/format/index.md
-      - Ch 1. Optimization and Stochastic Gradient Descent:
-          - 1. Optimization Problem : MFDNN/format/1.md
-          - 2. Gradient Descent: MFDNN/format/2.md
-          - Chapter 1 Code: https://drive.google.com/file/d/1PSpoeseUPIptYQOPuQpxNawxtZbVR_K6/view?usp=sharing
-      - Ch 2. Shallow Neural Networks to Multilayer Perceptrons:
-          - 3. Shallow Neural Networks : MFDNN/format/3.md
-          - 4. Deep Neural Networks : MFDNN/format/4.md
-          - Chapter 2 Code: https://drive.google.com/file/d/15kXC3cJUV63gZNfXK6JdPPuSrwQZBzI8/view?usp=sharing
-      - Ch 3. Convolutional Neural Networks:
-          - 5. Convolutional Neural Networks : MFDNN/format/5.md
-          - 6. Foundations of Design and Training of Deep Neural Networks : MFDNN/format/6.md
-          - 7. ImageNet Challenge : MFDNN/format/7.md
-          - Chapter 3 Code: https://drive.google.com/file/d/12O9fLasWDA-kOKBD-lE-1UhCl-PoDf0z/view?usp=sharing
-      - Ch 4. CNNs for Other Supervised Learning Tasks:
-          - 8. CNNs for Other Supervised Learning Tasks : MFDNN/format/8.md
-          - Chapter 4 Code: https://drive.google.com/file/d/16IOKVF6IiDMyUvL73pGKBaEMKyXvezLB/view?usp=sharing
-      - Ch 5. Unsupervised Learning:
-          - 9. Autoencoder : MFDNN/format/9.md
-          - 10. Flow Models : MFDNN/format/10.md
-          - 11. Variational Autoencoders : MFDNN/format/11.md
-          - 12. Generative Adversarial Networks : MFDNN/format/12.md
-          - Chapter 5 Code: https://drive.google.com/file/d/1JM5k-e6LkhZ0vXRlfROWpiuw4YC85Jv1/view?usp=sharing
-      - Ch A. Appendix - Basics of Monte Carlo:
-          - 13. Basics of Monte Carlo : MFDNN/format/13.md
-          - Chapter A Code: https://drive.google.com/file/d/18b01xoORd0LFQmpfc_4ou5Rv44MY1neg/view?usp=sharing
-      - Python Basics:
-          - Python Lecture 1: https://drive.google.com/file/d/1-iY9XfDhWNRDq3z_wVVvOzU04aRQWAfW/view?usp=drive_link
-          - Python Lecture 2: https://drive.google.com/file/d/1BANbCC6jBjPEUFSRJMFkcLbc4oVmoQHm/view?usp=sharing
-          - Python Lecture 3: https://drive.google.com/file/d/1-Bc11RZmno6yx37kfVLjsyY-XKpLK5Je/view?usp=drive_link
+  - Books & Courses:
+      - Mathematical Foundations of Deep Neural Networks:
+          - books-and-courses/mfdnn/format/index.md
+          - Ch 1. Optimization and Stochastic Gradient Descent:
+              - 1. Optimization Problem : books-and-courses/mfdnn/format/1.md
+              - 2. Gradient Descent: books-and-courses/mfdnn/format/2.md
+              - Chapter 1 Code: https://drive.google.com/file/d/1PSpoeseUPIptYQOPuQpxNawxtZbVR_K6/view?usp=sharing
+          - Ch 2. Shallow Neural Networks to Multilayer Perceptrons:
+              - 3. Shallow Neural Networks : books-and-courses/mfdnn/format/3.md
+              - 4. Deep Neural Networks : books-and-courses/mfdnn/format/4.md
+              - Chapter 2 Code: https://drive.google.com/file/d/15kXC3cJUV63gZNfXK6JdPPuSrwQZBzI8/view?usp=sharing
+          - Ch 3. Convolutional Neural Networks:
+              - 5. Convolutional Neural Networks : books-and-courses/mfdnn/format/5.md
+              - 6. Foundations of Design and Training of Deep Neural Networks : books-and-courses/mfdnn/format/6.md
+              - 7. ImageNet Challenge : books-and-courses/mfdnn/format/7.md
+              - Chapter 3 Code: https://drive.google.com/file/d/12O9fLasWDA-kOKBD-lE-1UhCl-PoDf0z/view?usp=sharing
+          - Ch 4. CNNs for Other Supervised Learning Tasks:
+              - 8. CNNs for Other Supervised Learning Tasks : books-and-courses/mfdnn/format/8.md
+              - Chapter 4 Code: https://drive.google.com/file/d/16IOKVF6IiDMyUvL73pGKBaEMKyXvezLB/view?usp=sharing
+          - Ch 5. Unsupervised Learning:
+              - 9. Autoencoder : books-and-courses/mfdnn/format/9.md
+              - 10. Flow Models : books-and-courses/mfdnn/format/10.md
+              - 11. Variational Autoencoders : books-and-courses/mfdnn/format/11.md
+              - 12. Generative Adversarial Networks : books-and-courses/mfdnn/format/12.md
+              - Chapter 5 Code: https://drive.google.com/file/d/1JM5k-e6LkhZ0vXRlfROWpiuw4YC85Jv1/view?usp=sharing
+          - Ch A. Appendix - Basics of Monte Carlo:
+              - 13. Basics of Monte Carlo : books-and-courses/mfdnn/format/13.md
+              - Chapter A Code: https://drive.google.com/file/d/18b01xoORd0LFQmpfc_4ou5Rv44MY1neg/view?usp=sharing
+          - Python Basics:
+              - Python Lecture 1: https://drive.google.com/file/d/1-iY9XfDhWNRDq3z_wVVvOzU04aRQWAfW/view?usp=drive_link
+              - Python Lecture 2: https://drive.google.com/file/d/1BANbCC6jBjPEUFSRJMFkcLbc4oVmoQHm/view?usp=sharing
+              - Python Lecture 3: https://drive.google.com/file/d/1-Bc11RZmno6yx37kfVLjsyY-XKpLK5Je/view?usp=drive_link

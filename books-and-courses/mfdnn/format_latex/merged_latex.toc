@@ -1,0 +1,80 @@
+\contentsline {part}{I\hspace {1em}Optimization and Stochastic Gradient Descent}{4}{part.1}%
+\contentsline {chapter}{\numberline {1}Optimization Problem}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Definition of Optimization Problem}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Examples of Optimization Problem}{6}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Local and Global Minimum}{7}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Gradient Descent}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Gradient Descent}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Convergence of Gradient Descent}{10}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Stochastic Gradient Descent}{13}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Variants of Stochastic Gradient Descent}{14}{section.2.4}%
+\contentsline {part}{II\hspace {1em}Shallow Neural Networks to Multilayer Perceptrons}{20}{part.2}%
+\contentsline {chapter}{\numberline {3}Shallow Neural Networks}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Supervised Learning Problem}{21}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Linear Classification}{22}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Support Vector Machine }{23}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Logistic Regression}{25}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Prediction}{29}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Datasets}{30}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Deep Neural Networks}{33}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Deep Neural Networks}{33}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Multi-Class Classification}{36}{section.4.2}%
+\contentsline {section}{\numberline {4.3}GPUs in Deep Learning}{38}{section.4.3}%
+\contentsline {part}{III\hspace {1em}Convolutional Neural Networks}{42}{part.3}%
+\contentsline {chapter}{\numberline {5}Convolutional Neural Networks}{43}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Convolutional Layers}{43}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Foundations of Design and Training of Deep Neural Networks}{49}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Data Augmentation}{49}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Overfitting \& Underfitting}{51}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Weight Decay}{53}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Dropout}{54}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}SGD Early / Late Stopping}{56}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}More Data}{57}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}SGD Optimizer}{58}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Weight Initialization}{63}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Automatic Differentation}{68}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Batch Normalization}{72}{section.6.6}%
+\contentsline {chapter}{\numberline {7}ImageNet Challenge}{76}{chapter.7}%
+\contentsline {section}{\numberline {7.1}LeNet}{77}{section.7.1}%
+\contentsline {section}{\numberline {7.2}AlexNet}{78}{section.7.2}%
+\contentsline {section}{\numberline {7.3}VGGNet}{80}{section.7.3}%
+\contentsline {section}{\numberline {7.4}NiN Network}{82}{section.7.4}%
+\contentsline {section}{\numberline {7.5}GoogLeNet}{84}{section.7.5}%
+\contentsline {section}{\numberline {7.6}ResNet}{87}{section.7.6}%
+\contentsline {part}{IV\hspace {1em}CNNs for Other Supervised Learning Tasks}{89}{part.4}%
+\contentsline {chapter}{\numberline {8}CNNs for Other Supervised Learning Tasks}{90}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Inverse Problem}{90}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Gaussian Denoising}{91}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}Image Super-Resolution}{92}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.1.3}Other Examples}{96}{subsection.8.1.3}%
+\contentsline {section}{\numberline {8.2}Operations Increasing Spatial Dimensions}{98}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Transposed convolution}{98}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Upsampling}{103}{subsection.8.2.2}%
+\contentsline {section}{\numberline {8.3}Semantic Segmentation}{104}{section.8.3}%
+\contentsline {part}{V\hspace {1em}Unsupervised Learning}{113}{part.5}%
+\contentsline {chapter}{\numberline {9}Autoencoder}{114}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Unsupervised Learning}{114}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Definition of Autoencoder}{114}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Applications of Autoencoder}{115}{section.9.3}%
+\contentsline {chapter}{\numberline {10}Flow Models}{118}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Probabilistic Generative Models}{118}{section.10.1}%
+\contentsline {section}{\numberline {10.2}1D Flow Models}{120}{section.10.2}%
+\contentsline {section}{\numberline {10.3}High Dimensional Flow Models}{126}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Coupling Flows}{129}{section.10.4}%
+\contentsline {section}{\numberline {10.5}Researches}{135}{section.10.5}%
+\contentsline {chapter}{\numberline {11}Variational Autoencoders}{136}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Latent Variable Model}{137}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Training Latent Variable Model with Importance Sampling}{140}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Definition of VAE}{143}{section.11.3}%
+\contentsline {section}{\numberline {11.4}VAE Standard Instance}{146}{section.11.4}%
+\contentsline {section}{\numberline {11.5}Training VAE}{148}{section.11.5}%
+\contentsline {section}{\numberline {11.6}Researches}{149}{section.11.6}%
+\contentsline {chapter}{\numberline {12}Generative Adversarial Networks}{153}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Minimax Optimization}{153}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Definition of GAN}{156}{section.12.2}%
+\contentsline {section}{\numberline {12.3}f-GAN}{159}{section.12.3}%
+\contentsline {chapter}{\numberline {13}Basics of Monte Carlo}{170}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Monte Carlo Estimation}{170}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Importance Sampling}{172}{section.13.2}%
+\contentsline {section}{\numberline {13.3}Log-Derivative Trick}{173}{section.13.3}%
+\contentsline {section}{\numberline {13.4}Reparameterization Trick}{175}{section.13.4}%

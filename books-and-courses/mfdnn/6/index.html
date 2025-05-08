@@ -1,0 +1,2543 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>§ 6. Foundations of Design and Training of Deep Neural Networks - Artificial Intelligence Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%206a6%206%200%200%201%206%206c0%202.22-1.21%204.16-3%205.2V19a1%201%200%200%201-1%201h-4a1%201%200%200%201-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6%206%200%200%201%206-6m2%2015v1a1%201%200%200%201-1%201h-2a1%201%200%200%201-1-1v-1zm6-10h3v2h-3zM1%2011h3v2H1zM13%201v3h-2V1zM4.92%203.5l2.13%202.14-1.42%201.41L3.5%204.93zm12.03%202.13%202.12-2.13%201.43%201.43-2.13%202.12z%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20512%20512%22%3E%3C%21--%21%20Font%20Awesome%20Free%206.7.2%20by%20%40fontawesome%20-%20https%3A//fontawesome.com%20License%20-%20https%3A//fontawesome.com/license/free%20%28Icons%3A%20CC%20BY%204.0%2C%20Fonts%3A%20SIL%20OFL%201.1%2C%20Code%3A%20MIT%20License%29%20Copyright%202024%20Fonticons%2C%20Inc.--%3E%3Cpath%20d%3D%22M256%200a256%20256%200%201%201%200%20512%20256%20256%200%201%201%200-512m-24%20120v136c0%208%204%2015.5%2010.7%2020l96%2064c11%207.4%2025.9%204.4%2033.3-6.7s4.4-25.9-6.7-33.3L280%20243.2V120c0-13.3-10.7-24-24-24s-24%2010.7-24%2024%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans";--md-code-font:"Ubuntu Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-foundations-of-design-and-training-of-deep-neural-networks" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../.." title="Artificial Intelligence Notes" class="md-header__button md-logo" aria-label="Artificial Intelligence Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Artificial Intelligence Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              § 6. Foundations of Design and Training of Deep Neural Networks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="공유" aria-label="공유" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/arnold518/ai-notes" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arnold518/ai-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../format/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Books & Courses
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Artificial Intelligence Notes" class="md-nav__button md-logo" aria-label="Artificial Intelligence Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Artificial Intelligence Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/arnold518/ai-notes" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arnold518/ai-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Books & Courses
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Books & Courses
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../format/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Mathematical Foundations of Deep Neural Networks
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Mathematical Foundations of Deep Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 1. Optimization and Stochastic Gradient Descent
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 1. Optimization and Stochastic Gradient Descent
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Optimization Problem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Gradient Descent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1PSpoeseUPIptYQOPuQpxNawxtZbVR_K6/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 2. Shallow Neural Networks to Multilayer Perceptrons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 2. Shallow Neural Networks to Multilayer Perceptrons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Shallow Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Deep Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/15kXC3cJUV63gZNfXK6JdPPuSrwQZBzI8/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 3. Convolutional Neural Networks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 3. Convolutional Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Convolutional Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Foundations of Design and Training of Deep Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. ImageNet Challenge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/12O9fLasWDA-kOKBD-lE-1UhCl-PoDf0z/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 3 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 4. CNNs for Other Supervised Learning Tasks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 4. CNNs for Other Supervised Learning Tasks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. CNNs for Other Supervised Learning Tasks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/16IOKVF6IiDMyUvL73pGKBaEMKyXvezLB/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 4 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6" id="__nav_2_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 5. Unsupervised Learning
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 5. Unsupervised Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Autoencoder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Flow Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Variational Autoencoders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Generative Adversarial Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1JM5k-e6LkhZ0vXRlfROWpiuw4YC85Jv1/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 5 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_7" id="__nav_2_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch A. Appendix - Basics of Monte Carlo
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            Ch A. Appendix - Basics of Monte Carlo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Basics of Monte Carlo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/18b01xoORd0LFQmpfc_4ou5Rv44MY1neg/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter A Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_8" id="__nav_2_1_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Python Basics
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_8">
+            <span class="md-nav__icon md-icon"></span>
+            Python Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1-iY9XfDhWNRDq3z_wVVvOzU04aRQWAfW/view?usp=drive_link" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python Lecture 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1BANbCC6jBjPEUFSRJMFkcLbc4oVmoQHm/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python Lecture 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1-Bc11RZmno6yx37kfVLjsyY-XKpLK5Je/view?usp=drive_link" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python Lecture 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-augmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Augmentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overfitting-underfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overfitting &amp; Underfitting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overfitting &amp; Underfitting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#weight-decay" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weight Decay
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dropout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dropout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sgd-early-late-stopping" class="md-nav__link">
+    <span class="md-ellipsis">
+      SGD Early / Late Stopping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      More Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sgd-optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      SGD Optimizer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weight-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weight Initialization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-differentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Differentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Normalization
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="6-foundations-of-design-and-training-of-deep-neural-networks">§ 6. Foundations of Design and Training of Deep Neural Networks<a class="headerlink" href="#6-foundations-of-design-and-training-of-deep-neural-networks" title="Permanent link">&para;</a></h1>
+<h2 id="data-augmentation">Data Augmentation<a class="headerlink" href="#data-augmentation" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.1 : Spurious Correlation</p>
+<p>Hypothetical: A photographer prefers to take pictures with cats looking to the left and dogs looking to the right. Neural network learns to distinguish cats from dogs by which direction it is facing. This learned correlation will not be useful for pictures taken by another photographer.</p>
+<p>This is a <strong>spurious correlation</strong>, a correlation between the data and labels that does not capture the "true" meaning. Spurious correlations are not robust in the sense that the spurious correlation will not be a useful predictor when the data changes slightly.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.2 : Data Augmentation (DA)</p>
+<p><center>
+<img alt="" src="../assets/6.1.png" width="100%" />
+</center></p>
+<p>Translation invariance are encoded in convolution, but other invariances are harder to encode (unless one uses geometric deep learning).
+Therefore encode invariances in data and have neural networks learn the invariance.</p>
+<hr />
+<p><strong>Data augmentation (DA)</strong> applies transforms to the data while preserving meaning and label.</p>
+<ul>
+<li>
+<p>Option 1: Enlarge dataset itself.<br />
+    Usually cumbersome and unnecessary.</p>
+</li>
+<li>
+<p>Option 2: Use randomly transformed data in training loop.<br />
+    In PyTorch, we use <code>Torchvision.transforms</code>.</p>
+</li>
+</ul>
+<hr />
+<p>We use DA to :</p>
+<ul>
+<li>Inject our prior knowledge of the structure of the data and force the neural network to learn it.</li>
+<li>Remove spurious correlations.</li>
+<li>Increase the effective data size. In particular, we ensure neural network never encounters the exact same data again and thereby prevent the neural network from performing exact memorization. (Neural network can memorize quite well.)</li>
+</ul>
+<p>Effects of DA :</p>
+<ul>
+<li>DA usually worsens the training error (but we don't care about training error).</li>
+<li>DA often, but not always, improves the test error.<br />
+    If DA removes a spurious correlation, then the test error can be worsened.</li>
+<li>DA usually improves robustness.</li>
+</ul>
+</div>
+<h2 id="overfitting-underfitting">Overfitting &amp; Underfitting<a class="headerlink" href="#overfitting-underfitting" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.3 : Classical Statistics - Overfitting vs Underfitting</p>
+<p><center>
+<img alt="" src="../assets/6.2.jpg" width="80%" />
+<img alt="" src="../assets/6.3.png" width="60%" />
+</center></p>
+<p>Given separate train and test data</p>
+<ul>
+<li>When (training loss) &lt;&lt; (testing loss) you are <strong>overfitting</strong>. What you have learned from the training data does not carry over to test data.</li>
+<li>When (training loss) <span class="arithmatex">\(\approx\)</span> (testing loss) you are <strong>underfitting</strong>. You have the potential to learn more from the training data.</li>
+</ul>
+<hr />
+<p>The goal of ML is to learn patterns that generalize to data you have not seen. From each datapoint, you want to learn enough (don't underfit) but if you learn too much you overcompensate for an observation specific to the single experience.</p>
+<p>In classical statistics, underfitting vs. overfitting (bias vs. variance tradeoff) is characterized rigorously.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.4 : Modern Deep Learning - Double Descent</p>
+<p>In modern deep learning, you can overfit, but the state-of-the art neural networks do not overfit (or "benignly overfit") despite having more model parameters than training data.</p>
+<p>We do not yet have clarity with this new phenomenon called <strong>double descent</strong>. When overfitting happens and when it does not is unclear.</p>
+<p><center>
+<img alt="" src="../assets/6.4.jpg" width="100%" />
+</center></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example 6.5 : Double Descent on 2-Layer Neural Network on MNIST</p>
+<p>Belkin et al. experimentally demonstrates the double descent phenomenon with an MLP trained on the MNIST dataset.</p>
+<p><center>
+<img alt="" src="../assets/6.5.png" width="60%" />
+</center></p>
+<p>(M. Belkin, D. Hsu, S. Ma, and S. Mandal, Reconciling modern machine-learning practice and the classical bias-variance trade-off, PNAS, 2019.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.6 : How to Avoid Overfitting</p>
+<p><strong>Regularization</strong> is loosely defined as mechanisms to prevent overfitting.</p>
+<p>When you are overfitting, regularize with:</p>
+<ul>
+<li>Smaller NN (fewer parameters) or larger NN (more parameters).</li>
+<li>Improve data by:<ul>
+<li>using data augmentation</li>
+<li>acquiring better, more diverse, data</li>
+<li>acquiring more of the same data</li>
+</ul>
+</li>
+<li>Weight decay</li>
+<li>Dropout</li>
+<li>Early stopping on SGD or late stopping on SGD</li>
+</ul>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.7 : How to Avoid Underfitting</p>
+<p>When you are underfitting, use:</p>
+<ul>
+<li>Larger NN (if computationally feasible)</li>
+<li>Less weight decay</li>
+<li>Less dropout</li>
+<li>Run SGD longer (if computationally feasible)</li>
+</ul>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.8 : Summary of Overfitting vs Underfitting</p>
+<p>In modern deep learning, the double descent phenomenon has brought a conceptual and theoretical crisis regarding over and underfitting. Much of the machine learning practice is informed by classical statistics and learning theory, which do not take the double descent phenomenon into account.</p>
+<p>Double descent will bring fundamental changes to statistics, and researchers need more time to figure things out. Most researchers, practitioners and theoreticians, agree that not all classical wisdom is invalid, but what part do we keep, and what part do we replace?</p>
+<p>In the meantime, we will have to keep in mind the two contradictory viewpoints and move forward in the absence of clarity.</p>
+</div>
+<h3 id="weight-decay">Weight Decay<a class="headerlink" href="#weight-decay" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.9 : <span class="arithmatex">\(\ell^{2}\)</span> - Regularization</p>
+<p><strong><span class="arithmatex">\(\ell^{2}\)</span>-regularization</strong> augments the loss function with</p>
+<div class="arithmatex">\[
+\underset{\theta \in \mathbb{R}^{p}}{\operatorname{minimize}} \frac{1}{N} \sum_{i=1}^{N} \ell\left(f_{\theta}\left(x_{i}\right), y_{i}\right)+\frac{\lambda}{2}\|\theta\|^{2}
+\]</div>
+<p>SGD on the augmented loss is usually implemented by changing SGD update rather than explicitly changing the loss since</p>
+<div class="arithmatex">\[
+\begin{gathered}
+\theta^{k+1}=\theta^{k}-\alpha\left(g^{k}+\lambda \theta^{k}\right) \\
+=(1-\alpha \lambda) \theta^{k}-\alpha g^{k}
+\end{gathered}
+\]</div>
+<p>Where <span class="arithmatex">\(g^{k}\)</span> is stochastic gradient of original (unaugmented) loss.</p>
+<p>In classical statistics, this is called ridge regression or maximum a posteriori (MAP) estimation with Gaussian prior.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.10 : Weight Decay <span class="arithmatex">\(\cong \ell^{2}\)</span> - Regularization</p>
+<p>In Pytorch, you can use SGD + weight decay by:</p>
+<p>augmenting the loss function
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>for param in model.parameters():
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    loss += (lamda/2)*param.pow(2.0).sum()
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>torch.optim.SGD(model.parameters(), lr=... , weight_decay=0)
+</span></code></pre></div>
+or by using <code>weight_decay</code> in the optimizer
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>torch.optim.SGD(model.parameters(), lr=... , weight_decay=lamda)
+</span></code></pre></div></p>
+<hr />
+<p>For plain SGD, weight decay and <span class="arithmatex">\(\ell^{2}\)</span>-regularization are equivalent. For other optimizers, the two are similar but not the same. More on this later.</p>
+</div>
+<h3 id="dropout">Dropout<a class="headerlink" href="#dropout" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.11 : Dropout</p>
+<p>Dropout is a regularization technique that randomly disables neurons.</p>
+<p>Standard layer,</p>
+<div class="arithmatex">\[
+h_{2}=\sigma\left(W_{1} h_{1}+b_{1}\right)
+\]</div>
+<p>Dropout with drop probability <span class="arithmatex">\(p\)</span> defines</p>
+<div class="arithmatex">\[
+h_{2}=\sigma\left(W_{1} h_{1}^{\prime}+b_{1}\right)
+\]</div>
+<p>with <span class="arithmatex">\(h_{1}^{\prime}\)</span> defined as</p>
+<div class="arithmatex">\[
+\left(h_{1}^{\prime}\right)_{j}= \begin{cases}0 &amp; \text { with probability } p \\ \frac{\left(h_{1}\right)_{j}}{1-p} &amp; \text { otherwise }\end{cases}
+\]</div>
+<p>Note that <span class="arithmatex">\(h_{1}^{\prime}\)</span> is defined so that <span class="arithmatex">\(\mathbb{E}[h_{1}^{\prime}]=h_1\)</span>.</p>
+<p><center>
+<img alt="" src="../assets/6.6.png" width="80%" />
+</center></p>
+<p>During training, dropout masks are different in every forward pass due to their random nature.</p>
+<p>(N. Srivastava, G. Hinton, A. Krizhevsky, I. Sutskever, R. Salakhutdinov, Dropout: A Simple Way to Prevent Neural Networks from Overfitting, JMLR, 2014.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.12 : Why is dropout helpful?</p>
+<p>"A motivation for dropout comes from a theory of the role of sex in evolution (Livnat et al., 2010)."</p>
+<p>Sexual reproduction, compared to asexual reproduction, creates the criterion for natural selection mix-ability of genes rather than individual fitness, since genes are mixed in a more haphazard manner.</p>
+<p>"Since a gene cannot rely on a large set of partners to be present at all times, it must learn to do something useful on its own or in collaboration with a small number of other genes. ... Similarly, each hidden unit in a neural network trained with dropout must learn to work with a randomly chosen sample of other units. This should make each hidden unit more robust and drive it towards creating useful features on its own without relying on other hidden units to correct its mistakes.</p>
+<p>The analogy to evolution is very interesting, but it is ultimately a heuristic argument. It also shifts the burden to the question: "why is sexual evolution more powerful than asexual evolution?"</p>
+<p>However, dropout can be shown to be loosely equivalent to <span class="arithmatex">\(\ell^{2}\)</span>-regularization. However, we do not yet have a complete understanding of the mathematical reason behind dropout's performance.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.13 : Dropout in Pytorch</p>
+<p>Dropout simply multiplies the neurons with a random <span class="arithmatex">\(0-\frac{1}{1-p_{\text {drop }}}\)</span> mask.</p>
+<p>A direct implementation in PyTorch:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>def dropout_layer(X, p_drop):
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    mask = (torch.rand(X.shape) &gt; p_drop).float()
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    return mask * X / (1.0 - p_drop)
+</span></code></pre></div></p>
+<p>PyTorch provides an implementation of dropout through <code>torch.nn.Dropout</code>.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.14 : Dropout in Training vs Test</p>
+<p>Typically, dropout is used during training and turned off during prediction/testing.
+(Dropout should be viewed as an additional onus imposed during training to make training more difficult and thereby effective, but it is something that should be turned off later.)</p>
+<p>In PyTorch, activate the training mode with
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>model.train()
+</span></code></pre></div>
+and activate evaluation mode with
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>model.eval()
+</span></code></pre></div>
+dropout (and batchnorm) will behave differently in these two modes.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.15 : When to Use Dropout</p>
+<p>Dropout is usually used on linear layers but not on convolutional layers.</p>
+<ul>
+<li>Linear layers have many weights and each weight is used only once per forward pass. (If <span class="arithmatex">\(y=\operatorname{Linear}_{A, b}(x)\)</span>, then <span class="arithmatex">\(A_{i j}\)</span> only affect <span class="arithmatex">\(y_{i}\)</span>.) So regularization seems more necessary.</li>
+<li>A convolutional filter has fewer weights and each weight is used multiple times in each forward pass. (If <span class="arithmatex">\(y=\operatorname{Conv} 2 \mathrm{D}_{w, b}(x)\)</span>, then <span class="arithmatex">\(w_{i j k t}\)</span> affects <span class="arithmatex">\(\left.y_{i, .,:}.\right)\)</span> So regularization seems less necessary.</li>
+</ul>
+<p>Dropout seems to be going out of fashion:</p>
+<ul>
+<li>Dropout's effect is somehow subsumed by batchnorm. (This is poorly understood.)</li>
+<li>Linear layers are less common due to their large number of trainable parameters.</li>
+</ul>
+<p>There is no consensus on whether dropout should be applied before or after the activation function. However, Dropout- <span class="arithmatex">\(\sigma\)</span> and <span class="arithmatex">\(\sigma\)</span>-Dropout are equivalent when <span class="arithmatex">\(\sigma\)</span> is <span class="arithmatex">\(\operatorname{ReLU}\)</span> or leaky <span class="arithmatex">\(\operatorname{ReLU}\)</span>, or, more generally, when <span class="arithmatex">\(\sigma\)</span> is nonnegative homogeneous.</p>
+</div>
+<h3 id="sgd-early-late-stopping">SGD Early / Late Stopping<a class="headerlink" href="#sgd-early-late-stopping" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.16 : SGD Early Stopping</p>
+<p><strong>Early stopping of SGD</strong> refers to stopping the training early even if you have time for more iterations.</p>
+<p>The rationale is that SGD fits data, so too many iterations lead to overfitting.</p>
+<p>A similar phenomenon (too many iterations hurt) is observed in classical algorithms for inverse problems.</p>
+<p><center>
+<img alt="" src="../assets/6.7.png" width="75%" />
+</center></p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.17 : Epochwise Double Descent</p>
+<p>Recently, however, an <strong>epochwise double descent</strong> has been observed.</p>
+<p>So perhaps one should stop SGD early or very late.</p>
+<p>We do not yet have clarity with this new phenomenon.</p>
+<p><center>
+<img alt="" src="../assets/6.8.jpg" width="75%" />
+</center></p>
+<p>(P. Nakkiran, G. Kaplun, Y. Bansal, T. Yang, B. Barak, and I. Sutskever, Deep double descent: Where bigger models and more data hurt, ICLR, 2020.)</p>
+</div>
+<h3 id="more-data">More Data<a class="headerlink" href="#more-data" title="Permanent link">&para;</a></h3>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.18 : More Data (by Data Augmentation)</p>
+<p>With all else fixed, using more data usually leads to less overfitting.</p>
+<p>However, collecting more data is often expensive.</p>
+<p>Think of data augmentation (DA) as a mechanism to create more data for free. You can view DA as a form of regularization.</p>
+</div>
+<h2 id="sgd-optimizer">SGD Optimizer<a class="headerlink" href="#sgd-optimizer" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.19 : SGD with Momentum</p>
+<p>SGD:</p>
+<div class="arithmatex">\[
+\theta^{k+1}=\theta^{k}-\alpha g^{k}
+\]</div>
+<p><strong>SGD with momentum</strong>:</p>
+<div class="arithmatex">\[
+\begin{gathered}
+v^{k+1}=g^{k}+\beta v^{k} \\
+\theta^{k+1}=\theta^{k}-\alpha v^{k+1}
+\end{gathered}
+\]</div>
+<p><span class="arithmatex">\(\beta=0.9\)</span> is a common choice.</p>
+<p><center>
+<img alt="" src="../assets/6.9.png" width="50%" />
+</center></p>
+<p>When different coordinates (parameters) have very different scalings (i.e., when the problem is ill-conditioned, momentum can help find a good direction of progress.</p>
+<p>(I. Sutskever, J. Martens, G. Dahl, and G. Hinton, On the importance of initialization and momentum in deep learning, ICML, 2013.)</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.20 : RMSProp</p>
+<p><strong>RMSProp</strong>:</p>
+<div class="arithmatex">\[
+\begin{gathered}
+m_{2}^{k+1}=\beta_{2} m_{2}^{k}+\left(1-\beta_{2}\right)\left(g^{k} \circledast g^{k}\right) \\
+\theta^{k+1}=\theta^{k}-\alpha g^{k} \oslash \sqrt{m_{2}^{k+1}+\epsilon}
+\end{gathered}
+\]</div>
+<p><span class="arithmatex">\(\beta_{2}=0.99\)</span> and <span class="arithmatex">\(\epsilon=10^{-8}\)</span> are common values. <span class="arithmatex">\(\circledast\)</span> and <span class="arithmatex">\(\oslash\)</span> are elementwise mult. and div.</p>
+<p><span class="arithmatex">\(m_{2}^{k}\)</span> is a running estimate of the <span class="arithmatex">\(2^{\text {nd }}\)</span> moment of the stochastic gradients, i.e., <span class="arithmatex">\(\left(m_{2}^{k}\right)_{i} \approx \mathbb{E}\left(g^{k}\right)_{i}^{2}\)</span>.</p>
+<p><span class="arithmatex">\(\alpha \oslash \sqrt{m_{2}^{k+1}+\epsilon}\)</span> is the learning rate scaled elementwise. Progress along steep and noisy directions are dampened while progress along flat and non-noisy directions are accelerated.</p>
+<p>(T. Tieleman, and G. Hinton, Lecture 6.5 - RMSProp, COURSERA: Neural Networks for Machine Learning, 2012.)</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.21 : Adam (Adaptive Moment Estimation)</p>
+<p><strong>Adam</strong>:</p>
+<div class="arithmatex">\[
+\begin{gathered}
+m_{1}^{k+1}=\beta_{1} m_{1}^{k}+\left(1-\beta_{1}\right) g^{k}, m_{2}^{k+1}=\beta_{2} m_{2}^{k}+\left(1-\beta_{2}\right)\left(g^{k} \circledast g^{k}\right) \\
+\tilde{m}_{1}^{k+1}=\frac{m_{1}^{k+1}}{1-\beta_{1}^{k+1}}, \quad \widetilde{m}_{2}^{k+1}=\frac{m_{2}^{k+1}}{1-\beta_{2}^{k+1}} \\
+\theta^{k+1}=\theta^{k}-\alpha \widetilde{m}_{1}^{k+1} \oslash \sqrt{\widetilde{m}_{2}^{k+1}+\epsilon}
+\end{gathered}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\beta_{1}^{k+1}\)</span> means <span class="arithmatex">\(\beta_{1}\)</span> to the <span class="arithmatex">\((k+1)\)</span> th power.</li>
+<li><span class="arithmatex">\(\beta_{1}=0.9, \beta_{2}=0.999\)</span>, and <span class="arithmatex">\(\epsilon=10^{-8}\)</span> are common values. Initialize with <span class="arithmatex">\(m_{1}^{0}=m_{2}^{0}=0\)</span>.</li>
+<li><span class="arithmatex">\(m_{1}^{k}\)</span> and <span class="arithmatex">\(m_{2}^{k}\)</span> are running estimates of the <span class="arithmatex">\(1^{\text {st }}\)</span> and <span class="arithmatex">\(2^{\text {nd }}\)</span> moments of <span class="arithmatex">\(g^{k}\)</span>.</li>
+<li><span class="arithmatex">\(\tilde{m}_{1}^{k}\)</span> and <span class="arithmatex">\(\tilde{m}_{2}^{k}\)</span> are bias-corrected estimates of <span class="arithmatex">\(m_{1}^{k}\)</span> and <span class="arithmatex">\(m_{2}^{k}\)</span>.</li>
+<li>Using <span class="arithmatex">\(\widetilde{m}_{1}^{k}\)</span> instead of <span class="arithmatex">\(g^{k}\)</span> adds the effect of momentum.</li>
+</ul>
+<p>(D. P. Kingma and J. Ba, Adam: A method for stochastic optimization, ICLR, 2015.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.22 : Bias correction of Adam</p>
+<p>To understand the bias correction, consider the hypothetical <span class="arithmatex">\(g^{k}=g\)</span> for <span class="arithmatex">\(k=0,1, \ldots\)</span>. Then</p>
+<div class="arithmatex">\[
+\begin{gathered}
+m_{1}^{k}=\left(1-\beta_{1}^{k}\right) g \\
+m_{2}^{k}=\left(1-\beta_{2}^{k}\right)(g \circledast g)
+\end{gathered}
+\]</div>
+<p>Even though <span class="arithmatex">\(m_{1}^{k} \rightarrow g\)</span> and <span class="arithmatex">\(m_{2}^{k} \rightarrow(g \circledast g)\)</span> as <span class="arithmatex">\(k \rightarrow \infty\)</span>, the estimators are not exact despite there being no variation in <span class="arithmatex">\(g^{k}\)</span>.</p>
+<p>On the other hand, the bias-corrected estimators are exact:</p>
+<div class="arithmatex">\[
+\begin{gathered}
+\widetilde{m}_{1}^{k}=g \\
+\widetilde{m}_{2}^{k}=(g \circledast g)
+\end{gathered}
+\]</div>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.23 : The Cautionary Tale of Adam</p>
+<p>Adam's original 2015 paper justified the effectiveness of the algorithm through experiments training deep neural networks with Adam. After all, this non-convex optimization is what Adam was proposed to do.</p>
+<p>However, the paper also provided a convergence proof under the assumption of convexity. This was perhaps unnecessary in an applied paper focusing on non-convex optimization.</p>
+<p>The proof was later shown to be incorrect! Adam does not always converge in the convex setup, i.e., the algorithm, rather than the proof, is wrong.</p>
+<p>Reddi and Kale presented the AMSGrad optimizer, which does come with a correct convergence proof, but AMSGrad tends to perform worse than Adam, empirically.</p>
+<p>(S. J. Reddi, S. Kale, and S. Kumar, On the convergence of Adam and beyond, ICLR, 2018.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.24 : How to Choose Optimizer</p>
+<p>Extensive research has gone into finding the "best" optimizer. Schmidt et al.<span class="arithmatex">\({ }^{\star}\)</span> reports that, roughly speaking, that Adam works well most of the time.</p>
+<p><strong>So, Adam is a good default choice. Currently, it seems to be the best default choice.</strong></p>
+<p>However, Adam does not always work. For example, it seems to be that the widely used EfficientNet model can only be trained <span class="arithmatex">\({ }^{\dagger}\)</span> with RMSProp.</p>
+<p>However, there are some setups where the LR of SGD is harder to tune, but SGD outperforms Adam when properly tuned.<span class="arithmatex">\({ }^{\#}\)</span></p>
+<p>(<span class="arithmatex">\({ }^{\star}\)</span> R. M. Schmidt, F. Schneider, and P. Hennig, Descending through a crowded valley — benchmarking deep learning optimizers, ICML, 2021.<br />
+<span class="arithmatex">\({ }^{\dagger}\)</span> M. Tan and Q. V. Le, EfficientNet: Rethinking model scaling for convolutional neural networks, ICML, 2019.<br />
+<span class="arithmatex">\({ }^{\#}\)</span> A. C. Wilson, R. Roelofs, M. Stern, N. Srebro, and B. Recht, The marginal value of adaptive gradient methods in machine learning, NeurlPS, 2017.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.25 : How to Tune Parameters</p>
+<p>Everything should be chosen by trial and error. The weight parameters and <span class="arithmatex">\(\beta, \beta_{1}, \beta_{2}\)</span> and the weight decay parameter <span class="arithmatex">\(\lambda\)</span>, and the optimizers should be chosen based on trial and error.</p>
+<p>The LR (the stepsize <span class="arithmatex">\(\alpha\)</span> ) of different optimizers are not really comparable between the different optimizers. When you change the optimizer, the LR should be tuned again.</p>
+<p>Roughly, large stepsize, large momentum, small weight decay is faster but less stable, while small stepsize, small momentum, and large weight decay is slower but more stable.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.26 : Using Different Optimizers in Pytorch</p>
+<p>In PyTorch, the <code>torch.optim</code> module implements the commonly used optimizers.</p>
+<ul>
+<li>
+<p>Using SGD:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>torch.optim.SGD(model.parameters(), lr=X)
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Using SGD with momentum:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>torch.optim.SGD(model.parameters(), momentum=0.9, lr=X)
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Using RMSprop:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>torch.optim.RMSprop(model.parameters(), lr=X)
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Using Adam:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>torch.optim.Adam(model.parameters(), lr=X)
+</span></code></pre></div></p>
+</li>
+</ul>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.27 : Learning Rate Scheduling</p>
+<p>Sometimes, it is helpful to change (usually reduce) the learning rate as the training progresses. PyTorch provides learning rate schedulers to do this.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>optimizer = SGD(model.parameters(), lr=0.1)
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>scheduler = ExponentialLR(optimizer, gamma=0.9) # lr = 0.9*lr
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>for _ in range(...):
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    for input, target in dataset:
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        optimizer.zero_grad()
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>        output = model(input)
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>        loss = loss_fn(output, target)
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        loss.backward()
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>        optimizer.step()
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    scheduler.step() # .step() call updates (changes) the learning rate
+</span></code></pre></div>
+<hr />
+<p>One common choice is to specify a diminishing learning rate via a function (a lambda expression). Choices like <code>C/epoch</code> or <code>C / sqrt(iteration)</code>, where <code>C</code> is an appropriately chosen constant, are common.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a># lr_lambda allows us to set lr with a function
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>scheduler = LambdaLR(optimizer, lr_lambda = lambda ep: 1e-2/ep)
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>for epoch in range(...):
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    for input, target in dataset:
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        optimizer.zero_grad()
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        output = model(input)
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        loss = loss_fn(output, target)
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        loss.backward()
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        optimizer.step()
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    scheduler.step() # lr=0.01/epoch
+</span></code></pre></div></p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.28 : Cosine Learning Rate</p>
+<p>The cosine learning rate scheduler, which sets the learning rate with the cosine function, is also commonly used.</p>
+<p>The <span class="arithmatex">\(2^{\text {nd }}\)</span> case in the specification means <span class="arithmatex">\(k\)</span> and its purpose is to prevent the learning rate from becoming 0 .</p>
+<p>It is also common to use only a half-period of the cosine rather than having the learning rate oscillate.</p>
+<p><center>
+<img alt="" src="../assets/6.10.png" width="80%" />
+</center></p>
+<p>(I. Loshchilov and F. Hutter, SGDR: Stochastic gradient descent with warm restarts, ICLR, 2017)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.29 : Wide vs Sharp Minima</p>
+<ul>
+<li>Large step makes large and rough progress towards regions with small loss.</li>
+<li>Small steps refines the model by finding sharper minima.</li>
+</ul>
+<p>Also small steps better suppress the effect of noise. Mathematically, one can show that SGD with small steps becomes very similar to GD with small steps.<span class="arithmatex">\({ }^{\#}\)</span></p>
+<p>However, using small steps to converge to sharp minima may not always be optimal. There is some empirical evidence that wide minima have better test error than sharp minima.<span class="arithmatex">\({ }^{\star}\)</span></p>
+<p>(<span class="arithmatex">\({ }^{\#}\)</span> D. Davis, D. Drusvyatskiy, S. Kakade and J. D. Lee, Stochastic subgradient method converges on tame functions, Found. Comput. Math., 2020.<br />
+<span class="arithmatex">\({ }^{\star}\)</span> Y. Jiang, B. Neyshabur, H. Mobahi, D. Krishnan, and S. Bengio, Fantastic generalization measures and where to find them, ICLR, 2020.)</p>
+</div>
+<h2 id="weight-initialization">Weight Initialization<a class="headerlink" href="#weight-initialization" title="Permanent link">&para;</a></h2>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.30 : Importance of Weight Initialization</p>
+<p>Remember, SGD is</p>
+<div class="arithmatex">\[
+\theta^{k+1}=\theta^{k}-\alpha g^{k}
+\]</div>
+<p>where <span class="arithmatex">\(\theta^{0} \in \mathbb{R}^{p}\)</span> is an initial point. Using a good initial point is important in NN training.</p>
+<p>Prescription by LeCun et al.: "Weights should be chosen randomly but in such a way that the [tanh] is primarily activated in its linear region. If weights are all very large then the [tanh] will saturate resulting in small gradients that make learning slow. If weights are very small then gradients will also be very small." (Cf. Vanishing gradient)</p>
+<p>"Intermediate weights that range over the [tanh's] linear region have the advantage that (1) the gradients are large enough that learning can proceed and (2) the network will learn the linear part of the mapping before the more difficult nonlinear part."</p>
+<p>(Y. A. LeCun, L. Bottou, G. B. Orr, and K.-R. Müller. Efficient BackProp, In: G. Montavon, G. B. Orr, and K.-R. Müller. (eds), Neural Networks: Tricks of the Trade, 1998.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.31 : Mathematics Review</p>
+<ul>
+<li>
+<p>Using the <span class="arithmatex">\(1^{\text {st }}\)</span> order Taylor approximation,</p>
+<div class="arithmatex">\[
+\tanh (z) \approx z
+\]</div>
+</li>
+<li>
+<p>Write <span class="arithmatex">\(X \sim \mathcal{N}\left(\mu, \sigma^{2}\right)\)</span> to denote that <span class="arithmatex">\(X\)</span> is a Gaussian (normal) random variable with mean <span class="arithmatex">\(\mu\)</span> and standard deviation <span class="arithmatex">\(\sigma\)</span>.</p>
+</li>
+<li>
+<p>If <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are random variables, with expected values <span class="arithmatex">\(\mu_X, \mu_Y\)</span> and standard deviations <span class="arithmatex">\(\sigma_X, \sigma_Y\)</span>, the following properties hold.</p>
+<div class="arithmatex">\[
+\text{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] = \mathbb{E}[(X-\mu_X)(Y-\mu_Y)]
+\]</div>
+<div class="arithmatex">\[
+\text{Corr}(X, Y) = \frac{\text{Cov}(X, Y)}{\sigma_X \sigma_Y}
+\]</div>
+<div class="arithmatex">\[
+\mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y]
+\]</div>
+<div class="arithmatex">\[
+\text{Var}(X+Y) = \text{Var}(X) + \text{Var}(Y) + 2\text{Cov}(X, Y)
+\]</div>
+<div class="arithmatex">\[
+\mathbb{E}[aX+b] = a\mathbb{E}[X] + b
+\]</div>
+<div class="arithmatex">\[
+\text{Var}[aX+b] = a^2 \text{Var}[X]
+\]</div>
+</li>
+<li>
+<p>If <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are random variables, such that</p>
+<div class="arithmatex">\[
+\text{Cov}(X, Y)=\text{Corr}(X, Y)=0
+\]</div>
+<p><span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are <strong>uncorrelated</strong> random variables, and following properties hold.</p>
+<div class="arithmatex">\[
+\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y]
+\]</div>
+<div class="arithmatex">\[
+\text{Var}(X+Y) = \text{Var}(X) + \text{Var}(Y)
+\]</div>
+</li>
+<li>
+<p>If <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are random variables, with probability density function <span class="arithmatex">\(f_X(x), f_Y(y)\)</span> and joint probability density funciton <span class="arithmatex">\(f_{X, Y}(x, y)\)</span>, such that</p>
+<div class="arithmatex">\[
+f_{X, Y}(x, y) = f_X(x)f_Y(y)
+\]</div>
+<p><span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are <strong>independent</strong> random variables, and following properties hold.</p>
+<div class="arithmatex">\[
+\mathbb{E}[X^n Y^m] = \mathbb{E}[X^n] \mathbb{E}[Y^m]
+\]</div>
+<div class="arithmatex">\[
+\text{Cov}(X, Y) = \text{Corr}(X, Y) = 0
+\]</div>
+<div class="arithmatex">\[
+\text{Var}(X+Y) = \text{Var}(X) + \text{Var}(Y)
+\]</div>
+<div class="arithmatex">\[
+\text{Var}(XY) = \text{Var}(X)\text{Var}(Y) + \text{Var}(X)\mathbb{E}[Y]^2 + \text{Var}(Y)\mathbb{E}[X]^2
+\]</div>
+<div class="arithmatex">\[
+\text{Var}(XY) = \text{Var}(X)\text{Var}(Y) \quad (\text{if} \ \mathbb{E}[X]=\mathbb{E}[Y]=0)
+\]</div>
+</li>
+<li>
+<p>If <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are independent, then <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are uncorrelated. The converse does not hold.</p>
+</li>
+<li><strong>IID</strong> means, "independent and identically distributed" random variables.</li>
+</ul>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.32 : LeCun Initialization</p>
+<p>Consider the layer</p>
+<div class="arithmatex">\[
+\begin{gathered}
+\tilde{y}=A x+b \\
+y=\tanh (\tilde{y})
+\end{gathered}
+\]</div>
+<p>where <span class="arithmatex">\(x \in \mathbb{R}^{n_{\text {in }}}\)</span> and <span class="arithmatex">\(y, \tilde{y} \in \mathbb{R}^{n_{\text {out }}}\)</span>. Assume <span class="arithmatex">\(x_{j}\)</span> have mean <span class="arithmatex">\(=0\)</span>, variance <span class="arithmatex">\(=1\)</span> and are uncorrelated. If we initialize <span class="arithmatex">\(A_{i j} \sim \mathcal{N}\left(0, \sigma_{A}^{2}\right)\)</span> and <span class="arithmatex">\(b_{i} \sim \mathcal{N}\left(0, \sigma_{b}^{2}\right)\)</span>, IID, then</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; \tilde{y}_{i}=\sum_{j=1}^{n_{\mathrm{in}}} A_{i j} x_{j}+b_{i} \quad \text { has mean }=0 \text {, variance }=n_{\mathrm{in}} \sigma_{A}^{2}+\sigma_{b}^{2} \\
+&amp; y_{i}=\tanh \left(\tilde{y}_{i}\right) \approx \tilde{y}_{i} \quad \text { has mean } \approx 0 \text {, variance } \approx n_{\mathrm{in}} \sigma_{A}^{2}+\sigma_{b}^{2}
+\end{aligned}
+\]</div>
+<p>If we choose</p>
+<div class="arithmatex">\[
+\sigma_{A}^{2}=\frac{1}{n_{\text {in }}}, \quad \sigma_{b}^{2}=0,
+\]</div>
+<p>(so <span class="arithmatex">\(b=0\)</span> ) then we have <span class="arithmatex">\(y_{i}\)</span> mean <span class="arithmatex">\(\approx 0\)</span> variance <span class="arithmatex">\(\approx 1\)</span> and are uncorrelated.</p>
+<hr />
+<p>By induction, with an <span class="arithmatex">\(L\)</span>-layer MLP,</p>
+<ul>
+<li>if the input to has mean <span class="arithmatex">\(=0\)</span> variance <span class="arithmatex">\(=1\)</span> and uncorrelated elements,</li>
+<li>the weights and biases are initialized with <span class="arithmatex">\(A_{i j} \sim \mathcal{N}\left(0, \frac{1}{n_{\text {in }}}\right)\)</span> and <span class="arithmatex">\(b_{i}=0\)</span>, and</li>
+<li>the linear approximations <span class="arithmatex">\(\tanh (z) \approx z\)</span> are valid,</li>
+</ul>
+<p>then we can expect the output layer to have mean <span class="arithmatex">\(\approx 0\)</span>, variance <span class="arithmatex">\(\approx 1\)</span>.</p>
+<p>(Y. A. LeCun, L. Bottou, G. B. Orr, and K.-R. Müller. Efficient BackProp, In: G. Montavon, G. B. Orr, and K.-R. Müller. (eds), Neural Networks: Tricks of the Trade, 1998.)</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.33 : Xavier Initialization</p>
+<p>Consider the layer</p>
+<div class="arithmatex">\[
+\begin{gathered}
+\tilde{y}=A x+b \\
+y=\tanh (\tilde{y})
+\end{gathered}
+\]</div>
+<p>where <span class="arithmatex">\(x \in \mathbb{R}^{n_{\text {in }}}\)</span> and <span class="arithmatex">\(y, \tilde{y} \in \mathbb{R}^{n_{\text {out }}}\)</span>. Consider the gradient with respect to some loss <span class="arithmatex">\(\ell(y)\)</span>. Assume <span class="arithmatex">\(\left(\frac{\partial \ell}{\partial y}\right)_{i}\)</span> have mean <span class="arithmatex">\(=0\)</span>, variance <span class="arithmatex">\(=1\)</span> and are uncorrelated. Then</p>
+<div class="arithmatex">\[
+\frac{\partial y}{\partial x}=\operatorname{diag}\left(\tanh ^{\prime}(A x+b)\right) A \approx A
+\]</div>
+<p>if <span class="arithmatex">\(\tanh (\tilde{y}) \approx \tilde{y}\)</span> and</p>
+<div class="arithmatex">\[
+\frac{\partial \ell}{\partial x}=\frac{\partial \ell}{\partial y} A
+\]</div>
+<p>If we initialize <span class="arithmatex">\(A_{i j} \sim \mathcal{N}\left(0, \sigma_{A}^{2}\right)\)</span> and <span class="arithmatex">\(b_{i} \sim \mathcal{N}\left(0, \sigma_{b}^{2}\right)\)</span>, IID, and assume that <span class="arithmatex">\(\frac{\partial \ell}{\partial y}\)</span> and <span class="arithmatex">\(A\)</span> are independent, then</p>
+<div class="arithmatex">\[
+\left(\frac{\partial \ell}{\partial x}\right)_{j}=\sum_{i=1}^{n_{\text {out }}}\left(\frac{\partial \ell}{\partial y}\right)_{i} A_{i j} \text { has mean } \approx 0 \text { and variance } \approx n_{\text {out }} \sigma_{A}^{2}
+\]</div>
+<p>If we choose</p>
+<div class="arithmatex">\[
+\sigma_{A}^{2}=\frac{1}{n_{\mathrm{out}}}
+\]</div>
+<p>then <span class="arithmatex">\(\left(\frac{\partial \ell}{\partial x}\right)_{j}\)</span> have mean <span class="arithmatex">\(\approx 0\)</span>, variance <span class="arithmatex">\(\approx 1\)</span> and are uncorrelated.</p>
+<hr />
+<p><span class="arithmatex">\(\frac{\partial \ell}{\partial y}\)</span> and <span class="arithmatex">\(A\)</span> are not independent; <span class="arithmatex">\(\frac{\partial \ell}{\partial y}\)</span> depends on the forward evaluation, which in turn depends on <span class="arithmatex">\(A\)</span>. Nevertheless, the calculation is an informative exercise and its result seems to be representative of common behavior.</p>
+<p>If <span class="arithmatex">\(y=\tanh (A x+b)\)</span> is an early layer (close to input) in a deep neural network, then the randomness of <span class="arithmatex">\(A\)</span> is diluted through the forward and backward propagation and <span class="arithmatex">\(\frac{\partial \ell}{\partial y}\)</span> and <span class="arithmatex">\(A\)</span> will be nearly independent.</p>
+<p>If <span class="arithmatex">\(y=\tanh (A x+b)\)</span> is an later layer (close to output) in a deep neural network, then <span class="arithmatex">\(\frac{\partial \ell}{\partial y}\)</span> and <span class="arithmatex">\(A\)</span> will have strong dependency.</p>
+<hr />
+<p>Consideration of forward and backward passes result in different prescriptions.</p>
+<p>The Xavier initialization uses the harmonic mean of the two:</p>
+<div class="arithmatex">\[
+\sigma_{A}^{2}=\frac{2}{n_{\mathrm{in}}+n_{\mathrm{out}}}, \quad \sigma_{b}^{2}=0
+\]</div>
+<p>In the literature, the alternate notation <span class="arithmatex">\(\text{fan}_{\text {in }}\)</span> and <span class="arithmatex">\(\text{fan}_{\text {out }}\)</span> are often used instead of <span class="arithmatex">\(n_{\text {in }}\)</span> and <span class="arithmatex">\(n_{\text {out }}\)</span>. The fan-in and fan-out terminology originally refers to the number of electric connections entering and exiting a circuit or an electronic device.</p>
+<p>(Xavier Glorot and Y. Bengio, Understanding the difficulty of training deep feedforward neural networks, AISTATS, 2010.)</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.34 : (Kaiming) He Initialization</p>
+<p>Consider the layer</p>
+<div class="arithmatex">\[
+y=\operatorname{ReLU}(A x+b)
+\]</div>
+<p>We cannot use the Taylor expansion with ReLU.</p>
+<p>However, a similar line of reasoning with the forward pass gives rise to</p>
+<div class="arithmatex">\[
+\sigma_{A}^{2}=\frac{2}{n_{\mathrm{in}}}
+\]</div>
+<p>And a similar consideration with backprop gives rise to</p>
+<div class="arithmatex">\[
+\sigma_{A}^{2}=\frac{2}{n_{\text {out }}}
+\]</div>
+<p>In PyTorch, use <code>mode='fan_in'</code> and <code>mode='fan_out'</code> to toggle between the two modes.</p>
+<p>(Kaiming He, X. Zhang, S. Ren, and J. Sun, Delving deep into rectifiers: Surpassing human-level performance on ImageNet classification, ICCV, 2015.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.35 : Discussions on Initializations</p>
+<p>In the original description of the Xavier and He initializations, the biases are all initialized to 0 . However, the default initialization of Linear<span class="arithmatex">\({ }^{\star}\)</span> and Conv2d <span class="arithmatex">\({ }^{\#}\)</span> layers in PyTorch uses initialize the biases randomly. A documented reasoning behind this choice (in the form of papers or GitHub discussions) do not seem to exist.</p>
+<p>Initializing weights with the proper scaling is sometimes necessary to get the network to train, as you will see with the VGG network. However, so long as the network gets trained, the choice of initialization does not seem to affect the final performance.</p>
+<p>Since initializations rely on the assumption that the input to each layer has roughly unit variance, it is important that the data is scaled properly. This is why PyTorch dataloader scales pixel intensity values to be in <span class="arithmatex">\([0,1]\)</span>, rather than <span class="arithmatex">\([0,255]\)</span>.</p>
+<p>(<span class="arithmatex">\({ }^{\star}\)</span> https://pytorch.org/docs/stable/_modules/torch/nn/modules/linear.html<br />
+<span class="arithmatex">\({ }^{\#}\)</span> https://pytorch.org/docs/stable/_modules/torch/nn/modules/conv.html)</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.36 : Initialization for Convolutional Layer</p>
+<p>Consider the layer</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; \tilde{y}=\operatorname{Conv} 2 \mathrm{D}_{w, b}(x) \\
+&amp; y=\tanh (\tilde{y}) \\
+\end{aligned}
+\]</div>
+<p>where <span class="arithmatex">\(w \in \mathbb{R}^{C_{\text {out }} \times C_{\text {in }} \times f_{1} \times f_{2}}\)</span> and <span class="arithmatex">\(b \in \mathbb{R}^{C_{\text {out }}}\)</span>. Assume <span class="arithmatex">\(x_{j}\)</span> have mean <span class="arithmatex">\(=0\)</span> variance <span class="arithmatex">\(=1\)</span> and are uncorrelated. If we initialize <span class="arithmatex">\(w_{i j k \ell} \sim \mathcal{N}\left(0, \sigma_{w}^{2}\right)\)</span> and <span class="arithmatex">\(b_{i} \sim \mathcal{N}\left(0, \sigma_{b}^{2}\right)\)</span>, IID, then</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; \tilde{y}_{i} \quad \text { has mean }=0 \text { variance }=\left(C_{\text {in }} f_{1} f_{2}\right) \sigma_{w}^{2}+\sigma_{b}^{2} \\
+&amp; y_{i} \approx \tilde{y}_{i} \text { has mean } \approx 0 \text { variance } \approx\left(C_{\text {in }} f_{1} f_{2}\right) \sigma_{w}^{2}+\sigma_{b}^{2}
+\end{aligned}
+\]</div>
+<p>If we choose</p>
+<div class="arithmatex">\[
+\sigma_{w}^{2}=\frac{1}{c_{\text {in }} f_{1} f_{2}}, \quad \sigma_{b}^{2}=0
+\]</div>
+<p>(so <span class="arithmatex">\(b=0\)</span> ) then we have <span class="arithmatex">\(y_{i}\)</span> mean <span class="arithmatex">\(\approx 0\)</span> variance <span class="arithmatex">\(\approx 1\)</span> and are correlated.</p>
+<hr />
+<p>Outputs from a convolutional layer are correlated. The uncorrelated assumption is false. Nevertheless, the calculation is an informative exercise and its result seems to be representative of common behavior.</p>
+<p>Xavier and He initialization is usually used with</p>
+<div class="arithmatex">\[
+n_{\mathrm{in}}=C_{\mathrm{in}} f_{1} f_{2}
+\]</div>
+<p>and</p>
+<div class="arithmatex">\[
+n_{\text {out }}=C_{\text {out }} f_{1} f_{2}
+\]</div>
+<p>Justification of <span class="arithmatex">\(n_{\text {out }}=C_{\text {out }} f_{1} f_{2}\)</span> requires working through the complex indexing or considering the "transpose convolution". We will return to it later.</p>
+</div>
+<h2 id="automatic-differentation">Automatic Differentation<a class="headerlink" href="#automatic-differentation" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.37 : Automatic Differentation</p>
+<p><strong>Autodiff (automatic differentiation)</strong> is an algorithm that automates gradient computation. In deep learning libraries, you only need to specify how to evaluate the function.</p>
+<p><strong>Backprop (back propagation)</strong> is an instance of autodiff. (backprop <span class="arithmatex">\(\subseteq\)</span> autodiff)</p>
+<p>Gradient computation costs roughly <span class="arithmatex">\(5 \times\)</span> the computation cost of forward evaluation.</p>
+<p>To clarify, backprop and autodiff are not</p>
+<ul>
+<li>finite difference (numerical differentation) or</li>
+<li>symbolic differentiation.</li>
+</ul>
+<p>Autodiff <span class="arithmatex">\(\approx\)</span> chain rule of vector calculus</p>
+<hr />
+<p>Autodiff is an essential yet often an underappreciated feature of the deep learning libraries. It allows deep learning researchers to use complicated neural networks, while avoiding the burden of performing derivative calculations by hand.</p>
+<p>Most deep learning libraries support <span class="arithmatex">\(2^{\text {nd }}\)</span> and higher order derivative computation, but we will only use <span class="arithmatex">\(1^{\text {st }}\)</span> order derivatives (gradients) in this class.</p>
+<p>Autodiff includes forward-mode, reverse-mode (backprop), and other orders. In deep learning, reverse-mode is most commonly used.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.38 : Autodiff by Jacobial Multiplication</p>
+<p>Consider <span class="arithmatex">\(g=f_{L} \circ f_{L-1} \circ \cdots \circ f_{2} \circ f_{1}\)</span>, where <span class="arithmatex">\(f_{\ell}: \mathbb{R}^{n_{\ell-1}} \rightarrow \mathbb{R}^{n_{\ell}}\)</span> for <span class="arithmatex">\(\ell=1, \cdots, L\)</span>.</p>
+<p>Chain rule: <span class="arithmatex">\(D g=D f_{L} \quad D f_{L-1} \quad \cdots \quad D f_{2} \quad D f_{1}\)</span></p>
+<p>Forward-mode: <span class="arithmatex">\(D f_{L}\left(D f_{L-1}\left(\cdots\left(D f_{2} D f_{1}\right) \cdots\right)\right)\)</span></p>
+<p>Reverse-mode (back propagation): <span class="arithmatex">\(\left(\left(\left(D f_{L} D f_{L-1}\right) D f_{L-2}\right) \cdots\right) D f_{1}\)</span></p>
+<p>Reverse mode is optimal (can be proved using DP) when <span class="arithmatex">\(n_{L} \leq n_{L-1} \leq \cdots \leq n_{1} \leq n_{0}\)</span>. The number of neurons in each layer tends to decrease in deep neural networks for classification. So reverse-mode is often close to the most efficient mode of autodiff in deep learning.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.39 : General Backprop</p>
+<p>Backprop in PyTorch:</p>
+<ol>
+<li>When the loss function is evaluated, a computation graph is constructed.</li>
+<li>The computation graph is a directed acyclic graph (DAG) that encodes dependencies of the individual computational components.</li>
+<li>A topological sort is performed on the DAG and the backprop is performed on the reversed order of this topological sort. (The topological sort ensures that nodes ahead in the DAG are processed first.)</li>
+</ol>
+<p>The general form combines a graph theoretic formulation with the principles of backprop.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.40 : Computation Graph</p>
+<p>Let <span class="arithmatex">\(y_{1}, \ldots, y_{L}\)</span> be the output values (neurons) of the computational nodes. Assume <span class="arithmatex">\(y_{1}, \ldots, y_{L}\)</span> follow a linear topological ordering, i.e., the computation of <span class="arithmatex">\(y_{\ell}\)</span> depends on <span class="arithmatex">\(y_{1}, \ldots, y_{\ell-1}\)</span> and does not depend on <span class="arithmatex">\(y_{\ell+1}, \ldots, y_{L}\)</span>.</p>
+<p>Define the graph <span class="arithmatex">\(G=(V, E)\)</span>, where <span class="arithmatex">\(V=\{1, \ldots, L\}\)</span> and <span class="arithmatex">\((i, \ell) \in E\)</span>, i.e., <span class="arithmatex">\(i \rightarrow \ell\)</span>, if the computation of <span class="arithmatex">\(y_{\ell}\)</span> directly depends on <span class="arithmatex">\(y_{i}\)</span>. Write the computation of <span class="arithmatex">\(y_{1}, \ldots, y_{L}\)</span> as</p>
+<div class="arithmatex">\[
+y_{\ell}=f_{\ell}\left(\left[y_{i}: \text { for } i \rightarrow \ell\right]\right)
+\]</div>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.41 : Forward Pass on Computation Graph</p>
+<p>In the forward pass, sequentially compute <span class="arithmatex">\(y_{1}, \ldots, y_{L}\)</span> via</p>
+<div class="arithmatex">\[
+y_{\ell}=f_{\ell}\left(\left[y_{i}: \text { for } i \rightarrow \ell\right]\right)
+\]</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a># Use 1-based indexing
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a># y[1] given
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>for l = 2,...,L
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    inputs = [y[i] for j such that (i-&gt;l)]
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    y[l] = f[l].eval(inputs)
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>end
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example 6.42 : Forward Pass &amp; Forward-mode Autodiff</p>
+<p>Consider <span class="arithmatex">\(f(x, y)=y \log x+\sqrt{y \log x}\)</span>. Evaluate <span class="arithmatex">\(f\)</span> with the computation graph:
+<center>
+<img alt="" src="../assets/6.11.png" width="100%" />
+</center></p>
+<ul>
+<li>
+<p>Step 0 :</p>
+<div class="arithmatex">\[
+\begin{gathered}
+x=3, y=2 \\
+\frac{\partial x}{\partial x}=1, \frac{\partial x}{\partial y}=0, \frac{\partial y}{\partial x}=0, \frac{\partial y}{\partial y}=1
+\end{gathered}
+\]</div>
+</li>
+<li>
+<p>Step 1 :</p>
+<div class="arithmatex">\[
+\begin{gathered}
+a=\log x=\log 3 \\
+\frac{\partial a}{\partial x}=\frac{1}{x} \cdot \frac{\partial x}{\partial x}=\frac{1}{3}, \frac{\partial a}{\partial y}=0
+\end{gathered}
+\]</div>
+</li>
+<li>
+<p>Step 2 :</p>
+<div class="arithmatex">\[
+\begin{gathered}
+b=y a=2 \log 3 \\
+\frac{\partial b}{\partial x}=\frac{\partial y}{\partial x} a+y \frac{\partial a}{\partial x}=\frac{2}{3}, \frac{\partial b}{\partial y}=\frac{\partial y}{\partial y} a+y \frac{\partial a}{\partial y}=a=\log 3
+\end{gathered}
+\]</div>
+</li>
+<li>
+<p>Step 3 :</p>
+<div class="arithmatex">\[
+\begin{gathered}
+c=\sqrt{b}=\sqrt{2 \log 3} \\
+\frac{\partial c}{\partial x}=\frac{1}{2 \sqrt{b}} \frac{\partial b}{\partial x}=\frac{1}{3 \sqrt{2 \log 3}}, \frac{\partial c}{\partial y}=\frac{1}{\sqrt{b}} \frac{\partial b}{\partial y}=\frac{1}{2} \sqrt{\frac{\log 3}{2}}
+\end{gathered}
+\]</div>
+</li>
+<li>
+<p>Step 4 :</p>
+<div class="arithmatex">\[
+\begin{gathered}
+f=c+b=\sqrt{2 \log 3}+2 \log 3 \\
+\frac{\partial f}{\partial x}=\frac{\partial c}{\partial x}+\frac{\partial b}{\partial x}=\frac{1}{3}\left(2+\frac{1}{3 \sqrt{2 \log 3}}\right), \frac{\partial f}{\partial y}=\frac{\partial c}{\partial y}+\frac{\partial b}{\partial y}=\frac{1}{2} \sqrt{\frac{\log 3}{2}}+\log 3
+\end{gathered}
+\]</div>
+</li>
+</ul>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.42 : Backprop on Computation Graph</p>
+<p>To perform backprop, use</p>
+<div class="arithmatex">\[
+\frac{\partial y_{L}}{\partial y_{i}}=\sum_{\ell: i \rightarrow \ell} \frac{\partial y_{L}}{\partial y_{\ell}} \frac{\partial f_{\ell}}{\partial y_{i}}
+\]</div>
+<p>to sequentially compute <span class="arithmatex">\(\frac{\partial y_{L}}{\partial y_{L}}, \frac{\partial y_{L}}{\partial y_{L-1}}, \ldots, \frac{\partial y_{L}}{\partial y_{1}}\)</span>.     </p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a># Use 1-based indexing
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a># y[1],...,y[L] already computed
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>g[:] = 0 // .zero_grad()
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>g[L] = 1 // dy[L]/dy[L]=1
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>for l = L,...,2
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    for i such that (i-&gt;l)
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        g[i] += g[l]*f[l].grad(i)
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    end
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>end
+</span></code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example 6.43 : Reverse-mode Autodiff (Backprop)</p>
+<p>Consider <span class="arithmatex">\(f(x, y)=y \log x+\sqrt{y \log x}\)</span>. Evaluate <span class="arithmatex">\(f\)</span> with the computation graph:
+<center>
+<img alt="" src="../assets/6.12.png" width="100%" />
+</center></p>
+<ul>
+<li>
+<p>Step 0 :</p>
+<div class="arithmatex">\[
+x=3, y=2
+\]</div>
+</li>
+<li>
+<p>Step 1 :</p>
+<div class="arithmatex">\[
+a=\log 3
+\]</div>
+</li>
+<li>
+<p>Step 2 :</p>
+<div class="arithmatex">\[
+b=2 \log 3
+\]</div>
+</li>
+<li>
+<p>Step 3 :</p>
+<div class="arithmatex">\[
+c=\sqrt{2 \log 3}
+\]</div>
+</li>
+<li>
+<p>Step 4 :</p>
+<div class="arithmatex">\[
+f=\sqrt{2 \log 3}+2 \log 3
+\]</div>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>Step 0' :</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial f}=1
+\]</div>
+</li>
+<li>
+<p>Step 1' :</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial c}=\frac{\partial f}{\partial f} \frac{\partial f}{\partial c}=\frac{\partial f}{\partial f} 1=1
+\]</div>
+</li>
+<li>
+<p>Step 2' :</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial b}=\frac{\partial f}{\partial c} \frac{\partial c}{\partial b}+\frac{\partial f}{\partial f} \frac{\partial f}{\partial c}=\frac{1}{2 \sqrt{b}} 1+1=\frac{1}{2 \sqrt{2 \log 3}}+1
+\]</div>
+</li>
+<li>
+<p>Step 3' :</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial a}=\frac{\partial f}{\partial b} \frac{\partial b}{\partial a}=\frac{\partial f}{\partial b} y=2+\frac{1}{\sqrt{2 \log 3}}
+\]</div>
+</li>
+<li>
+<p>Step 4' :</p>
+<div class="arithmatex">\[
+\begin{gathered}
+\frac{\partial f}{\partial x}=\frac{\partial f}{\partial a} \frac{\partial a}{\partial x}=\frac{\partial f}{\partial a} \frac{1}{x}=\frac{1}{3}\left(2+\frac{1}{\sqrt{2 \log 3}}\right) \\
+\frac{\partial f}{\partial y}=\frac{\partial f}{\partial b} \frac{\partial b}{\partial y}=\frac{\partial f}{\partial b} a=\frac{1}{2} \sqrt{\frac{\log 3}{2}}+\log 3
+\end{gathered}
+\]</div>
+</li>
+</ul>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.44 : Backprop in Pytorch</p>
+<p><center>
+<img alt="" src="../assets/6.13.png" width="100%" />
+</center></p>
+<p>In NN training, parameters (shown blue in the image) and fixed inputs are distinguished.
+In PyTorch, you (1) clear the existing gradient with <code>.zero_grad()</code>
+(2) forward-evaluate the loss function by providing the input and label and
+(3) perform backprop with <code>.backward()</code>.</p>
+<p>The forward pass stores the intermediate neuron values so that they can later be used in backprop. In the test loop, however, we don't compute gradients so the intermediate neuron values are unnecessary.
+The <code>torch.no_grad()</code> context manager allows intermediate node values to discarded or not be stored.
+This saves memory and can accelerate the test loop.</p>
+</div>
+<h2 id="batch-normalization">Batch Normalization<a class="headerlink" href="#batch-normalization" title="Permanent link">&para;</a></h2>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.45 : Idea of Batch Normalization</p>
+<p>The first step of many data processing algorithms is often to normalize data to have zero mean and unit variance.</p>
+<ul>
+<li>Step 1. Compute <span class="arithmatex">\(\hat{\mu}=\frac{1}{N} \sum_{i=1}^{N} X_{i}, \widehat{\sigma^{2}}=\frac{1}{N} \sum_{i=1}^{N}\left(X_{i}-\hat{\mu}\right)^{2}\)</span></li>
+</ul>
+<div class="arithmatex">\[
+\hat{X}_{i}=\frac{X_{i}-\widehat{\mu}}{\sqrt{\sigma^{2}}+\varepsilon}
+\]</div>
+<ul>
+<li>Step 2. Run method with data <span class="arithmatex">\(\hat{X}_{1}, \ldots, \hat{X}_{N}\)</span></li>
+</ul>
+<p><strong>Batch normalization (BN)</strong> (sort of) enforces this normalization layer-by-layer. BN is an indispensable tool for training very deep neural networks. Theoretical justification is weak.</p>
+<p>(S. Ioffe and C. Szegedy, Batch normalization: Accelerating deep network training by reducing internal covariate shift, ICML, 2015.)</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.46 : BN for Linear Layers</p>
+<p>Underlying assumption: Each element of the batch is an IID sample.</p>
+<p>Input: <span class="arithmatex">\(X\)</span>, <span class="arithmatex">\(\text{shape}(X) = \text{(batch size)} \times \text{(# entries)}\)</span></p>
+<p>Output: <span class="arithmatex">\(\mathrm{BN}_{\beta, \gamma}(X)\)</span>, <span class="arithmatex">\(\text{shape} \left(\mathrm{BN}_{\beta, \gamma}(X)\right)=\operatorname{shape}(X)\)</span></p>
+<p><span class="arithmatex">\(\mathrm{BN}_{\beta, \gamma}\)</span> for linear layers acts independently over neurons.</p>
+<div class="arithmatex">\[
+\begin{gathered}
+\hat{\mu}[:]=\frac{1}{B} \sum_{b=1}^{B} X[b,:]\\
+\hat{\sigma}^{2}[:]=\frac{1}{B} \sum_{b=1}^{B}(X[b,:]-\hat{\mu}[:])^{2} \\
+\mathrm{BN}_{\gamma, \beta}(X)[b,:]=\gamma[:] \frac{X[b,:]-\hat{\mu}[:]}{\sqrt{\hat{\sigma}^{2}[:]+\varepsilon}}+\beta[:] \quad b=1, \ldots, B
+\end{gathered}
+\]</div>
+<p>where operations are elementwise. BN normalizes each output neuron. The mean and variance are explicitly controlled through learned parameters <span class="arithmatex">\(\beta\)</span> and <span class="arithmatex">\(\gamma\)</span>. In Pytorch, <code>nn.BatchNorm1d</code>.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.47 : BN for Convolutional Layers</p>
+<p>Underlying assumption: Each element of the batch, horizontal pixel, and vertical pixel is an IID sample.</p>
+<p>Input: <span class="arithmatex">\(X\)</span>, <span class="arithmatex">\(\text{shape}(X) =  \text{(batch size)} \times \text{(channels)} \times \text{(vertical dim)} \times \text{(horizontal dim)}\)</span></p>
+<p>Output: <span class="arithmatex">\(\mathrm{BN}_{\beta, \gamma}(X)\)</span>, <span class="arithmatex">\(\text{shape} \left(\mathrm{BN}_{\beta, \gamma}(X)\right)=\operatorname{shape}(X)\)</span></p>
+<p><span class="arithmatex">\(\mathrm{BN}_{\beta, \gamma}\)</span> for conv. layers acts independently over channels.</p>
+<div class="arithmatex">\[
+\begin{gathered}
+\hat{\mu}[:]=\frac{1}{B P Q} \sum_{b=1}^{B} \sum_{i=1}^{P} \sum_{j=1}^{Q} X[b,:, i, j] \\
+\hat{\sigma}^{2}[:]=\frac{1}{B P Q} \sum_{b=1}^{B} \sum_{i=1}^{P} \sum_{j=1}^{Q}(X[b,:, i, j]-\hat{\mu}[:])^{2} \\
+\operatorname{BN}_{\gamma, \beta}(X)[b,:, i, j]=\gamma[:] \frac{X[b,:, i, j]-\hat{\mu}[:]}{\sqrt{\hat{\sigma}^{2}[:]+\varepsilon}}+\beta[:] \quad \begin{array}{l}
+b=1, \ldots, B \\
+i=1, \ldots, P \\
+j=1, \ldots, Q
+\end{array}
+\end{gathered}
+\]</div>
+<p>BN normalizes over each convolutional filter. The mean and variance are explicitly controlled through learned parameters <span class="arithmatex">\(\beta\)</span> and <span class="arithmatex">\(\gamma\)</span>. In Pytorch, <code>nn.BatchNorm2d</code>.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 6.48 : BN during Testing</p>
+<p><span class="arithmatex">\(\hat{\mu}\)</span> and <span class="arithmatex">\(\hat{\sigma}\)</span> are estimated from batches during training. During testing, we don't update the NN, and we may only have a single input (so no batch).</p>
+<p>There are 2 strategies for computing final values of <span class="arithmatex">\(\hat{\mu}\)</span> and <span class="arithmatex">\(\hat{\sigma}\)</span> :</p>
+<ol>
+<li>After training, fix all parameters and evaluate NN on full training set to compute <span class="arithmatex">\(\hat{\mu}\)</span> and <span class="arithmatex">\(\hat{\sigma}\)</span> layer-by-layer. Store this computed value. (Computation of <span class="arithmatex">\(\hat{\mu}\)</span> and <span class="arithmatex">\(\hat{\sigma}\)</span> must be done sequentially layer-by-layer. Why?)</li>
+<li>During training, compute running average of <span class="arithmatex">\(\hat{\mu}\)</span> and <span class="arithmatex">\(\hat{\sigma}\)</span>. This is the default behavior of PyTorch.</li>
+</ol>
+<p>In PyTorch, use <code>model.train()</code> and <code>model.eval()</code> to switch BN behavior between training and testing.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.49 : Efficiency of BN</p>
+<p>BN does not change the representation power of NN ; since <span class="arithmatex">\(\beta\)</span> and <span class="arithmatex">\(\gamma\)</span> are trained, the output of each layer can have any mean and variance. However, controlling the mean and variance as explicit trainable parameters makes training easier.</p>
+<p>With BN, the choice of batch size becomes a more important hyperparameter to tune.</p>
+<p>BN is indispensable in practice. Training of VGGNet and GoogLeNet becomes much easier with BN. Training of ResNet requires BN.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.51 : BN and Internal Covariate Shift</p>
+<p>BN has insufficient theoretical justification.
+The original paper by loffe and Szegedy hypothesized that BN mitigates internal covariate shift (ICS), the shift in the mean and variance of the intermediate layer neurons throughout the training, and that this mitigation leads to improved training.</p>
+<div class="arithmatex">\[
+\mathrm{BN} \Rightarrow(\text { reduced ICS }) \Rightarrow \text { (improved training })
+\]</div>
+<p>However, Santukar et al. demonstrated that when experimentally measured, BN does not mitigate ICS, but nevertheless improves the training.</p>
+<div class="arithmatex">\[
+\mathrm{BN} \nRightarrow \text { (reduced ICS) }
+\]</div>
+<p>Nevertheless</p>
+<div class="arithmatex">\[
+\mathrm{BN} \Rightarrow \text { (improved training performance) }
+\]</div>
+<p>Santukar et al. argues that</p>
+<div class="arithmatex">\[
+\mathrm{BN} \Rightarrow \text { (smoother loss landscape) } \Rightarrow \text { (improved training performance) }
+\]</div>
+<p>While this claim is more evidence-based than that of loffe and Szegedy, it is still not conclusive. It is also unclear why BN makes the loss landscape smoother, and it is not clear whether the smoother loss landscape fully explains the improved training performance.</p>
+<p>This story is a cautionary tale: we should carefully distinguish between speculative hypotheses and evidence-based claims, even in a primarily empirical subject.</p>
+<p>(S. Ioffe and C. Szegedy, Batch normalization: Accelerating deep network training by reducing internal covariate shift, ICML, 2015.<br />
+S. Santurkar, D. Tsipras, A. Ilyas, and A. Mądry, How does batch normalization help optimization?, NeurIPS, 2018.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.50 : BN has trainable parameters.</p>
+<p>BN is usually not considered a trainable layer, much like pooling or dropout, and they are usually excluded when counting the "depth" of a NN. However, BN does have trainable parameters. Interestingly, if one randomly initializes a CNN, freezes all other parameters, and only train BN parameters, the performance is surprisingly good.</p>
+<p><center>
+<img alt="" src="../assets/6.14.png" width="75%" />
+</center></p>
+<p>(J. Frankle, D. J. Schwab, and A. S. Morcos, Training BatchNorm and only BatchNorm: On the expressive power of random features in CNNs, NeurIPS SEDL Workshop, 2019.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 6.51 : Discussion of BN</p>
+<p>BN seems to also act as a regularizer, and for some reason subsumes effect Dropout. (Using dropout together with BN seems to worsen performance.) Since BN has been popularized, Dropout is used less often.</p>
+<p>After training, functionality of BN can be absorbed into the previous layer when the previous layer is a linear layer or a conv layer.</p>
+<p>The use of batch norm makes the scaling of weight initialization less important irrelevant.</p>
+<p>Use <code>bias=false</code> on layers preceding BN , since <span class="arithmatex">\(\beta\)</span> subsumes the bias.</p>
+<p>(X. Li, S. Chen, X. Hu and J. Yang, Understanding the disharmony between dropout and batch normalization by variance shift, CVPR, 2019.)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/arnold518" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "header.autohide", "navigation.instant", "navigation.tracking", "navigation.tabs", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "search.share", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

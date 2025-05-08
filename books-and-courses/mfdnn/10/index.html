@@ -1,0 +1,2150 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>§ 10. Flow Models - Artificial Intelligence Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%206a6%206%200%200%201%206%206c0%202.22-1.21%204.16-3%205.2V19a1%201%200%200%201-1%201h-4a1%201%200%200%201-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6%206%200%200%201%206-6m2%2015v1a1%201%200%200%201-1%201h-2a1%201%200%200%201-1-1v-1zm6-10h3v2h-3zM1%2011h3v2H1zM13%201v3h-2V1zM4.92%203.5l2.13%202.14-1.42%201.41L3.5%204.93zm12.03%202.13%202.12-2.13%201.43%201.43-2.13%202.12z%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20512%20512%22%3E%3C%21--%21%20Font%20Awesome%20Free%206.7.2%20by%20%40fontawesome%20-%20https%3A//fontawesome.com%20License%20-%20https%3A//fontawesome.com/license/free%20%28Icons%3A%20CC%20BY%204.0%2C%20Fonts%3A%20SIL%20OFL%201.1%2C%20Code%3A%20MIT%20License%29%20Copyright%202024%20Fonticons%2C%20Inc.--%3E%3Cpath%20d%3D%22M256%200a256%20256%200%201%201%200%20512%20256%20256%200%201%201%200-512m-24%20120v136c0%208%204%2015.5%2010.7%2020l96%2064c11%207.4%2025.9%204.4%2033.3-6.7s4.4-25.9-6.7-33.3L280%20243.2V120c0-13.3-10.7-24-24-24s-24%2010.7-24%2024%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans";--md-code-font:"Ubuntu Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10-flow-models" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../.." title="Artificial Intelligence Notes" class="md-header__button md-logo" aria-label="Artificial Intelligence Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Artificial Intelligence Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              § 10. Flow Models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="공유" aria-label="공유" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/arnold518/ai-notes" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arnold518/ai-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../format/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Books & Courses
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Artificial Intelligence Notes" class="md-nav__button md-logo" aria-label="Artificial Intelligence Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Artificial Intelligence Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/arnold518/ai-notes" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arnold518/ai-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Books & Courses
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Books & Courses
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../format/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Mathematical Foundations of Deep Neural Networks
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Mathematical Foundations of Deep Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 1. Optimization and Stochastic Gradient Descent
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 1. Optimization and Stochastic Gradient Descent
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Optimization Problem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Gradient Descent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1PSpoeseUPIptYQOPuQpxNawxtZbVR_K6/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 1 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 2. Shallow Neural Networks to Multilayer Perceptrons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 2. Shallow Neural Networks to Multilayer Perceptrons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Shallow Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Deep Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/15kXC3cJUV63gZNfXK6JdPPuSrwQZBzI8/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 2 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_4" id="__nav_2_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 3. Convolutional Neural Networks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 3. Convolutional Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Convolutional Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Foundations of Design and Training of Deep Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. ImageNet Challenge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/12O9fLasWDA-kOKBD-lE-1UhCl-PoDf0z/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 3 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_5" id="__nav_2_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 4. CNNs for Other Supervised Learning Tasks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 4. CNNs for Other Supervised Learning Tasks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. CNNs for Other Supervised Learning Tasks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/16IOKVF6IiDMyUvL73pGKBaEMKyXvezLB/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 4 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_6" id="__nav_2_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch 5. Unsupervised Learning
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            Ch 5. Unsupervised Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Autoencoder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Flow Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Variational Autoencoders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Generative Adversarial Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1JM5k-e6LkhZ0vXRlfROWpiuw4YC85Jv1/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter 5 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_7" id="__nav_2_1_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ch A. Appendix - Basics of Monte Carlo
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            Ch A. Appendix - Basics of Monte Carlo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format/13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Basics of Monte Carlo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/18b01xoORd0LFQmpfc_4ou5Rv44MY1neg/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chapter A Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_8" id="__nav_2_1_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Python Basics
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_8">
+            <span class="md-nav__icon md-icon"></span>
+            Python Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1-iY9XfDhWNRDq3z_wVVvOzU04aRQWAfW/view?usp=drive_link" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python Lecture 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1BANbCC6jBjPEUFSRJMFkcLbc4oVmoQHm/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python Lecture 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1-Bc11RZmno6yx37kfVLjsyY-XKpLK5Je/view?usp=drive_link" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python Lecture 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#probabilistic-generative-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Probabilistic Generative Models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1d-flow-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      1D Flow Models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#high-dimensional-flow-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      High Dimensional Flow Models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coupling-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coupling Flows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#researches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Researches
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="10-flow-models">§ 10. Flow Models<a class="headerlink" href="#10-flow-models" title="Permanent link">&para;</a></h1>
+<h2 id="probabilistic-generative-models">Probabilistic Generative Models<a class="headerlink" href="#probabilistic-generative-models" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.1 : Probabilistic generative models</p>
+<p>A <strong>probabilistic generative model</strong> learns a distribution <span class="arithmatex">\(p_{\theta}\)</span> from <span class="arithmatex">\(X_{1}, \ldots, X_{N} \sim p_{\text {true }}\)</span> such that <span class="arithmatex">\(p_{\theta} \approx p_{\text {true }}\)</span> and such that we can generate new samples <span class="arithmatex">\(X \sim p_{\theta}\)</span>.</p>
+<p>The ability to generate new synthetic data is interesting, but by itself not very useful.
+(Generating fake images to use in fake social media accounts is the only direct application that I can think of.)</p>
+<p>The structure of the data learned through the unsupervised learning is of higher value. However, we won't talk about the downstream applications in this course.</p>
+<p>In this class, we will talk about <strong>flow models</strong>, <strong>VAEs</strong>, and <strong>GANs</strong>.</p>
+</div>
+<hr />
+<p>Fit a probability density function <span class="arithmatex">\(p_{\theta}(x)\)</span> with continuous data <span class="arithmatex">\(X_{1}, \ldots, X_{N} \sim p_{\text {true }}(x)\)</span>.</p>
+<ul>
+<li>We want to fit the data <span class="arithmatex">\(X_{1}, \ldots, X_{N}\)</span> (or really the underlying distribution <span class="arithmatex">\(p_{\text {true}}\)</span>) well.</li>
+<li>We want to be able to sample from <span class="arithmatex">\(p_{\theta}\)</span>.</li>
+<li>(We want to get a good latent representation.)</li>
+</ul>
+<p>We first develop the mathematical discussion with 1D flows, and then generalize the discussion to high dimensions.</p>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.2 : Example Density Model : Gaussian Mixture Model</p>
+<div class="arithmatex">\[
+p_{\theta}(x)=\sum_{i=1}^{k} \pi_{i} \mathcal{N}\left(x ; \mu_{i}, \sigma_{i}^{2}\right)
+\]</div>
+<p>Parameters: means and variances of components, mixture weights</p>
+<div class="arithmatex">\[
+\theta=\left(\pi_{1}, \ldots, \pi_{k}, \mu_{1}, \ldots, \mu_{k}, \sigma_{1}, \ldots, \sigma_{k}\right)
+\]</div>
+<p>Problems with GMM:</p>
+<ul>
+<li>Highly non-convex optimization problem. Can easily get stuck in local minima.</li>
+<li>It is does not have the representation power to express high-dimensional data.</li>
+</ul>
+<p><center>
+<img alt="" src="../assets/10.1.png" width="70%" />
+</center></p>
+<hr />
+<p>GMM doesn't work with high-dimensional data. The sampling process is:</p>
+<ol>
+<li>Pick a cluster center</li>
+<li>Add Gaussian noise</li>
+</ol>
+<p>If this is done with natural images, a realistic image can be generated only if it is a cluster center, i.e., the clusters must already be realistic images.</p>
+<p><center>
+<img alt="" src="../assets/10.2.png" width="100%" />
+</center></p>
+<p>So then how do we fit a general (complex) density model?</p>
+</div>
+<h2 id="1d-flow-models">1D Flow Models<a class="headerlink" href="#1d-flow-models" title="Permanent link">&para;</a></h2>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.3 : Math Review : 1D Continuous RV</p>
+<p>A random variable <span class="arithmatex">\(X\)</span> is continuous if there exists a <strong>probability density function (PDF)</strong> <span class="arithmatex">\(p_{X}(x) \geq 0\)</span> such that</p>
+<div class="arithmatex">\[
+\mathbb{P}(a \leq X \leq b)=\int_{a}^{b} p_{X}(x) d x
+\]</div>
+<p>In this case, we write <span class="arithmatex">\(X \sim p_{X}\)</span>.</p>
+<p><center>
+<img alt="" src="../assets/10.3.png" width="70%" />
+</center></p>
+<hr />
+<p>The <strong>cumulative distribution function (CDF)</strong> of <span class="arithmatex">\(X\)</span> is defined as</p>
+<div class="arithmatex">\[
+F_{X}(t)=\mathbb{P}(X \leq t)=\int_{-\infty}^{t} p_{X}(x) d x
+\]</div>
+<ul>
+<li><span class="arithmatex">\(F_{X}(t)\)</span> is a nondecreasing function.  </li>
+<li><span class="arithmatex">\(F_{X}(t)\)</span> is a continuous function if <span class="arithmatex">\(X\)</span> is a continuous random variable.</li>
+</ul>
+<p><center>
+<img alt="" src="../assets/10.4.png" width="70%" />
+</center></p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.4 : Naïve Approach : Parameterize <span class="arithmatex">\(p_{\theta}\)</span> as DNN</p>
+<p>Naïve approach for fitting a density model. Represent <span class="arithmatex">\(p_{\theta}(x)\)</span> with DNN.
+<center>
+<img alt="" src="../assets/10.5.png" width="100%" />
+</center></p>
+<p>There are some challenges:</p>
+<ol>
+<li>
+<p>How to ensure proper distribution?</p>
+<div class="arithmatex">\[\int_{-\infty}^{+\infty} p_{\theta}(x) d x=1, \quad p_{\theta}(x) \geq 0, \quad x \in \mathbb{R}\]</div>
+</li>
+<li>
+<p>How to sample?</p>
+</li>
+</ol>
+<hr />
+<p><strong>Normalization of <span class="arithmatex">\(p_{\theta}\)</span></strong></p>
+<p>For discrete random variables, one can use the soft-max function <span class="arithmatex">\(\mu: \mathbb{R}^{k} \rightarrow \mathbb{R}^{k}\)</span> defined as</p>
+<div class="arithmatex">\[
+\mu_{i}(z)_{i}=\frac{e^{z_{i}}}{\sum_{j=1}^{k} e^{z_{j}}}
+\]</div>
+<p>to normalize probabilities.</p>
+<p>For continuous random variables, we can ensure <span class="arithmatex">\(p_{\theta} \geq 0\)</span> with <span class="arithmatex">\(p_{\theta}(x)=e^{f_{\theta}(x)}\)</span>, where <span class="arithmatex">\(f_{\theta}\)</span> is the output of the neural network. However, ensuring the normalization</p>
+<div class="arithmatex">\[
+\int_{-\infty}^{+\infty} p_{\theta}(x) d x=1
+\]</div>
+<p>is not a simple matter. (Any Bayesian statistician can tell you how difficult this is.)</p>
+<hr />
+<p><strong>What happens if we ignore normalization?</strong></p>
+<p>Do we really need this normalization thing? Yes, we do.</p>
+<p>Without normalization, one can just assign arbitrarily large probabilities everywhere when we perform maximum likelihood estimation:</p>
+<div class="arithmatex">\[
+\underset{\theta \in \mathbb{R}^{p}}{\operatorname{maximize}} \sum_{i=1}^{N} \log p_{\theta}\left(X_{i}\right)
+\]</div>
+<p>The solution is to set <span class="arithmatex">\(p_{\theta}(x)=M\)</span> with <span class="arithmatex">\(M \rightarrow \infty\)</span>.</p>
+<p>We want model to place large probability on data <span class="arithmatex">\(X_{1}, \ldots, X_{N}\)</span> while placing small probability elsewhere. Normalization forces model to place small probability where data doesn't reside.</p>
+</div>
+<hr />
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.5 : Flow Model : Parameterize <span class="arithmatex">\(Z=f_{\theta}(X)\)</span> with DNN</p>
+<p>Key insight of normalizing flow: DNN outputs random variable <span class="arithmatex">\(Z\)</span>, rather than <span class="arithmatex">\(p_{\theta}(X)\)</span>.
+We choose <span class="arithmatex">\( Z \)</span> from a known distribution that is easy to sample from, such as <span class="arithmatex">\( \mathcal{N}(0,1) \)</span> or <span class="arithmatex">\( \operatorname{Uniform}([0,1]) \)</span>.</p>
+<p><center>
+<img alt="" src="../assets/10.6.png" width="100%" />
+</center></p>
+<p>In normalizing flow, find <span class="arithmatex">\(\theta\)</span> such that the flow <span class="arithmatex">\(f_{\theta}\)</span> normalizes the random variable <span class="arithmatex">\(X \sim p_{X}\)</span> into <span class="arithmatex">\(Z \sim \mathcal{N}(0,1)\)</span>.
+Generally, we can consider <span class="arithmatex">\(Z \sim pZ\)</span>. The choice of <span class="arithmatex">\(pZ\)</span>, however, does not seem to make a significant difference.</p>
+<p>Important questions to resolve:</p>
+<ol>
+<li>How to train? (How to evaluate <span class="arithmatex">\(p_{\theta}(x)\)</span> ? DNN outputs <span class="arithmatex">\(f_{\theta}\)</span>, not <span class="arithmatex">\(p_{\theta}\)</span>.) (Concept 10.7)</li>
+<li>How to sample <span class="arithmatex">\(X\)</span> ? (Concept 10.8)</li>
+</ol>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.6 : Math Review : 1D Change of Variable Formula for RV</p>
+<p>Assume <span class="arithmatex">\(f\)</span> is invertible, <span class="arithmatex">\(f\)</span> is differentiable, and <span class="arithmatex">\(f^{-1}\)</span> is differentiable.</p>
+<p>If <span class="arithmatex">\(X \sim p_{X}\)</span>, then <span class="arithmatex">\(Z=f(X)\)</span> has pdf</p>
+<div class="arithmatex">\[
+p_{Z}(z)=p_{X}\left(f^{-1}(z)\right)\left|\frac{d x}{d z}\right|
+\]</div>
+<p>If <span class="arithmatex">\(Z \sim p_{Z}\)</span>, then <span class="arithmatex">\(X=f^{-1}(Z)\)</span> has pdf</p>
+<div class="arithmatex">\[
+p_{X}(x)=p_{Z}(f(x))\left|\frac{d f(x)}{d x}\right|
+\]</div>
+<p>Since <span class="arithmatex">\(Z=f(X)\)</span>, one might think <span class="arithmatex">\(p_{X}(x)=p_{Z}(z)=p_{Z}(f(x))\)</span>. <span class="arithmatex">\(\leftarrow\)</span> This is wrong.</p>
+<p>Invertibility of <span class="arithmatex">\(f\)</span> is essential; it is not a minor technical issue.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.7 : Traning Flow Models</p>
+<p>Train model with MLE</p>
+<div class="arithmatex">\[
+\underset{\theta \in \mathbb{R}^{p}}{\operatorname{maximize}} \sum_{i=1}^{N} \log p_{\theta}\left(X_{i}\right)=\underset{\theta \in \mathbb{R}^{p}}{\operatorname{maximize}} \sum_{i=1}^{N} \log p_{Z}\left(f_{\theta}\left(X_{i}\right)\right)+\log \left|\frac{\partial f_{\theta}}{\partial x}\left(X_{i}\right)\right|
+\]</div>
+<p>where <span class="arithmatex">\(f_{\theta}\)</span> is invertible and differentiable, and <span class="arithmatex">\(X=f_{\theta}^{-1}(Z)\)</span> with <span class="arithmatex">\(Z \sim p_{Z}\)</span> so</p>
+<div class="arithmatex">\[
+p_{X}(x)=p_{Z}\left(f_{\theta}(x)\right)\left|\frac{\partial f_{\theta}}{\partial x}(x)\right|
+\]</div>
+<p>Can optimize with SGD, if we know how to perform backprop on <span class="arithmatex">\(\left|\frac{\partial f_{\theta}}{\partial x}\left(X_{i}\right)\right|\)</span>. More on this later.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.8 : Sampling from Flow Models</p>
+<p><center>
+<img alt="" src="../assets/10.7.png" width="100%" />
+</center></p>
+<ol>
+<li>Sample <span class="arithmatex">\(Z \sim p_{Z}\)</span></li>
+<li>Compute <span class="arithmatex">\(X=f_{\theta}^{-1}(Z)\)</span></li>
+</ol>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.9 : Requirements of Flow <span class="arithmatex">\(f_{\theta}\)</span></p>
+<p>Theoretical requirement:</p>
+<ul>
+<li><span class="arithmatex">\(f_{\theta}(x)\)</span> invertible and differentiable.</li>
+</ul>
+<p>Computational requirements:</p>
+<ul>
+<li><span class="arithmatex">\(f_{\theta}(x)\)</span> and <span class="arithmatex">\(\nabla_{\theta} f_{\theta}(x)\)</span> efficient to evaluate (for training)</li>
+<li><span class="arithmatex">\(\left|\frac{\partial f_{\theta}}{\partial x}(x)\right|\)</span> and <span class="arithmatex">\(\nabla_{\theta}\left|\frac{\partial f_{\theta}}{\partial x}(x)\right|\)</span> efficient to evaluate (for training)</li>
+<li><span class="arithmatex">\(f_{\theta}^{-1}\)</span> efficient to evaluate (for sampling)</li>
+</ul>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example 10.10 : Example of Trained Flow Models</p>
+<ul>
+<li>Flow to <span class="arithmatex">\(Z\)</span> ~ <span class="arithmatex">\(\operatorname{Uniform}([0,1])\)</span>
+<center>
+<img alt="" src="../assets/10.8.png" width="100%" />
+</center></li>
+<li>Flow to <span class="arithmatex">\(Z \sim \operatorname{Beta}(5,5)\)</span>
+<center>
+<img alt="" src="../assets/10.9.png" width="100%" />
+</center></li>
+<li>Flow to <span class="arithmatex">\(Z \sim \mathcal{N}(0,1)\)</span>
+<center>
+<img alt="" src="../assets/10.10.png" width="100%" />
+</center></li>
+</ul>
+</div>
+<hr />
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.11 : Universality of Flows</p>
+<p>Are flows universal, i.e., can <span class="arithmatex">\(f_{\theta}^{-1}(Z) \sim p_{X}\)</span> for any <span class="arithmatex">\(X\)</span> provided that <span class="arithmatex">\(f_{\theta}\)</span> can represent any invertible function?</p>
+<p>Yes, 1D flows are universal due to the inverse CDF sampling technique. (Some basic conditions are being omitted.)</p>
+<p>Higher dimensional flows are also universal as shown by Huang et al.<span class="arithmatex">\(^{\star}\)</span> or earlier by the general theory of optimal transport. (<a href="https://en.wikipedia.org/wiki/Transportation_theory_(mathematics)">link</a>)</p>
+<p><span class="arithmatex">\(^{\star}\)</span> C.-W. Huang, D. Krueger, A. Lacoste, and A. Courville, Neural Autoregressive Flows, ICML, 2018.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.12 : Math Review : Sampling via Inverse CDF</p>
+<p><strong>Inverse CDF sampling</strong> is a technique for sampling <span class="arithmatex">\(X \sim p_{X}\)</span>.
+If <span class="arithmatex">\(F_{X}(t)\)</span> is furthermore a strictly increasing function, then <span class="arithmatex">\(F_{X}\)</span> is invertible, i.e., <span class="arithmatex">\(F_{X}^{-1}\)</span> exists.</p>
+<p>Generate a random number <span class="arithmatex">\(U \sim \operatorname{Uniform}([0,1])\)</span> and compute <span class="arithmatex">\(F_{X}^{-1}(U)\)</span>. Then</p>
+<div class="arithmatex">\[
+F_{X}^{-1}(U) \sim p_{X}
+\]</div>
+<p>since</p>
+<div class="arithmatex">\[
+\mathbb{P}\left(F_{X}^{-1}(U) \leq t\right)=\mathbb{P}\left(U \leq F_{X}(t)\right)=F_{X}(t)
+\]</div>
+<p>Technique can be generalized to when <span class="arithmatex">\(F_{X}\)</span> is not invertible.</p>
+<hr />
+<p>Inverse CDF can be seen as flow model from <span class="arithmatex">\(X \sim p_X\)</span> to <span class="arithmatex">\(U \sim \operatorname{Uniform}([0,1])\)</span>.
+As seen above, the flow is <span class="arithmatex">\(F_X\)</span>, so when we do not know the true distribution <span class="arithmatex">\(p_X\)</span>, we can train the flow model to learn <span class="arithmatex">\(F_{X}^{-1}(U) \sim p_{X}\)</span>.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.13 : Universality of 1D Flows</p>
+<p>Composition of flows is a flow, and inverse of a flow is a flow.</p>
+<p>Universality of 1D flows:</p>
+<ul>
+<li>Use inverse CDF as flow to transform <span class="arithmatex">\(X \sim p_{X}\)</span> into <span class="arithmatex">\(U \sim \operatorname{Uniform}([0,1])\)</span> and <span class="arithmatex">\(Z \sim \mathcal{N}(0,1)\)</span> into <span class="arithmatex">\(U \sim \operatorname{Uniform}([0,1])\)</span>.</li>
+<li>Compose flow <span class="arithmatex">\(X \rightarrow U\)</span> and inverse flow <span class="arithmatex">\(U \rightarrow Z\)</span>.</li>
+</ul>
+<p><center>
+<img alt="" src="../assets/10.11.png" width="70%" />
+</center></p>
+</div>
+<h2 id="high-dimensional-flow-models">High Dimensional Flow Models<a class="headerlink" href="#high-dimensional-flow-models" title="Permanent link">&para;</a></h2>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.14 : Math Review : Jacobian Notation</p>
+<p>Let <span class="arithmatex">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}\)</span>, such that</p>
+<div class="arithmatex">\[
+f(x)=\left[\begin{array}{c}
+f_{1}(x) \\
+f_{2}(x) \\
+\vdots \\
+f_{n}(x)
+\end{array}\right]
+\]</div>
+<p>The Jacobian matrix is</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial x}(x)=\left[\begin{array}{cccc}
+\frac{\partial f_{1}}{\partial x_{1}}(x) &amp; \frac{\partial f_{1}}{\partial x_{2}}(x) &amp; \cdots &amp; \frac{\partial f_{1}}{\partial x_{n}}(x) \\
+\frac{\partial f_{2}}{\partial x_{1}}(x) &amp; \frac{\partial f_{2}}{\partial x_{2}}(x) &amp; \cdots &amp; \frac{\partial f_{2}}{\partial x_{n}}(x) \\
+\vdots &amp; &amp; \ddots &amp; \vdots \\
+\frac{\partial f_{n}}{\partial x_{1}}(x) &amp; \frac{\partial f_{n}}{\partial x_{2}}(x) &amp; \cdots &amp; \frac{\partial f_{n}}{\partial x_{n}}(x)
+\end{array}\right]=\left[\begin{array}{c}
+\left(\nabla f_{1}(x)\right)^{\top} \\
+\left(\nabla f_{2}(x)\right)^{\top} \\
+\vdots \\
+\left(\nabla f_{n}(x)\right)^{\top}
+\end{array}\right]
+\]</div>
+<p>The Jacobian determinant is <span class="arithmatex">\(\operatorname{det}\left(\frac{\partial f}{\partial x}\right)\)</span>. We use the notation</p>
+<div class="arithmatex">\[
+\left|\frac{\partial f}{\partial x}(x)\right|=\left|\operatorname{det}\left(\frac{\partial f}{\partial x}(x)\right)\right|
+\]</div>
+<p>where the second <span class="arithmatex">\(|\cdot|\)</span> is the absolute value of the determinant. (This notation is not completely standard.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.15 : Math Review : Multivariate Change of Variables</p>
+<p>Let <span class="arithmatex">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}\)</span> be an invertible function such that both <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(f^{-1}\)</span> are differentiable. Let <span class="arithmatex">\(U \subseteq \mathbb{R}^{n}\)</span>. Then</p>
+<div class="arithmatex">\[
+\int_{f(U)} h(v) d v=\int_{U} h(f(u))\left|\frac{\partial f}{\partial u}(u)\right| d u
+\]</div>
+<p>for any <span class="arithmatex">\(h: \mathbb{R}^{n} \rightarrow \mathbb{R}\)</span>. (Change of variable from <span class="arithmatex">\(v=f(u)\)</span> to <span class="arithmatex">\(u=f^{-1}(v)\)</span>.)</p>
+<p>(The conditions for this change of variable formula can be further generalized.)</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.16 : Math Review : Multivariate Continuous RV</p>
+<p>A multivariate random variable <span class="arithmatex">\(X \in \mathbb{R}^{n}\)</span> is continuous if there exists a probability density function <span class="arithmatex">\(p_{X}(x)\)</span> such that</p>
+<div class="arithmatex">\[
+\mathbb{P}(X \in A)=\int_{A} p_{X}(x) d x
+\]</div>
+<p>where the integral is over the volume <span class="arithmatex">\(A \subseteq \mathbb{R}^{n}\)</span>. In this case, we write <span class="arithmatex">\(X \sim p_{X}\)</span>.</p>
+<p>The joint cumulative distribution function (the copula) does not seem to be useful in the context of high-dimensional flow models.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.17 : Math Review : Multivariate Change of Variable Formula for RV</p>
+<p>Let <span class="arithmatex">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}\)</span> be an invertible function such that both <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(f^{-1}\)</span> are differentiable. Let <span class="arithmatex">\(X\)</span> be a continuous random variable with probability density function <span class="arithmatex">\(p_{X}\)</span> and let <span class="arithmatex">\(Y=f(X)\)</span> have density <span class="arithmatex">\(p_{Y}\)</span>. Then</p>
+<div class="arithmatex">\[
+p_{X}(x)=p_{Y}(f(x))\left|\frac{\partial f}{\partial x}(x)\right|
+\]</div>
+<div class="admonition proof">
+<p class="admonition-title">Proof</p>
+<div class="arithmatex">\[
+\mathbb{P}\left(f^{-1}(Y) \in A\right)=\mathbb{P}(Y \in f(A))=\int_{f(A)} p_{Y}(y) d y=\int_{A} p_{Y}(f(x))\left|\frac{\partial f}{\partial x}(x)\right| d x=\mathbb{P}(X \in A)
+\]</div>
+</div>
+<p>Invertibility of <span class="arithmatex">\(f\)</span> is essential; it is not a minor technical issue.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.18 : Math Review : Determinant</p>
+<p>Fact: Determinant definitions in undergraduate linear algebra textbooks require exponentially many operations to compute:</p>
+<div class="arithmatex">\[
+\operatorname{det}(A)=\sum_{\sigma \in S_{n}}\left(\operatorname{sgn}(\sigma) \prod_{i=1}^{n} a_{i, \sigma_{i}}\right)
+\]</div>
+<p>Efficient computation of determinant for general matrices and performing backprop through the computation is difficult. Therefore, high-dimensional flow model are designed to compute determinants only on simple matrices.</p>
+<ul>
+<li>Product formula: if <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> are square, then</li>
+</ul>
+<div class="arithmatex">\[
+\operatorname{det}(A B)=\operatorname{det}(A) \operatorname{det}(B)
+\]</div>
+<ul>
+<li>Block lower triangular formula: if <span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span> and <span class="arithmatex">\(C \in \mathbb{R}^{m \times m}\)</span>, then</li>
+</ul>
+<div class="arithmatex">\[
+\operatorname{det}\left(\begin{array}{ll}
+A &amp; 0 \\
+B &amp; C
+\end{array}\right)=\operatorname{det}(A) \operatorname{det}(C)
+\]</div>
+<ul>
+<li>Lower triangular formula: if <span class="arithmatex">\(a_{1}, \ldots, a_{n} \in \mathbb{R}\)</span> and <span class="arithmatex">\(*\)</span> represents arbitrary values, then</li>
+</ul>
+<div class="arithmatex">\[
+\operatorname{det}\left(\begin{array}{cccc}
+a_{1} &amp; 0 &amp; \cdots &amp; 0 \\
+* &amp; a_{2} &amp; &amp; \vdots \\
+* &amp; * &amp; \ddots &amp; 0 \\
+* &amp; * &amp; * &amp; a_{n}
+\end{array}\right)=\prod_{i=1}^{n} a_{i}
+\]</div>
+<ul>
+<li>Upper triangular formula: same as for lower triangular matrices.</li>
+</ul>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.19 : Training High Dimensional Flow Models</p>
+<p>Train model with MLE</p>
+<div class="arithmatex">\[
+\underset{\theta \in \mathbb{R}^{p}}{\operatorname{maximize}} \sum_{i=1}^{N} \log p_{\theta}\left(X_{i}\right)=\underset{\theta \in \mathbb{R}^{p}}{\operatorname{maximize}} \sum_{i=1}^{N} \log p_{Z}\left(f_{\theta}\left(X_{i}\right)\right)+\log \left|\frac{\partial f_{\theta}}{\partial x}\left(X_{i}\right)\right|
+\]</div>
+<p>where <span class="arithmatex">\(f_{\theta}(z)\)</span> is invertible and differentiable, and <span class="arithmatex">\(X=f^{-1}(Z)\)</span> with <span class="arithmatex">\(Z \sim p_{Z}\)</span> so</p>
+<div class="arithmatex">\[
+p_{X}(x)=p_{Z}\left(f_{\theta}(x)\right)\left|\frac{\partial f_{\theta}}{\partial x}(x)\right|
+\]</div>
+<p>(Exactly the same formula as with 1D flow.)</p>
+<p>Can optimize with SGD, if we know how to perform backprop on <span class="arithmatex">\(\left|\frac{\partial f_{\theta}}{\partial x}\left(X_{i}\right)\right|\)</span>.</p>
+</div>
+<h2 id="coupling-flows">Coupling Flows<a class="headerlink" href="#coupling-flows" title="Permanent link">&para;</a></h2>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.20 : Composing Flows</p>
+<p>Flows can be composed to increase expressiveness. (Deep NN more expressive.)
+Consider composition of <span class="arithmatex">\(k\)</span> flows</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; x \rightarrow f_{1} \rightarrow f_{2} \rightarrow \cdots \rightarrow f_{k} \rightarrow z \\
+&amp; z=f_{k} \circ \cdots \circ f_{1}(x) \\
+&amp; x=f_{1}^{-1} \circ \cdots \circ f_{k}^{-1}(z)
+\end{aligned}
+\]</div>
+<p>Determinant computation splits nicely due to chain rule and product formula</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; \operatorname{det}\left(\frac{\partial z}{\partial x}\right)=\operatorname{det}\left(\frac{\partial f_{k}}{\partial f_{k-1}} \cdots \frac{\partial f_{1}}{\partial f_{0}}\right)=\operatorname{det}\left(\frac{\partial f_{k}}{\partial f_{k-1}}\right) \cdots \operatorname{det}\left(\frac{\partial f_{1}}{\partial f_{0}}\right) \\
+&amp; \log p_{\theta}(x)=\log p_{\theta}(z)+\sum_{i=1}^{k} \log \left|\frac{\partial f_{i}}{\partial f_{i-1}}\right|
+\end{aligned}
+\]</div>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.21 : Affine Flows</p>
+<p>An affine (linear) transformation</p>
+<div class="arithmatex">\[
+f_{A, b}(x)=A^{-1}(x-b)
+\]</div>
+<p>is a flow if matrix <span class="arithmatex">\(A\)</span> is invertible. Then</p>
+<div class="arithmatex">\[
+\frac{\partial f_{A, b}}{\partial x}=A^{-1}
+\]</div>
+<p>and</p>
+<div class="arithmatex">\[
+\left|\frac{\partial f_{A, b}}{\partial x}\right|=\left|\operatorname{det}\left(A^{-1}\right)\right|=\frac{1}{|\operatorname{det}(A)|}
+\]</div>
+<p>Sampling: <span class="arithmatex">\(X=A Z+b\)</span>, where <span class="arithmatex">\(Z \sim \mathcal{N}(0, I)\)</span>.</p>
+<p>Problem with <strong>affine flows</strong>:</p>
+<ul>
+<li>Computing <span class="arithmatex">\(|\operatorname{det}(A)|\)</span> is expensive and performing backprop over it is difficult. We want <span class="arithmatex">\(\frac{\partial f_{A, b}}{\partial x}\)</span> to be further structured so that determinant is easy to compute.</li>
+<li>One affine flow is insufficient to generate complex data. However, composing multiple affine flows yields an affine flow and therefore is pointless. We need to introduce nonlinearities.</li>
+</ul>
+</div>
+<hr />
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.22 : Coupling Flows</p>
+<p>A coupling flow is a general and practical approach for constructing non-linear flows.</p>
+<p>Partition input into two disjoint subsets <span class="arithmatex">\(x=\left(x^{A}, x^{B}\right)\)</span>. Then</p>
+<div class="arithmatex">\[
+f(x)=\left(x^{A}, \hat{f}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right)\right)
+\]</div>
+<p>where <span class="arithmatex">\(\psi_{\theta}\)</span> is a neural network and <span class="arithmatex">\(\hat{f}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right)\)</span> is another flow whose parameters depend on <span class="arithmatex">\(x^{A}\)</span>.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.23 : Evaluation of Coupling Flows</p>
+<ul>
+<li>Forward Evaluation</li>
+</ul>
+<p><center>
+<img alt="" src="../assets/10.12.png" width="100%" />
+</center></p>
+<ul>
+<li>Inverse Evaluation</li>
+</ul>
+<p><center>
+<img alt="" src="../assets/10.13.png" width="100%" />
+</center></p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.24 : Jacobian of Coupling Flows</p>
+<p>The Jacobian of a coupling flow has a nice block structure</p>
+<div class="arithmatex">\[
+\frac{\partial f_{\theta}}{\partial x}(x)=\left[\begin{array}{cc}
+I &amp; 0 \\
+\frac{\partial \hat{f}}{\partial x^{A}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right) &amp; \frac{\partial \hat{f}}{\partial x^{B}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right)
+\end{array}\right]
+\]</div>
+<p>which leads to the simplified determinant formula</p>
+<div class="arithmatex">\[
+\operatorname{det}\left(\frac{\partial f_{\theta}}{\partial x}(x)\right)=\operatorname{det}\left(\frac{\partial \hat{f}}{\partial x^{B}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right)\right)
+\]</div>
+<p>Note <span class="arithmatex">\(\frac{\partial \hat{f}}{\partial x^{A}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right)\)</span>, which will be very complicated, does not appear in the determinant.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.25 : Coupling transformation <span class="arithmatex">\(\hat{f}(x \mid \psi)\)</span></p>
+<ul>
+<li>
+<p><strong>Additive transformations (NICE)</strong></p>
+<div class="arithmatex">\[
+\hat{f}(x \mid \psi)=x+t
+\]</div>
+<p>where <span class="arithmatex">\(\psi=t\)</span>.</p>
+</li>
+<li>
+<p><strong>Affine transformations (Real NVP)</strong></p>
+<div class="arithmatex">\[
+\hat{f}(x \mid \psi)=e^{s} \odot x+t
+\]</div>
+<p>where <span class="arithmatex">\(\psi=(s, t)\)</span>.</p>
+</li>
+</ul>
+<p>Other transformations studied throughout the literature.</p>
+</div>
+<hr />
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.26 : NICE (Non-linear Independent Components Estimation)</p>
+<p>NICE uses additive coupling layers:
+Split variables in half: <span class="arithmatex">\(x_{1: n / 2}, x_{n / 2: n}\)</span></p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; z_{1: n / 2}=x_{1: n / 2} \\
+&amp; z_{n / 2: n}=x_{n / 2: n}+t_{\theta}\left(x_{1: n / 2}\right)
+\end{aligned}
+\]</div>
+<p>Easily invertible:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; x_{1: n / 2}=z_{1: n / 2} \\
+&amp; x_{n / 2: n}=z_{n / 2: n}-t_{\theta}\left(x_{1: n / 2}\right)
+\end{aligned}
+\]</div>
+<p>Jacobian determinant is easy to compute:</p>
+<div class="arithmatex">\[
+\operatorname{det} \frac{\partial f_{\theta}}{\partial x}(x)=\operatorname{det}\left[\begin{array}{cc}I &amp; 0 \\ \frac{\partial \hat{f}}{\partial x^{A}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right) &amp; \frac{\partial \hat{f}}{\partial x^{B}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right)\end{array}\right]=\operatorname{det}\left[\begin{array}{cc}I &amp; 0 \\ \frac{\partial \hat{f}}{\partial x^{A}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right) &amp; I\end{array}\right]=1
+\]</div>
+<p>(L. Dinh, D. Krueger, and Y. Bengio, NICE: Non-linear independent components estimation, ICLR Workshop, 2015.)</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.27 : Real NVP (Real-valued Non-Volume Preserving)</p>
+<p>Real NVP uses affine coupling layers:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; z_{1: n / 2}=x_{1: n / 2} \\
+&amp; z_{n / 2: n}=e^{s_{\theta}\left(x_{1: n / 2}\right)} \odot x_{n / 2: n}+t_{\theta}\left(x_{1: n / 2}\right)
+\end{aligned}
+\]</div>
+<p>Easily invertible:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; x_{1: n / 2}=z_{1: n / 2} \\
+&amp; x_{n / 2: n}=\left(z_{n / 2: n}-t_{\theta}\left(x_{1: n / 2}\right)\right) \odot e^{-s_{\theta}\left(x_{1: n / 2}\right)}
+\end{aligned}
+\]</div>
+<p>Jacobian determinant is easy to compute:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\operatorname{det} \frac{\partial f_{\theta}}{\partial x}(x) &amp; =\operatorname{det}\left[\begin{array}{cc}
+I &amp; 0 \\
+\frac{\partial \hat{f}}{\partial x^{A}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right) &amp; \frac{\partial \hat{f}}{\partial x^{B}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right)
+\end{array}\right] \\
+&amp; =\operatorname{det}\left[\begin{array}{cc}
+I &amp; 0 \\
+\frac{\partial \hat{f}}{\partial x^{A}}\left(x^{B} \mid \psi_{\theta}\left(x^{A}\right)\right) &amp; \operatorname{diag}\left(e^{s_{\theta}\left(x_{1: n / 2}\right)}\right)
+\end{array}\right]=\exp \left(\mathbf{1}_{n / 2}^{\top} s_{\theta}\left(x_{1: n / 2}\right)\right)
+\end{aligned}
+\]</div>
+<p>(L. Dinh, J. Sohl-Dickstein, and S. Bengio, Density estimation using Real NVP, ICLR, 2017.)</p>
+</div>
+<ul>
+<li>Results of Real NVP</li>
+</ul>
+<center>
+![](./assets/10.14.png){: width="100%"}
+</center>
+
+<hr />
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.28 : How to partition variables?</p>
+<p>Note that the additive and affine coupling layers of NICE and Real NVP are nonlinear mappings from <span class="arithmatex">\(x_{1: n}\)</span> to <span class="arithmatex">\(z_{1: n}\)</span>, since <span class="arithmatex">\(s_{\theta}\left(x_{1: n / 2}\right)\)</span> and <span class="arithmatex">\(t_{\theta}\left(x_{1: n / 2}\right)\)</span> are nonlinear.</p>
+<p>Flow models compose multiple nonlinear flows. But if <span class="arithmatex">\(x_{1: n / 2}\)</span> is always unchanged, then the full composition will leave it unchanged. Therefore, we change the partitioning for every coupling layer.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.29 : Real NVP Variable Partitioning</p>
+<p>Two partition strategies:</p>
+<ol>
+<li>Partition with checkerboard pattern.</li>
+<li>Reshape tensor and then partition channelwise.</li>
+</ol>
+<p><center>
+<img alt="" src="../assets/10.15.png" width="70%" />
+</center></p>
+<p>(L. Dinh, J. Sohl-Dickstein, and S. Bengio, Density estimation using Real NVP, ICLR, 2017.)</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.30 : Real NVP Architecture</p>
+<p><center>
+<img alt="" src="../assets/10.16.png" width="100%" />
+</center></p>
+<p>Input <span class="arithmatex">\(X\)</span> : <span class="arithmatex">\(c \times 32 \times 32\)</span> image with <span class="arithmatex">\(c=3\)</span></p>
+<p>Layer 1: Input <span class="arithmatex">\(X: c \times 32 \times 32\)</span></p>
+<ul>
+<li>Checkerboard <span class="arithmatex">\(\times 3\)</span>, channel reshape into <span class="arithmatex">\(4 c \times 16 \times 16\)</span>, channel <span class="arithmatex">\(\times 3\)</span></li>
+<li>Output: Split result to get <span class="arithmatex">\(X_{1}: 2 c \times 16 \times 16\)</span> and <span class="arithmatex">\(Z_{1}: 2 c \times 16 \times 16\)</span> (fine-grained latents)</li>
+</ul>
+<p>Layer 2: Input <span class="arithmatex">\(X_{1}: 2 c \times 16 \times 16\)</span> from layer 1</p>
+<ul>
+<li>Checkerboard <span class="arithmatex">\(\times 3\)</span>, channel reshape into <span class="arithmatex">\(8 c \times 8 \times 8\)</span>, channel <span class="arithmatex">\(\times 3\)</span></li>
+<li>Split result to get <span class="arithmatex">\(X_{2}: 4 c \times 8 \times 8\)</span> and <span class="arithmatex">\(Z_{2}: 4 c \times 8 \times 8\)</span> (coarser latents)</li>
+</ul>
+<p>Layer 3: Input <span class="arithmatex">\(X_{2}: 4 c \times 8 \times 8\)</span> from layer 2</p>
+<ul>
+<li>Checkerboard <span class="arithmatex">\(\times 3\)</span>, channel reshape into <span class="arithmatex">\(16 c \times 4 \times 4\)</span>, channel <span class="arithmatex">\(\times 3\)</span></li>
+<li>Get <span class="arithmatex">\(Z_{3}: 16 c \times 4 \times 4\)</span> (latents for highest-level details)</li>
+</ul>
+<p>Output <span class="arithmatex">\(Z = (Z_1, Z_2, Z_3) \in \mathbb{R}^{c \dot 32^2}\)</span></p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.31 : Batch Normalization in Deep Flows</p>
+<p>To train deep flows, BN is helpful. However, the large model size forces the use of small batch sizes, and BN is not robust with small batch sizes. RealNVP uses a modified form of BN</p>
+<div class="arithmatex">\[
+x \mapsto \frac{x-\tilde{\mu}}{\sqrt{\tilde{\sigma}^{2}+\varepsilon}}
+\]</div>
+<p>(No <span class="arithmatex">\(\beta\)</span> and <span class="arithmatex">\(\gamma\)</span> parameters.) This layer has the log Jacobian determinant</p>
+<div class="arithmatex">\[
+-\frac{1}{2} \sum_{i} \log \left(\tilde{\sigma}_{i}^{2}+\varepsilon\right)
+\]</div>
+<p>The mean and variance parameters are updated with</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\tilde{\mu}_{k+1} &amp; =\rho \tilde{\mu}_{k}+(1-\rho) \hat{\mu}_{k} \\
+\tilde{\sigma}_{k+1}^{2} &amp; =\rho \tilde{\sigma}_{k}^{2}+(1-\rho) \hat{\sigma}_{k}^{2}
+\end{aligned}
+\]</div>
+<p>where <span class="arithmatex">\(\rho\)</span> is the momentum. During gradient computation, only backprop through the current batch statistics <span class="arithmatex">\(\hat{\mu}_{k}\)</span> and <span class="arithmatex">\(\hat{\sigma}_{k}^{2}\)</span>.</p>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 10.32 : <span class="arithmatex">\(s_{\theta}\)</span> and <span class="arithmatex">\(t_{\theta}\)</span> networks</p>
+<p>The <span class="arithmatex">\(s_{\theta}\)</span> and <span class="arithmatex">\(t_{\theta}\)</span> do not need to be invertible. The original RealNVP paper does not describe its construction.</p>
+<p>We let <span class="arithmatex">\(\left(s_{\theta}, t_{\theta}\right)\)</span> be a deep (20-layer) convolutional neural network using residual connections and standard batch normalization.</p>
+</div>
+<h2 id="researches">Researches<a class="headerlink" href="#researches" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.33 : Glow Paper</p>
+<p>The authors of the Glow paper also released a blog post.
+<a href="https://openai.com/blog/glow/">link</a></p>
+<p>(D. P. Kingma and P. Dhariwal, Glow: Generative flow with invertible 1x1 convolutions, NeurIPS, 2018.)</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 10.34 : FFJORD</p>
+<p>Instead of a discrete composition of flows, what if we have a continuous-time flow?</p>
+<div class="arithmatex">\[
+\begin{aligned}
+z_{0} &amp; =x \\
+z_{t} &amp; =z_{0}+\int_{0}^{t} h\left(t, z_{t}\right) d t \\
+f(x) &amp; =z_{1}
+\end{aligned}
+\]</div>
+<p>Inverse:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+z_{1} &amp; =z \\
+z_{t} &amp; =z_{1}-\int_{t}^{1} h\left(t, z_{t}\right) d t \\
+f^{-1}(z) &amp; =z_{0}
+\end{aligned}
+\]</div>
+<p>(R. T. Q. Chen, Y. Rubanova, J. Bettencourt, and D. Duvenaud, Neural ordinary differential equations, NeurIPS, 2018.<br />
+W. Grathwohl, R. T. Q. Chen, J. Bettencourt, I. Sutskever, and D. Duvenaud, FFJORD: Free-form continuous dynamics for scalable reversible generative models, ICLR, 2019.)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/arnold518" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "header.autohide", "navigation.instant", "navigation.tracking", "navigation.tabs", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "search.share", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

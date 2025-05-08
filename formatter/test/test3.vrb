@@ -1,0 +1,4 @@
+\frametitle{Code Block Example}
+\begin{verbatim}
+    printf("Hello World");
+    \end{verbatim}

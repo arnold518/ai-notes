@@ -1,0 +1,11 @@
+{
+	"Definition Snippet": {
+	  "prefix": ["def", "definition"],
+	  "scope": "markdown",
+	  "body": [
+		"!!! definition \"Definition $1 : $2\"",
+		"\t$3"
+	  ],
+	  "description": "Insert a definition block"
+	}
+  }

@@ -1,0 +1,11 @@
+{
+	"Theorem Snippet": {
+	  "prefix": ["thm", "theorem"],
+	  "scope": "markdown",
+	  "body": [
+		"!!! theorem \"Theorem $1 : $2\"",
+		"\t$3"
+	  ],
+	  "description": "Insert a theorem block"
+	}
+  }

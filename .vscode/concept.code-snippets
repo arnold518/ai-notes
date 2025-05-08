@@ -1,0 +1,11 @@
+{
+	"Concept Snippet": {
+	  "prefix": ["con", "concept"],
+	  "scope": "markdown",
+	  "body": [
+		"!!! concept \"Concept $1 : $2\"",
+		"\t$3"
+	  ],
+	  "description": "Insert a concept block"
+	}
+  }

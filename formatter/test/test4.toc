@@ -1,0 +1,11 @@
+\beamer@sectionintoc {1}{§ 1. Optimization Problem}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Definition of Optimization Problem}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Examples of Optimization Problem}{8}{0}{1}
+\beamer@subsectionintoc {1}{3}{Local and Global Minimum}{13}{0}{1}
+\beamer@sectionintoc {2}{§ 11. Variational Autoencoders}{16}{0}{2}
+\beamer@subsectionintoc {2}{1}{Latent Variable Model}{23}{0}{2}
+\beamer@subsectionintoc {2}{2}{Training Latent Variable Model with Importance Sampling}{29}{0}{2}
+\beamer@subsectionintoc {2}{3}{Definition of VAE}{43}{0}{2}
+\beamer@subsectionintoc {2}{4}{VAE Standard Instance}{50}{0}{2}
+\beamer@subsectionintoc {2}{5}{Training VAE}{58}{0}{2}
+\beamer@subsectionintoc {2}{6}{Researches}{62}{0}{2}

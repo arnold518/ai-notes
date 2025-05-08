@@ -1,0 +1,278 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage{amsmath, amssymb}
+\usepackage{xcolor}
+
+\setbeamertemplate{footline}
+{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{title in head/foot}\insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,leftskip=2ex,rightskip=2ex,sep=0pt]{date in head/foot}%
+    \hfill%
+    \usebeamerfont{date in head/foot}%
+    \insertsubsection%
+    \hfill%
+    \usebeamercolor[fg]{page number in head/foot}%
+    \usebeamerfont{page number in head/foot}%
+    \usebeamertemplate{page number in head/foot}%
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\let\oldpart\part
+\renewcommand{\part}[1]{
+    \oldpart{#1}
+    \begin{frame}
+        \centering
+        \Huge \textbf{#1}
+    \end{frame}
+}
+\setbeamertemplate{section in toc}[ball unnumbered]
+\setbeamertemplate{subsection in toc}[ball unnumbered]
+\setbeamertemplate{subsubsection in toc}[ball unnumbered]
+
+\AtBeginSection[]{
+    \begin{frame}
+        \vfill
+        \centering
+        \Huge \textbf{\insertsection} \\
+        \vspace{1em}
+        \begin{minipage}{0.7\linewidth}
+            \centering
+            \normalsize
+            \tableofcontents[
+                sectionstyle=show/hide,
+                subsectionstyle=show/shaded/hide,
+                subsubsectionstyle=show/shaded/shaded/hide
+            ]
+        \end{minipage}
+        \vfill
+    \end{frame}
+}
+
+\AtBeginSubsection[]{
+    \begin{frame}
+        \vfill
+        \centering
+        \LARGE \textbf{\insertsection} \\
+        \vspace{1em}
+        \Large \textbf{\insertsubsection} \\
+        \vspace{1em}
+        \begin{minipage}{0.7\linewidth}
+            \centering
+            \normalsize
+            \tableofcontents[
+                sectionstyle=show/hide,
+                subsectionstyle=show/shaded/hide,
+                subsubsectionstyle=show/shaded/shaded/hide
+            ]
+        \end{minipage}
+        \vfill
+    \end{frame}
+}
+
+\AtBeginSubsubsection[]{
+    \begin{frame}
+        \vfill
+        \centering
+        \LARGE \textbf{\insertsection} \\
+        \vspace{1em}
+        \Large \textbf{\insertsubsection} \\
+        \vspace{1em}
+        \large \textbf{\insertsubsubsection} \\
+        \vspace{1em}
+        \begin{minipage}{0.7\linewidth}
+            \centering
+            \normalsize
+            \tableofcontents[
+                sectionstyle=show/hide,
+                subsectionstyle=show/shaded/hide,
+                subsubsectionstyle=show/shaded/shaded/hide
+            ]
+        \end{minipage}
+        \vfill
+    \end{frame}
+}
+
+% Define custom colors
+\definecolor{mytheorem}{RGB}{41, 128, 185} % Dark blue for the theorem title
+\definecolor{myconcept}{RGB}{192, 57, 43}  % Dark red for concept title
+\definecolor{mydefinition}{RGB}{39, 174, 96} % Dark green for definition title
+\definecolor{myexample}{RGB}{211, 84, 0}   % Dark orange for example title
+\definecolor{myproof}{RGB}{127, 140, 141}  % Gray for proof title
+
+% Themed background colors
+\definecolor{mytheorem_bg}{RGB}{214, 234, 248}   % Light blue body
+\definecolor{myconcept_bg}{RGB}{242, 215, 213}   % Light red body
+\definecolor{mydefinition_bg}{RGB}{235, 247, 238} % Light green body
+\definecolor{myexample_bg}{RGB}{250, 229, 211}   % Light orange body
+\definecolor{myproof_bg}{RGB}{236, 240, 241}     % Light gray body
+
+\newenvironment{mytheoremblock}[2]{
+    \phantomsection\label{theorem:#1} 
+    \setbeamercolor{block title}{bg=mytheorem,fg=white}
+    \setbeamercolor{block body}{bg=mytheorem_bg,fg=black}
+    \begin{block}{Theorem #1: #2}
+}
+{\end{block}}
+
+\newenvironment{myconceptblock}[2]{
+    \phantomsection\label{concept:#1} 
+    \setbeamercolor{block title}{bg=myconcept,fg=white}
+    \setbeamercolor{block body}{bg=myconcept_bg,fg=black}
+    \begin{block}{Concept #1: #2}
+}
+{\end{block}}
+
+\newenvironment{myexampleblock}[2]{
+    \phantomsection\label{example:#1} 
+    \setbeamercolor{block title}{bg=myexample,fg=white}
+    \setbeamercolor{block body}{bg=myexample_bg,fg=black}
+    \begin{block}{Example #1: #2}
+}
+{\end{block}}
+
+\newenvironment{mydefinitionblock}[2]{
+    \phantomsection\label{definition:#1} 
+    \setbeamercolor{block title}{bg=mydefinition,fg=white}
+    \setbeamercolor{block body}{bg=mydefinition_bg,fg=black}
+    \begin{block}{Definition #1: #2}
+}
+{\end{block}}
+
+\newenvironment{myproofblock}[2]{
+    \phantomsection\label{proof:#1} 
+    \setbeamercolor{block title}{bg=myproof,fg=white}
+    \setbeamercolor{block body}{bg=myproof_bg,fg=black}
+    \begin{block}{Proof #1: #2}
+}
+{\end{block}}
+
+\begin{document}
+
+\title{Custom Blocks in Beamer}
+\author{Your Name}
+\date{\today}
+
+\frame{\titlepage}
+
+\section{Introduction}
+
+\begin{frame}[allowframebreaks]{Custom Blocks Example}
+
+    \begin{mytheoremblock}{1.2}{Pythagoras}
+        In a right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.
+        \begin{enumerate}
+            \item First item
+            \item Second item
+            \item Third item
+            \item asdf
+        \end{enumerate}
+    \end{mytheoremblock}
+    
+    \begin{myconceptblock}{Concept: Probability}
+        The probability of an event is a measure of the likelihood that the event will occur.
+    \end{myconceptblock}
+    
+    \framebreak
+
+    \begin{mydefinitionblock}{Definition: Function}
+        A function is a relation that assigns exactly one output to each input.
+    \end{mydefinitionblock}
+    
+    \begin{myexampleblock}{Example: Fibonacci Sequence}
+        The sequence starts with 0 and 1, and each subsequent number is the sum of the previous two.
+    \end{myexampleblock}
+    
+    \begin{myproofblock}{Proof (Sketch)}
+        The proof follows by induction on \(n\).
+    \end{myproofblock}
+    
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]{Unordered List Example}
+    \begin{itemize}
+        \item First item
+        \item Second item
+        \item Third item
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+        \item asdf
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Ordered List Example}
+    \begin{enumerate}
+        \item First item
+        \item Second item
+        \item Third item
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Code Block Example}
+    \begin{verbatim}
+    printf("Hello World");
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Automatic Frame Break Example}
+    \begin{myconceptblock}{Concept: Probability}
+        The probability of an event is a measure of the likelihood that the event will occur.
+        \begin{enumerate}
+            \item First item
+            \item Second item
+            \item Third item
+            \item Third item
+            \item Third item
+            \item Third item
+            \item Third item
+            \item Third item
+            \item Third item
+            \item Third item
+        \end{enumerate}
+    \end{myconceptblock}
+    \begin{myconceptblock}{Concept: Probability}
+        The probability of an event is a measure of the likelihood that the event will occur.
+    \end{myconceptblock}
+    \begin{myconceptblock}{Concept: Probability}
+        The probability of an event is a measure of the likelihood that the event will occur.
+    \end{myconceptblock}
+    \begin{myconceptblock}{Concept: Probability}
+        The probability of an event is a measure of the likelihood that the event will occur.
+    \end{myconceptblock}
+    \begin{myconceptblock}{Concept: Probability}
+        The probability of an event is a measure of the likelihood that the event will occur.
+    \end{myconceptblock}
+    \begin{myconceptblock}{Concept: Probability}
+        The probability of an event is a measure of the likelihood that the event will occur.
+    \end{myconceptblock}
+\end{frame}
+
+\section{Inserting an Image}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{example-image-a} % Replace with actual filename
+    \caption{Example of an Image in LaTeX}
+    \label{fig:image_example}
+\end{figure}
+
+\end{document}

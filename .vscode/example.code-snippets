@@ -1,0 +1,11 @@
+{
+	"Example Snippet": {
+	  "prefix": ["ex", "example"],
+	  "scope": "markdown",
+	  "body": [
+		"!!! example \"Example $1 : $2\"",
+		"\t$3"
+	  ],
+	  "description": "Insert a example block"
+	}
+  }

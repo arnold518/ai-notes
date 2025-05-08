@@ -1,0 +1,12 @@
+{
+	"Concept Snippet": {
+	  "prefix": ["img", "image"],
+	  "scope": "markdown",
+	  "body": [
+		"<center>",
+		"![](./assets/$1){: width=\"100%\"}",
+		"</center>"
+	  ],
+	  "description": "Insert a image"
+	}
+  }

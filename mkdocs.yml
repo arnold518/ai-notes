@@ -1,0 +1,124 @@
+site_name: Artificial Intelligence Notes
+
+repo_name: arnold518/ai-notes
+
+repo_url: https://github.com/arnold518/ai-notes
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - navigation.sections
+    - header.autohide
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - toc.follow
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - search.share
+    - navigation.indexes
+  icon:
+    repo: fontawesome/brands/github
+    admonition:
+      note: material/lightbulb-on
+      tip: fontawesome/solid/clock
+  language: ko  
+  font:
+    text: Noto Sans
+    code: Ubuntu Mono
+  palette: 
+      # Palette toggle for light mode
+      - media: "(prefers-color-scheme: light)"
+        scheme: default
+        primary: green
+        accent: green
+        toggle:
+          icon: material/weather-sunny
+          name: Switch to dark mode
+      # Palette toggle for dark mode
+      - media: "(prefers-color-scheme: dark)"
+        scheme: slate
+        primary: green
+        accent: green
+        toggle:
+          icon: material/weather-night
+          name: Switch to light mode
+    
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - attr_list
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - tags:
+      tags_file: tags.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/arnold518
+  generator: false
+
+nav:
+  - Home: index.md
+  - Mathematical Foundations of Deep Neural Networks:
+      - MFDNN/format/index.md
+      - Ch 1. Optimization and Stochastic Gradient Descent:
+          - 1. Optimization Problem : MFDNN/format/1.md
+          - 2. Gradient Descent: MFDNN/format/2.md
+          - Chapter 1 Code: https://drive.google.com/file/d/1PSpoeseUPIptYQOPuQpxNawxtZbVR_K6/view?usp=sharing
+      - Ch 2. Shallow Neural Networks to Multilayer Perceptrons:
+          - 3. Shallow Neural Networks : MFDNN/format/3.md
+          - 4. Deep Neural Networks : MFDNN/format/4.md
+          - Chapter 2 Code: https://drive.google.com/file/d/15kXC3cJUV63gZNfXK6JdPPuSrwQZBzI8/view?usp=sharing
+      - Ch 3. Convolutional Neural Networks:
+          - 5. Convolutional Neural Networks : MFDNN/format/5.md
+          - 6. Foundations of Design and Training of Deep Neural Networks : MFDNN/format/6.md
+          - 7. ImageNet Challenge : MFDNN/format/7.md
+          - Chapter 3 Code: https://drive.google.com/file/d/12O9fLasWDA-kOKBD-lE-1UhCl-PoDf0z/view?usp=sharing
+      - Ch 4. CNNs for Other Supervised Learning Tasks:
+          - 8. CNNs for Other Supervised Learning Tasks : MFDNN/format/8.md
+          - Chapter 4 Code: https://drive.google.com/file/d/16IOKVF6IiDMyUvL73pGKBaEMKyXvezLB/view?usp=sharing
+      - Ch 5. Unsupervised Learning:
+          - 9. Autoencoder : MFDNN/format/9.md
+          - 10. Flow Models : MFDNN/format/10.md
+          - 11. Variational Autoencoders : MFDNN/format/11.md
+          - 12. Generative Adversarial Networks : MFDNN/format/12.md
+          - Chapter 5 Code: https://drive.google.com/file/d/1JM5k-e6LkhZ0vXRlfROWpiuw4YC85Jv1/view?usp=sharing
+      - Ch A. Appendix - Basics of Monte Carlo:
+          - 13. Basics of Monte Carlo : MFDNN/format/13.md
+          - Chapter A Code: https://drive.google.com/file/d/18b01xoORd0LFQmpfc_4ou5Rv44MY1neg/view?usp=sharing
+      - Python Basics:
+          - Python Lecture 1: https://drive.google.com/file/d/1-iY9XfDhWNRDq3z_wVVvOzU04aRQWAfW/view?usp=drive_link
+          - Python Lecture 2: https://drive.google.com/file/d/1BANbCC6jBjPEUFSRJMFkcLbc4oVmoQHm/view?usp=sharing
+          - Python Lecture 3: https://drive.google.com/file/d/1-Bc11RZmno6yx37kfVLjsyY-XKpLK5Je/view?usp=drive_link

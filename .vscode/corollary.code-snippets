@@ -1,0 +1,11 @@
+{
+	"Corollary Snippet": {
+	  "prefix": ["cor", "corollary"],
+	  "scope": "markdown",
+	  "body": [
+		"!!! corollary \"Corollary $1 : $2\"",
+		"\t$3"
+	  ],
+	  "description": "Insert a corollary block"
+	}
+  }

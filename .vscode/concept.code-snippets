@@ -1,5 +1,5 @@
 {
-		"Concept Snippet": {
+	"Concept Snippet": {
 	  	"prefix": ["con", "concept"],
 	  	"scope": "markdown",
 	  	"body": [

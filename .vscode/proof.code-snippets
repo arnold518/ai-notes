@@ -1,5 +1,5 @@
 {
-	"Theorem Snippet": {
+	"Proof Snippet": {
 		"prefix": ["prf", "proof"],
 		"scope": "markdown",
 		"body": [

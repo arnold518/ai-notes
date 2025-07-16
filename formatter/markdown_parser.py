@@ -16,7 +16,7 @@ class MarkdownParser:
         processed_content = []
         for line in self.content:
             sline = line.lstrip(' ')
-            if sline == "<center>\n" or sline == "</center>\n" or sline == "<center>" or sline == "</center>": continue
+            # if sline == "<center>\n" or sline == "</center>\n" or sline == "<center>" or sline == "</center>": continue
             if sline.startswith('- '):
                 processed_content.append(' ' * (len(line) - len(sline)) + '- \n')
                 processed_content.append(' ' * (len(line) - len(sline) + 4) + sline[2:])
@@ -119,9 +119,11 @@ class MarkdownParser:
                         start = sline.find('(') + 1
                         end = sline.find(')')
                         image_path = sline[start:end]
-                        scale_start = sline.find('width="') + 7
-                        scale_end = sline.find('%"', scale_start)
-                        scale = int(sline[scale_start:scale_end])
+                        scale = 100
+                        if sline.find('width')>=0 :
+                            scale_start = sline.find('width:') + 6
+                            scale_end = sline.find('%', scale_start)
+                            scale = int(sline[scale_start:scale_end])
                         image = Image(image_path=image_path, scale=scale, lvl=indent_level)
                         ST[-1].add_content(image)
                     elif sline == "---\n":

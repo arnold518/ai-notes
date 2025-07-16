@@ -5,7 +5,7 @@ from content import *
 from markdown_parser import MarkdownParser
 
 title = ""
-filepath = "../docs/MFDNN/"
+filepath = "../docs/books-and-courses/mfdnn/"
 format_markdown_filepath = filepath + 'format/'
 format_latex_filepath = filepath + 'format_latex/'
 format_beamer_filepath = filepath + 'format_beamer/'

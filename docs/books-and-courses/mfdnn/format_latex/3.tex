@@ -302,7 +302,11 @@ If the optimal value is 0, then the data is linearly separable.
     Use the model
 
     $$
-    f_{a, b}(x)=\left[\begin{array}{c}
+    f_{a, b}(x)=
+    \mu\left(\left[\begin{array}{c}0 \\
+    a^{\top} x+b
+    \end{array}\right]\right)
+    = \left[\begin{array}{c}
     \frac{1}{1+e^{a^{\top} x+b}} \\
     \frac{e^{a^{\top} x+b}}{1+e^{a^{\top} x+b}}
     \end{array}\right]=\left[\begin{array}{c}

@@ -244,6 +244,8 @@ class Text(Content):
         ret = ""
         for line in self.text.split('\n'):
             if line == "": continue
+            if line.strip().startswith('<div'): continue
+            if line.strip().startswith('</div'): continue
             tex = line
             tex = tex.replace('  ', '\\\\')
             tex = re.sub(r'(?<!\\)#', r'\\#', tex)
@@ -289,9 +291,7 @@ class Image(Content):
         self.scale = scale
 
     def str_markdown(self):
-        ret = ' ' * (self.lvl * 4) + '<center>\n'
-        ret += ' ' * (self.lvl * 4) + '![](' + self.image_path + '){: width="' + str(self.scale) + '%"}\n'
-        ret += ' ' * (self.lvl * 4) + '</center>\n'
+        ret = ' ' * (self.lvl * 4) + '![](' + self.image_path + '){: .center style="width:' + str(self.scale) + '%;"}\n'
         return ret
 
     def str_latex(self):

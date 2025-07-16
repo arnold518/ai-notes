@@ -1,12 +1,10 @@
 {
 	"Concept Snippet": {
-	  "prefix": ["img", "image"],
-	  "scope": "markdown",
-	  "body": [
-		"<center>",
-		"![](./assets/$1){: width=\"100%\"}",
-		"</center>"
-	  ],
-	  "description": "Insert a image"
+		"prefix": ["img", "image"],
+		"scope": "markdown",
+		"body": [
+			"![](./assets/$1){: .center style=\"width:100%;\"}"
+		],
+		"description": "Insert an image"
 	}
-  }
+}

@@ -1,0 +1,12 @@
+{
+	"Concept Snippet": {
+	    "prefix": ["cen", "center"],
+	    "scope": "markdown",
+	    "body": [
+			"<div style=\"text-align:center\" markdown>",
+			"$1",
+			"</div>"
+	    ],
+	    "description": "Insert a center div"
+	}
+  }

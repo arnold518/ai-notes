@@ -124,3 +124,6 @@ nav:
               - Python Lecture 1: https://drive.google.com/file/d/1-iY9XfDhWNRDq3z_wVVvOzU04aRQWAfW/view?usp=drive_link
               - Python Lecture 2: https://drive.google.com/file/d/1BANbCC6jBjPEUFSRJMFkcLbc4oVmoQHm/view?usp=sharing
               - Python Lecture 3: https://drive.google.com/file/d/1-Bc11RZmno6yx37kfVLjsyY-XKpLK5Je/view?usp=drive_link
+  - Paper Review:
+      - paper-review/index.md
+      - 1. RNN: paper-review/1.md

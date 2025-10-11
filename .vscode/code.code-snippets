@@ -1,0 +1,11 @@
+{
+	"Code Snippet": {
+	  	"prefix": ["code"],
+	  	"scope": "markdown",
+	  	"body": [
+			"!!! code \"Code $1 : $2\"",
+			"\t$3"
+	  	],
+	  	"description": "Insert a code block"
+	}
+  }

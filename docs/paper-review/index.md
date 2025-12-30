@@ -1,4 +1,4 @@
-# Paper Review
+# AI Paper Review
 
 ## Table of Contents
 

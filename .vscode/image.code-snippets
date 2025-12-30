@@ -3,7 +3,10 @@
 		"prefix": ["img", "image"],
 		"scope": "markdown",
 		"body": [
-			"![](./assets/$1){: .center style=\"width:100%;\"}"
+			"![](./assets/$1){: .center style=\"width:100%;\"}",
+			"///caption",
+			"Figure $2 : $3.",
+			"///"
 		],
 		"description": "Insert an image"
 	}

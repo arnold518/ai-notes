@@ -1,8 +1,10 @@
-site_name: Artificial Intelligence Notes
+site_name: CS Notes
 
-repo_name: arnold518/ai-notes
+site_url: https://arnold518.github.io/cs-notes/
 
-repo_url: https://github.com/arnold518/ai-notes
+repo_name: arnold518/cs-notes
+
+repo_url: https://github.com/arnold518/cs-notes
 
 theme:
   name: material

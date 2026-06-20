@@ -1,0 +1,4144 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://arnold518.github.io/cs-notes/paper-review/5/">
+      
+      
+        <link rel="prev" href="../4/">
+      
+      
+        <link rel="next" href="../../mfdnn/format/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>5. Transformer - Computer Science Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%206a6%206%200%200%201%206%206c0%202.22-1.21%204.16-3%205.2V19a1%201%200%200%201-1%201h-4a1%201%200%200%201-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6%206%200%200%201%206-6m2%2015v1a1%201%200%200%201-1%201h-2a1%201%200%200%201-1-1v-1zm6-10h3v2h-3zM1%2011h3v2H1zM13%201v3h-2V1zM4.92%203.5l2.13%202.14-1.42%201.41L3.5%204.93zm12.03%202.13%202.12-2.13%201.43%201.43-2.13%202.12z%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20512%20512%22%3E%3C%21--%21%20Font%20Awesome%20Free%207.1.0%20by%20%40fontawesome%20-%20https%3A//fontawesome.com%20License%20-%20https%3A//fontawesome.com/license/free%20%28Icons%3A%20CC%20BY%204.0%2C%20Fonts%3A%20SIL%20OFL%201.1%2C%20Code%3A%20MIT%20License%29%20Copyright%202025%20Fonticons%2C%20Inc.--%3E%3Cpath%20d%3D%22M256%200a256%20256%200%201%201%200%20512%20256%20256%200%201%201%200-512m-24%20120v136c0%208%204%2015.5%2010.7%2020l96%2064c11%207.4%2025.9%204.4%2033.3-6.7s4.4-25.9-6.7-33.3L280%20243.2V120c0-13.3-10.7-24-24-24s-24%2010.7-24%2024%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans";--md-code-font:"Ubuntu Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5-transformer" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="Computer Science Notes" class="md-header__button md-logo" aria-label="Computer Science Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computer Science Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. Transformer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="공유" aria-label="공유" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/arnold518/cs-notes" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arnold518/cs-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI Paper Review
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../mfdnn/format/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mathematical Foundations of Deep Neural Networks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rl/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reinforcement Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Computer Science Notes" class="md-nav__button md-logo" aria-label="Computer Science Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Computer Science Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/arnold518/cs-notes" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arnold518/cs-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Paper Review
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Paper Review
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. RNN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. LSTM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Sequence-to-Sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Attention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Transformer
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Papers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Blogs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scaled-dot-product-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaled Dot-Product Attention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Head Attention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position-wise-feed-forward-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Position-wise Feed-Forward Network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Positional Encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encoder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decoder
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optimizer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regularization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regularization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Self-Attention?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../mfdnn/format/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematical Foundations of Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mathematical Foundations of Deep Neural Networks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 1. Optimization and Stochastic Gradient Descent
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 1. Optimization and Stochastic Gradient Descent
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Optimization Problem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Gradient Descent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1PSpoeseUPIptYQOPuQpxNawxtZbVR_K6/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 2. Shallow Neural Networks to Multilayer Perceptrons
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 2. Shallow Neural Networks to Multilayer Perceptrons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Shallow Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/15kXC3cJUV63gZNfXK6JdPPuSrwQZBzI8/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 3. Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 3. Convolutional Neural Networks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Foundations of Design and Training of Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. ImageNet Challenge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/12O9fLasWDA-kOKBD-lE-1UhCl-PoDf0z/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 4. CNNs for Other Supervised Learning Tasks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 4. CNNs for Other Supervised Learning Tasks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. CNNs for Other Supervised Learning Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/16IOKVF6IiDMyUvL73pGKBaEMKyXvezLB/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 5. Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 5. Unsupervised Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Autoencoder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Flow Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Variational Autoencoders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Generative Adversarial Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1JM5k-e6LkhZ0vXRlfROWpiuw4YC85Jv1/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch A. Appendix - Basics of Monte Carlo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch A. Appendix - Basics of Monte Carlo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Basics of Monte Carlo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/18b01xoORd0LFQmpfc_4ou5Rv44MY1neg/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter A Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1-iY9XfDhWNRDq3z_wVVvOzU04aRQWAfW/view?usp=drive_link" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Lecture 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1BANbCC6jBjPEUFSRJMFkcLbc4oVmoQHm/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Lecture 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1-Bc11RZmno6yx37kfVLjsyY-XKpLK5Je/view?usp=drive_link" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Lecture 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../rl/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reinforcement Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 1. Tabular Solution Methods
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 1. Tabular Solution Methods
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/2.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Multi-armed Bandits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/3.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Finite Markov Decision Processes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/4.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Dynamic Programming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/5.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Monte Carlo Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/6.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Temporal-Difference Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/7.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. n-step Bootstrapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/8.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Planning and Learning with Tabular Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 2. Approximate Solution Methods
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 2. Approximate Solution Methods
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/9.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. On-policy Prediction with Approximation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/10.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. On-policy Control with Approximation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/11.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Off-policy Methods with Approximation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/12.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Eligibility Traces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/13.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Policy Gradient Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 3. Looking Deeper
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 3. Looking Deeper
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/14.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Psychology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/15.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. NeuroScience
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/16.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. Applications and Case Studies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/17.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Frontiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Papers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Blogs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scaled-dot-product-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaled Dot-Product Attention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Head Attention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position-wise-feed-forward-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Position-wise Feed-Forward Network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Positional Encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encoder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decoder
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optimizer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regularization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regularization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-self-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Self-Attention?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="5-transformer">5. Transformer<a class="headerlink" href="#5-transformer" title="Permanent link">&para;</a></h1>
+<h2 id="papers">Papers<a class="headerlink" href="#papers" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../papers/5.1.pdf">A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser, and I. Polosukhin, “Attention Is All You Need,” in Advances in Neural Information Processing Systems 30 (NIPS 2017), 2017.</a></li>
+</ul>
+<h2 id="blogs">Blogs<a class="headerlink" href="#blogs" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://jalammar.github.io/illustrated-transformer/">https://jalammar.github.io/illustrated-transformer/</a></li>
+<li><a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/">https://kazemnejad.com/blog/transformer_architecture_positional_encoding/</a></li>
+<li><a href="https://nlp.seas.harvard.edu/annotated-transformer/">https://nlp.seas.harvard.edu/annotated-transformer/</a></li>
+</ul>
+<h2 id="core-components">Core Components<a class="headerlink" href="#core-components" title="Permanent link">&para;</a></h2>
+<h3 id="scaled-dot-product-attention">Scaled Dot-Product Attention<a class="headerlink" href="#scaled-dot-product-attention" title="Permanent link">&para;</a></h3>
+<p>The self-attention layer computes the relation between each pair of words in two sequences, and outputs the weighted average of the vectors according to the calculated attention.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 5.1 : Scaled Dot-Product Attention</p>
+<ul>
+<li>
+<p><strong>Input Queries</strong> from <span class="arithmatex">\(S_1\)</span> :<br />
+    From the first sequence <span class="arithmatex">\(S_1\)</span>, query vectors for each word are given as input.</p>
+<div class="arithmatex">\[
+q_1, q_2, \dots, q_{|S_1|} \in \mathbb{R}^{d_k}.
+\]</div>
+</li>
+<li>
+<p><strong>Input Key-Value pairs</strong> from <span class="arithmatex">\(S_2\)</span> :<br />
+    From the second sequence <span class="arithmatex">\(S_2\)</span>, key-value vector pairs for each word are given as input.</p>
+<div class="arithmatex">\[
+k_1, k_2, \dots, k_{|S_2|} \in \mathbb{R}^{d_k}.
+\]</div>
+<div class="arithmatex">\[
+v_1, v_2, \dots, v_{|S_2|} \in \mathbb{R}^{d_v}.
+\]</div>
+</li>
+<li>
+<p><strong>Score</strong> (relation) of word <span class="arithmatex">\(S_{1, i}\)</span> and <span class="arithmatex">\(S_{2, j}\)</span> :<br />
+    For each <span class="arithmatex">\(1 \le i \le |S_1|\)</span>, <span class="arithmatex">\(1 \le j \le |S_2|\)</span>, we compute the dot-product attention as the dot product between the query vector <span class="arithmatex">\(q_i\)</span> and key vector <span class="arithmatex">\(k_j\)</span>.
+    This value represents the score (relation) of word <span class="arithmatex">\(S_{1, i}\)</span> and <span class="arithmatex">\(S_{2, j}\)</span>.</p>
+<div class="arithmatex">\[
+s(i, j) = q_i \cdot k_j.
+\]</div>
+</li>
+<li>
+<p><strong>Masking</strong> (Optional) :<br />
+    If we want to <strong>ignore</strong> the relation between specific pair of words, we can apply masking by zeroing out the softmax probability with explicitly setting</p>
+<div class="arithmatex">\[
+s(i, j) = -\infty.
+\]</div>
+<p>This technique is used in <strong>Defintion 5.8</strong>.</p>
+</li>
+<li>
+<p><strong>Output</strong> :<br />
+    For each fixed <span class="arithmatex">\(i\)</span>, define the score vector over all positions in <span class="arithmatex">\(S_2\)</span>:</p>
+<div class="arithmatex">\[
+s_i
+=
+\big(s(i,1), s(i,2), \dots, s(i,|S_2|)\big)
+\in
+\mathbb{R}^{|S_2|}.
+\]</div>
+<p>We scale by <span class="arithmatex">\(\sqrt{d_k}\)</span> and take softmax to get attention weights:</p>
+<div class="arithmatex">\[
+\alpha_{i,j}
+=
+\frac{\exp\!\left(\frac{s(i,j)}{\sqrt{d_k}}\right)}
+    {\sum_{t=1}^{|S_2|}\exp\!\left(\frac{s(i,t)}{\sqrt{d_k}}\right)}
+\qquad
+(1 \le j \le |S_2|).
+\]</div>
+<p>Then the output (context) vector for token <span class="arithmatex">\(S_{1,i}\)</span> is the weighted average of the values:</p>
+<div class="arithmatex">\[
+o_i
+=
+\sum_{j=1}^{|S_2|} \alpha_{i,j}\, v_j
+\in
+\mathbb{R}^{d_v}.
+\]</div>
+<p>Collecting all outputs gives:</p>
+<div class="arithmatex">\[
+o_1, o_2, \dots, o_{|S_1|}
+\in
+\mathbb{R}^{d_v}.
+\]</div>
+</li>
+<li>
+<p><strong>Matrix form</strong> :<br />
+    Define the stacked matrices by putting the vectors as rows:</p>
+<div class="arithmatex">\[
+Q
+=
+\begin{bmatrix}
+q_1^\top \\
+q_2^\top \\
+\vdots \\
+q_{|S_1|}^\top
+\end{bmatrix}
+\in \mathbb{R}^{|S_1|\times d_k},
+\qquad
+K
+=
+\begin{bmatrix}
+k_1^\top \\
+k_2^\top \\
+\vdots \\
+k_{|S_2|}^\top
+\end{bmatrix}
+\in \mathbb{R}^{|S_2|\times d_k},
+\qquad
+V
+=
+\begin{bmatrix}
+v_1^\top \\
+v_2^\top \\
+\vdots \\
+v_{|S_2|}^\top
+\end{bmatrix}
+\in \mathbb{R}^{|S_2|\times d_v}.
+\]</div>
+<div class="arithmatex">\[
+\mathrm{Attention}(Q,K,V)
+=
+\mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+= 
+\begin{bmatrix}
+o_1^\top \\
+o_2^\top \\
+\vdots \\
+o_{|S_1|}^\top
+\end{bmatrix} \in \mathbb{R}^{|S_1|\times d_v}.
+\]</div>
+</li>
+</ul>
+</div>
+<p>Among the commonly used additive attention and dot-product (multiplicative) attention, the paper chose dot-product attention, with a scaling factor of <span class="arithmatex">\(\frac{1}{\sqrt{d_k}}\)</span>.
+The scaling factor was introduced to normalize the dot-product, which grows bigger for larger values of <span class="arithmatex">\(d_k\)</span>, which will push the softmax function into regions where the gradients vanish.
+(Modeling the components of <span class="arithmatex">\(q_i\)</span> and <span class="arithmatex">\(k_j\)</span> as i.i.d. random variables of mean <span class="arithmatex">\(0\)</span> and variance <span class="arithmatex">\(1\)</span> gives <span class="arithmatex">\(s(i, j) = q_i \cdot k_j\)</span> variance of <span class="arithmatex">\(d_k\)</span>, so we have to normalize by the scaling factor of <span class="arithmatex">\(\frac{1}{\sqrt{d_k}}\)</span>.)</p>
+<figure>
+<p><img alt="" class="center" src="../assets/5.1.jpg" style="width:30%;" /></p>
+<figcaption>
+<p>Figure 5.1 : Scaled dot-product attention.</p>
+</figcaption>
+</figure>
+<h3 id="multi-head-attention">Multi-Head Attention<a class="headerlink" href="#multi-head-attention" title="Permanent link">&para;</a></h3>
+<p>Instead of using just one attention, we project the query, key, value vectors to <span class="arithmatex">\(h\)</span> multiple heads and perform attention function on each of them in parallel.
+The results of each heads are concatenated and projected again for the final values.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 5.2 : Multi-Head Attention</p>
+<ul>
+<li>
+<p><strong>Input</strong> :<br />
+    Query, Key, Values of each words are given as vectors of dimension <span class="arithmatex">\(d_{\mathrm{model}}\)</span>.</p>
+<div class="arithmatex">\[
+Q \in \mathbb{R}^{|S_1|\times d_{\mathrm{model}}}, \quad
+K \in \mathbb{R}^{|S_2|\times d_{\mathrm{model}}}, \quad
+V \in \mathbb{R}^{|S_2|\times d_{\mathrm{model}}}.
+\]</div>
+</li>
+<li>
+<p>For each heads, <span class="arithmatex">\(Q, K, V\)</span> are projected to dimensions <span class="arithmatex">\(d_k, d_k, d_v\)</span> by learned linear projections <span class="arithmatex">\(W_i^Q, W_i^K, W_i^V\)</span>.
+    Then, the attention function is computed for each projected queries, keys, values.</p>
+<div class="arithmatex">\[
+W_i^Q \in \mathbb{R}^{d_{\mathrm{model}} \times d_k}, \quad
+W_i^K \in \mathbb{R}^{d_{\mathrm{model}} \times d_k}, \quad
+W_i^V \in \mathbb{R}^{d_{\mathrm{model}} \times d_v}.
+\]</div>
+<div class="arithmatex">\[
+\mathrm{head}_i = \mathrm{Attention}(QW_i^Q, KW_i^K, VW_i^V) \in \mathbb{R}^{|S_1| \times d_v}.
+\]</div>
+</li>
+<li>
+<p><strong>Output</strong> :<br />
+    For each words, the results <span class="arithmatex">\(\mathrm{head}_i\)</span> are concatenated, and projected again to output a vector of dimension <span class="arithmatex">\(d_{\mathrm{model}}\)</span> by learned projection <span class="arithmatex">\(W^O\)</span>.
+    (Concatenation is same as summing up the projected vectors for each heads.)</p>
+<div class="arithmatex">\[
+W^O \in \mathbb{R}^{hd_v \times d_{\mathrm{model}}}.
+\]</div>
+<div class="arithmatex">\[
+\mathrm{MultiHead}(Q, K, V) = 
+\mathrm{Concat}(\mathrm{head}_1, \dots, \mathrm{head}_h) W^O
+\in \mathbb{R}^{|S_1| \times d_{\mathrm{model}}}.
+\]</div>
+</li>
+</ul>
+</div>
+<figure>
+<p><img alt="" class="center" src="../assets/5.2.jpg" style="width:50%;" /></p>
+<figcaption>
+<p>Figure 5.2 : Multi-head attention.</p>
+</figcaption>
+</figure>
+<h3 id="position-wise-feed-forward-network">Position-wise Feed-Forward Network<a class="headerlink" href="#position-wise-feed-forward-network" title="Permanent link">&para;</a></h3>
+<p>While the attention layer captures the relation between subsets of words, the feed-forward network layer tries to learn the meaning of the word phrases.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 5.3 : Position-wise Feed-Forward Network</p>
+<ul>
+<li>
+<p><strong>Input</strong> :<br />
+    Representation of each words are given as vectors of dimension <span class="arithmatex">\(d_{\mathrm{model}}\)</span>.</p>
+<div class="arithmatex">\[
+x \in \mathbb{R}^{|S|\times d_{\mathrm{model}}}.
+\]</div>
+</li>
+<li>
+<p><strong>Output</strong> :<br />
+    Each vector passes through two linear transformations with a ReLU activation in between.
+    Note that each words are passed through the feed-forward network independently.</p>
+<div class="arithmatex">\[
+W_1 \in \mathbb{R}^{d_{\mathrm{model}} \times d_{ff}}, \quad
+b_1 \in \mathbb{R}^{d_{ff}}, \quad
+W_2 \in \mathbb{R}^{d_{ff} \times d_{\mathrm{model}}}, \quad
+b_2 \in \mathbb{R}^{d_{\mathrm{model}}}.
+\]</div>
+<div class="arithmatex">\[
+\mathrm{FFN}(x) = \max(0, xW_1+b_1)W_2+b_2
+\in \mathbb{R}^{|S| \times d_{\mathrm{model}}}.
+\]</div>
+</li>
+</ul>
+</div>
+<h3 id="positional-encoding">Positional Encoding<a class="headerlink" href="#positional-encoding" title="Permanent link">&para;</a></h3>
+<p>The transformer model can not utilize the order of words, since it does not have any recurrence or convolution.
+Positional encoding is added to the input embeddings at the beginning to give the model information about the order.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 5.4 : Positional Encoding</p>
+<div class="arithmatex">\[
+\mathrm{PE} \in \mathbb{R}^{|S| \times d_{\mathrm{model}}}
+\]</div>
+<div class="arithmatex">\[
+\omega_k = \frac{1}{10000^{2k / d}}, \quad
+\mathrm{PE}_{pos, 2i} = \sin(pos \cdot \omega_i),
+\quad
+\mathrm{PE}_{pos, 2i+1} = \cos(pos \cdot \omega_i).
+\]</div>
+<p>Each dimension of the positional encoding along <span class="arithmatex">\(d_{\mathrm{model}}\)</span> corresponds to a sinusoid, with the wavelengths forming a geometric progression from <span class="arithmatex">\(2\pi\)</span> to <span class="arithmatex">\(10000 \cdot 2\pi\)</span>.</p>
+</div>
+<figure>
+<p><img alt="" class="center" src="../assets/5.3.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 5.3 : Visualization of sinusoid positional encoding.</p>
+</figcaption>
+</figure>
+<div class="admonition concept">
+<p class="admonition-title">Concept 5.5 : Intuitions behind Choice of Positional Encoding Function</p>
+<ul>
+<li>
+<p>The binary representation of positions gives us a discrete (0/1) version of a positional encoding function: each bit is a separate “channel” that flips at its own rate.
+The least-significant bit changes every step (period 2), the next bit changes every two steps (period 4), then every four steps (period 8), and so on.</p>
+<div class="arithmatex">\[
+\begin{align}
+0: \ \ \ \ \color{orange}{\texttt{0}} \ \ \color{green}{\texttt{0}} \ \ \color{blue}{\texttt{0}} \ \ \color{red}{\texttt{0}} &amp; &amp; 
+8: \ \ \ \ \color{orange}{\texttt{1}} \ \ \color{green}{\texttt{0}} \ \ \color{blue}{\texttt{0}} \ \ \color{red}{\texttt{0}} \\
+1: \ \ \ \ \color{orange}{\texttt{0}} \ \ \color{green}{\texttt{0}} \ \ \color{blue}{\texttt{0}} \ \ \color{red}{\texttt{1}} &amp; &amp; 
+9: \ \ \ \ \color{orange}{\texttt{1}} \ \ \color{green}{\texttt{0}} \ \ \color{blue}{\texttt{0}} \ \ \color{red}{\texttt{1}} \\ 
+2: \ \ \ \ \color{orange}{\texttt{0}} \ \ \color{green}{\texttt{0}} \ \ \color{blue}{\texttt{1}} \ \ \color{red}{\texttt{0}} &amp; &amp; 
+10: \ \ \ \ \color{orange}{\texttt{1}} \ \ \color{green}{\texttt{0}} \ \ \color{blue}{\texttt{1}} \ \ \color{red}{\texttt{0}} \\ 
+3: \ \ \ \ \color{orange}{\texttt{0}} \ \ \color{green}{\texttt{0}} \ \ \color{blue}{\texttt{1}} \ \ \color{red}{\texttt{1}} &amp; &amp; 
+11: \ \ \ \ \color{orange}{\texttt{1}} \ \ \color{green}{\texttt{0}} \ \ \color{blue}{\texttt{1}} \ \ \color{red}{\texttt{1}} \\ 
+4: \ \ \ \ \color{orange}{\texttt{0}} \ \ \color{green}{\texttt{1}} \ \ \color{blue}{\texttt{0}} \ \ \color{red}{\texttt{0}} &amp; &amp; 
+12: \ \ \ \ \color{orange}{\texttt{1}} \ \ \color{green}{\texttt{1}} \ \ \color{blue}{\texttt{0}} \ \ \color{red}{\texttt{0}} \\
+5: \ \ \ \ \color{orange}{\texttt{0}} \ \ \color{green}{\texttt{1}} \ \ \color{blue}{\texttt{0}} \ \ \color{red}{\texttt{1}} &amp; &amp; 
+13: \ \ \ \ \color{orange}{\texttt{1}} \ \ \color{green}{\texttt{1}} \ \ \color{blue}{\texttt{0}} \ \ \color{red}{\texttt{1}} \\
+6: \ \ \ \ \color{orange}{\texttt{0}} \ \ \color{green}{\texttt{1}} \ \ \color{blue}{\texttt{1}} \ \ \color{red}{\texttt{0}} &amp; &amp; 
+14: \ \ \ \ \color{orange}{\texttt{1}} \ \ \color{green}{\texttt{1}} \ \ \color{blue}{\texttt{1}} \ \ \color{red}{\texttt{0}} \\
+7: \ \ \ \ \color{orange}{\texttt{0}} \ \ \color{green}{\texttt{1}} \ \ \color{blue}{\texttt{1}} \ \ \color{red}{\texttt{1}} &amp; &amp; 
+15: \ \ \ \ \color{orange}{\texttt{1}} \ \ \color{green}{\texttt{1}} \ \ \color{blue}{\texttt{1}} \ \ \color{red}{\texttt{1}} \\
+\end{align}
+\]</div>
+<p>Sinusoidal positional encoding is the continuous, float-friendly analogue of the same idea, smooth sine/cosine waves with wavelengths (periods) increasing exponentially.</p>
+</li>
+<li>
+<p>The sinusoidal positional encoding has a good representation of relative positions, <span class="arithmatex">\(\mathrm{PE}_{pos+\phi}\)</span> can be expressed as a linear transformation (rotation) of <span class="arithmatex">\(\mathrm{PE}_{pos}\)</span>, for fixed <span class="arithmatex">\(\phi\)</span> regardless of choice of <span class="arithmatex">\(pos\)</span>.</p>
+<div class="arithmatex">\[
+M_{\phi} \cdot \begin{bmatrix}
+        \sin(\omega_i \cdot t) \\
+        \cos(\omega_i \cdot t)
+    \end{bmatrix} = \begin{bmatrix}
+        \sin(\omega_i \cdot (t + \phi)) \\
+        \cos(\omega_i \cdot (t + \phi))
+    \end{bmatrix}.
+\]</div>
+</li>
+</ul>
+</div>
+<h2 id="model-structure">Model Structure<a class="headerlink" href="#model-structure" title="Permanent link">&para;</a></h2>
+<figure>
+<p><img alt="" class="center" src="../assets/5.4.jpg" style="width:60%;" /></p>
+<figcaption>
+<p>Figure 5.4 : Transformer model architecture.</p>
+</figcaption>
+</figure>
+<div class="admonition definition">
+<p class="admonition-title">Definition 5.6 : Residual Connection + Layer Normalization</p>
+<p>For each sub-layers in both encoder and decoder, we cover each of them with residual connection followed by layer normalization.</p>
+<div class="arithmatex">\[
+\mathrm{LayerNorm}(x+\mathrm{Sublayer}(x)).
+\]</div>
+<div class="arithmatex">\[
+x, \mathrm{Sublayer}(x), \mathrm{LayerNorm}(x+\mathrm{Sublayer}(x))
+\in \mathbb{R}^{|S| \times d_{\mathrm{model}}}.
+\]</div>
+<p>LayerNorm is applied independently to each row, normalizing across the dimension <span class="arithmatex">\(d_{\mathrm{model}}\)</span>.</p>
+</div>
+<h3 id="encoder">Encoder<a class="headerlink" href="#encoder" title="Permanent link">&para;</a></h3>
+<p>The encoder takes the source sentence <span class="arithmatex">\(S\)</span> as input, and aims to transform the sentence into sequence of vectors which captures the meaning of the sentence.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 5.7 : Encoder Layer</p>
+<p>Each layer of the encoder is consisted of two sub-layers.
+Both of them are covered with residual connection + layer normalization (<strong>Definition 5.6</strong>).</p>
+<ul>
+<li>
+<p><strong>Self-Attention Sublayer</strong> :<br />
+    In the self-attention sublayer, all key, values, queries all come from the same place, the output of previous layer in the encoder.
+    No masking is applied, so all positions can attend to each position in the previous layer of the encoder.</p>
+</li>
+<li>
+<p><strong>Feed-Forward Net Sublayer</strong> :<br />
+    The result of attention is passed to feed-forward net sublayer.</p>
+</li>
+</ul>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 5.8 : Encoder</p>
+<ul>
+<li><strong>Input</strong> : The source sentence <span class="arithmatex">\(S_1, S_2, \dots, S_{|S|}\)</span> is given as input.</li>
+<li>
+<p>First, after the source sentence <span class="arithmatex">\(S\)</span> is embedded into vectors of size <span class="arithmatex">\(\mathbb{R}^{|S| \times d_{\mathrm{model}}}\)</span>, positional encoding is added:</p>
+<div class="arithmatex">\[
+X^{(0)} = \mathrm{Embed}(S) + \mathrm{PE}(S)
+\in \mathbb{R}^{|S| \times d_{\mathrm{model}}}.
+\]</div>
+<p>Then, it passes through <span class="arithmatex">\(N\)</span> identical encoder layers (<strong>Definition 5.7</strong>), where the parameters are kept independent for each layer:</p>
+<div class="arithmatex">\[
+X^{(\ell)} = \mathrm{EncLayer}^{(\ell)}\!\left(X^{(\ell-1)}\right)
+\in \mathbb{R}^{|S| \times d_{\mathrm{model}}}
+\qquad (\ell = 1,2,\dots,N).
+\]</div>
+</li>
+<li>
+<p><strong>Output</strong> :<br />
+    The encoder outputs the final sequence of hidden states</p>
+<div class="arithmatex">\[
+Z = X^{(N)} = \bigl(z_1, z_2, \dots, z_{|S|}\bigr)^\top
+\in \mathbb{R}^{|S| \times d_{\mathrm{model}}}.
+\]</div>
+<p>Each <span class="arithmatex">\(z_i \in \mathbb{R}^{d_{\mathrm{model}}}\)</span> is a contextual representation of the source token <span class="arithmatex">\(S_i\)</span> that incorporates information from <strong>all</strong> source positions via self-attention.
+In the decoder, <span class="arithmatex">\(Z\)</span> is used as the key-value memory for encoder–decoder attention (cross-attention).</p>
+</li>
+</ul>
+</div>
+<h3 id="decoder">Decoder<a class="headerlink" href="#decoder" title="Permanent link">&para;</a></h3>
+<p>The decoder takes the target sentence <span class="arithmatex">\(T\)</span> as input, and for each position <span class="arithmatex">\(i\)</span> outputs the probability distribution of the next token that will appear after <span class="arithmatex">\(T_1, T_2, \dots, T_{i-1}\)</span>.
+In inference, the probability distribution is used to generate the next token.
+In training, we are particularly interested in the conditional probability that the next target token <span class="arithmatex">\(T_i\)</span> will appear next.</p>
+<div class="arithmatex">\[
+\Pr(T_i \mid S, T_1, T_2, \dots, T_{i-1}).
+\]</div>
+<p>In order to assure that the output at position <span class="arithmatex">\(i\)</span> only depends on the words with position less than <span class="arithmatex">\(i\)</span>, the decoder uses <strong>shifted inputs</strong> and <strong>causal masking</strong> in self-attention.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 5.9 : Decoder Layer</p>
+<p>Each layer of the decoder is consisted of three sub-layers.
+All of them are covered with residual connection + layer normalization (<strong>Definition 5.6</strong>).</p>
+<ul>
+<li>
+<p><strong>Self-Attention Sublayer</strong> :<br />
+    In the self-attention sublayer, all key, values, queries all come from the same place, the output of previous layer in the decoder.
+    Here, <strong>casual masking</strong> is applied so that words on the left cannot get information from the words on the right.
+    (In terms of prediction, at the time when the left word is generated, the model does not know the words appearing right of it.
+    Therefore, we block out the illegal "cheating" connections.)</p>
+<div class="arithmatex">\[
+\mathrm{MaskedAttn}(Q,K,V)
+=
+\mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}} + M\right)V,
+\quad
+M_{i,j}=
+\begin{cases}
+0, &amp; j \le i,\\
+-\infty, &amp; j&gt; i.
+\end{cases}
+\]</div>
+</li>
+<li>
+<p><strong>Cross-Attention Sublayer</strong> :<br />
+    In the cross-attention sublayer, key-value pairs come from the final result of encoder, while the queries come from the result of self-attention sublayer.
+    No masking is applied, so all positions can attend to each position in the encoder.</p>
+</li>
+<li>
+<p><strong>Feed-Forward Net Sublayer</strong> :<br />
+    The result of attention is passed to feed-forward net sublayer.</p>
+</li>
+</ul>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 5.10 : Decoder</p>
+<ul>
+<li>
+<p><strong>Input</strong> :<br />
+    The target tokens <span class="arithmatex">\(T_1, T_2, \dots, T_{|T|}\)</span> are used to form the decoder input by shifting right by one position:</p>
+<div class="arithmatex">\[
+T^{\text{in}} = \langle \mathrm{BOS}\rangle,\, T_1,\, T_2,\, \dots,\, T_{|T|-1}.
+\]</div>
+</li>
+<li>
+<p>First, the decoder input is embedded and positional encoding is added:</p>
+<div class="arithmatex">\[
+Y^{(0)} = \mathrm{Embed}(T^{\text{in}}) + \mathrm{PE}(T^{\text{in}})
+\in \mathbb{R}^{|T|\times d_{\mathrm{model}}}.
+\]</div>
+<p>Pass through <span class="arithmatex">\(N\)</span> identical decoder layers (<strong>Definition 5.9</strong>), with independent parameters per layer:</p>
+<div class="arithmatex">\[
+Y^{(\ell)} = \mathrm{DecLayer}^{(\ell)}\!\left(Y^{(\ell-1)},\, Z\right)
+\in \mathbb{R}^{|T|\times d_{\mathrm{model}}}
+\qquad (\ell = 1,2,\dots,N),
+\]</div>
+<p>where <span class="arithmatex">\(Z \in \mathbb{R}^{|S|\times d_{\mathrm{model}}}\)</span> is the encoder output (source “memory”).</p>
+</li>
+<li>
+<p><strong>Output logits and probabilities</strong> :<br />
+    The final decoder outputs are</p>
+<div class="arithmatex">\[
+Y^{(N)} = \bigl(y_1, y_2, \dots, y_{|T|}\bigr)^\top
+\in \mathbb{R}^{|T|\times d_{\mathrm{model}}}.
+\]</div>
+<p>For each position <span class="arithmatex">\(i\)</span>, let <span class="arithmatex">\(y_i \in \mathbb{R}^{d_{\mathrm{model}}}\)</span> be the <span class="arithmatex">\(i\)</span>-th row of <span class="arithmatex">\(Y^{(N)}\)</span>.
+A linear projection to the vocabulary size <span class="arithmatex">\(d_{\mathrm{target\_vocab}}\)</span> produces logits, and softmax gives the distribution <span class="arithmatex">\(p_i \in \mathbb{R}^{d_{\mathrm{target\_vocab}}}\)</span>.</p>
+<div class="arithmatex">\[
+P = \bigl(p_1, p_2, \dots, p_{|T|}\bigr)^\top
+\in \mathbb{R}^{|T|\times d_{\mathrm{target\_vocab}}}.
+\]</div>
+<p>From the distribution <span class="arithmatex">\(p_i\)</span>, we take the probability of token <span class="arithmatex">\(T_i\)</span> to compute <span class="arithmatex">\(\Pr(T_i \mid S, T_1, T_2, \dots, T_{i-1})\)</span>.
+Thus, we want to maximize the probabilities matching <span class="arithmatex">\(T^{\text{out}}\)</span>, where</p>
+<div class="arithmatex">\[
+T^{\text{out}} = T_1,\, T_2,\, \dots,\, T_{|T|-1}, \langle \mathrm{EOS}\rangle = T_{|T|}.
+\]</div>
+</li>
+</ul>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 5.11 : Shared Embeddings and Pre-Softmax Linear Transformation</p>
+<p>For both the encoder and decoder, we use learned embeddings to convert the input tokens to vectors of dimension <span class="arithmatex">\(d_{\mathrm{model}}\)</span>.
+Therefore, the weight matrix of the embedding layer is of dimension <span class="arithmatex">\(\mathbb{R}^{d_{\mathrm{source\_vocab}} \times d_{\mathrm{model}}}\)</span> and <span class="arithmatex">\(\mathbb{R}^{d_{\mathrm{target\_vocab}} \times d_{\mathrm{model}}}\)</span>.</p>
+<p>For the pre-softmax linear transformation in the decoder, we share the weight matrix with the embedding layer of the decoder.
+By transposing the embedding layer of decoder, we get the weight matrix of dimension <span class="arithmatex">\(\mathbb{R}^{d_{\mathrm{model}} \times d_{\mathrm{target\_vocab}}}\)</span>, which we use to transform the decoder layer's output of size <span class="arithmatex">\(\mathbb{R}^{|T| \times d_{\mathrm{model}}}\)</span> to <span class="arithmatex">\(\mathbb{R}^{|T| \times d_{\mathrm{target\_vocab}}}\)</span>.
+This result will represent the conditional probability distribution for all positions of <span class="arithmatex">\(T\)</span>.</p>
+<p>The paper uses a joint dictionary for both the source and target language, thus sharing the same matrix for both of the embedding matrix and the pre-softmax linear transformation.</p>
+</div>
+<h2 id="training">Training<a class="headerlink" href="#training" title="Permanent link">&para;</a></h2>
+<p>Our goal in training is to maximize the conditional probability <span class="arithmatex">\(\Pr(T \mid S)\)</span>, given paired data <span class="arithmatex">\((S,T)\)</span>.</p>
+<div class="arithmatex">\[
+\max_{\theta} \prod_{(S, T)} \Pr_{\theta}(T \mid S)
+=
+\max_{\theta} \prod_{(S, T)} \prod_{i=1}^{|T|}
+\Pr_{\theta}\!\left(T_i \mid S, T_1, T_2, \dots, T_{i-1}\right).
+\]</div>
+<p>Equivalently, minimizing the negative log-likelihood (cross-entropy loss):</p>
+<div class="arithmatex">\[
+\min_{\theta} \sum_{(S, T)} -\log \Pr_{\theta}(T \mid S)
+=
+\min_{\theta} \sum_{(S, T)} \sum_{i=1}^{|T|}
+-\log \Pr_{\theta}\!\left(T_i \mid S, T_1, T_2, \dots, T_{i-1}\right).
+\]</div>
+<h3 id="optimizer">Optimizer<a class="headerlink" href="#optimizer" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">Definition 5.12 : Noam Optimizer</p>
+<p>The paper uses Adam optimizer with custom learning rate scheduler, defined as follows.</p>
+<div class="arithmatex">\[
+\mathrm{lrate}(s) =
+d_{\mathrm{model}}^{-1/2} \cdot
+\min\!\left(
+s^{-1/2},
+\; s \cdot \mathrm{warmup}^{-3/2}
+\right).
+\]</div>
+<p>This corresponds to learning rate linearly increasing for the first <span class="arithmatex">\(\mathrm{warmup}\)</span> steps, and decaying proportional to <span class="arithmatex">\(1/\sqrt{s}\)</span> afterwards.</p>
+<div class="arithmatex">\[
+\mathrm{lrate}(s)
+=
+\begin{cases}
+d_{\mathrm{model}}^{-1/2} \cdot s \cdot \mathrm{warmup}^{-3/2}, &amp; s \le \mathrm{warmup}, \\
+d_{\mathrm{model}}^{-1/2} \cdot s^{-1/2}, &amp; s \ge \mathrm{warmup}.
+\end{cases}
+\]</div>
+</div>
+<figure>
+<p><img alt="" class="center" src="../assets/5.5.jpg" style="width:70%;" /></p>
+<figcaption>
+<p>Figure 5.5 : Learning rate plot of noam optimizer.</p>
+</figcaption>
+</figure>
+<h3 id="regularization">Regularization<a class="headerlink" href="#regularization" title="Permanent link">&para;</a></h3>
+<div class="admonition concept">
+<p class="admonition-title">Concept 5.13 : Residual Dropout and Label Smoothing</p>
+<ul>
+<li>
+<p><strong>Residual Dropout</strong> :<br />
+    Apply dropout to the output of each sub-layer before it is added back through the residual connection and then normalized.</p>
+<p>Also apply dropout to the sum of token embeddings and positional encodings (in both encoder and decoder).</p>
+</li>
+<li>
+<p><strong>Label Smoothing</strong> :<br />
+    Replace the one-hot target distribution <span class="arithmatex">\(y \in \{0,1\}^{d_{\mathrm{target\_vocab}}}\)</span> with a softened target distribution <span class="arithmatex">\(y^{(\mathrm{ls})}\)</span> over <span class="arithmatex">\(d_{\mathrm{target\_vocab}}\)</span> classes,</p>
+<div class="arithmatex">\[
+y^{(\mathrm{ls})} = (1-\varepsilon_{\mathrm{ls}})\,y + \varepsilon_{\mathrm{ls}}\cdot \frac{\mathbf{1}}{d_{\mathrm{target\_vocab}}}.
+\]</div>
+<p>Then train with cross-entropy against <span class="arithmatex">\(y^{(\mathrm{ls})}\)</span>:</p>
+<div class="arithmatex">\[
+\mathcal{L}
+=
+-\sum_{k=1}^{d_{\mathrm{target\_vocab}}} y^{(\mathrm{ls})}_k \log p_k.
+\]</div>
+<p>As the model learns to be more unsure, this can hurt perplexity but improves accuracy and BLEU score.</p>
+</li>
+</ul>
+</div>
+<h2 id="inference">Inference<a class="headerlink" href="#inference" title="Permanent link">&para;</a></h2>
+<p>In inference, we generate the output sentence token by token.
+Therefore, we start from token <span class="arithmatex">\(\langle \mathrm{BOS}\rangle\)</span> and repeatedly run the decoder: at each step, we feed the tokens generated so far and predict the next token, until the special token <span class="arithmatex">\(\langle \mathrm{EOS}\rangle\)</span> indicates the end of the sentence.</p>
+<div class="admonition concept">
+<p class="admonition-title">Concept 5.14 : Inference Workflow</p>
+<ul>
+<li>
+<p><strong>Encoding</strong> (run once) :<br />
+    The source sentence <span class="arithmatex">\(S = (S_1, S_2, \dots, S_{|S|})\)</span> is given as input and passed through the encoder (<strong>Concept 5.8</strong>) once.
+    The encoder outputs</p>
+<div class="arithmatex">\[
+Z = (z_1, z_2, \dots, z_{|S|})^\top \in \mathbb{R}^{|S|\times d_{\mathrm{model}}},
+\]</div>
+<p>where each <span class="arithmatex">\(z_i\)</span> is the contextual representation of the source token <span class="arithmatex">\(S_i\)</span>.</p>
+</li>
+<li>
+<p><strong>Auto-regressive decoding (repeat until <span class="arithmatex">\(\langle \mathrm{EOS}\rangle\)</span>)</strong> :<br />
+Initialize the decoder input as</p>
+<div class="arithmatex">\[
+T^{\text{in}}_{(1)} = \langle \mathrm{BOS}\rangle = \hat{T}_0.
+\]</div>
+<p>For step <span class="arithmatex">\(t = 1,2,\dots\)</span>, do:</p>
+<ol>
+<li>
+<p><strong>Run the decoder</strong> on the tokens generated so far and the encoder memory <span class="arithmatex">\(Z\)</span>:</p>
+<div class="arithmatex">\[
+P^{(t)} = \mathrm{Decoder}\!\left(T^{\text{in}}_{(t)}, Z\right)
+= \bigl(p_1, p_2, \dots, p_{t}\bigr)^\top
+\in \mathbb{R}^{t \times d_{\mathrm{target\_vocab}}},
+\]</div>
+<p>where <span class="arithmatex">\(P^{(t)}\)</span> contains probability distributions over the vocabulary for each position.</p>
+<p>Note that the distributions <span class="arithmatex">\(p_1, p_2, \dots, p_{t-1}\)</span> are identical to the distributions already computed in steps <span class="arithmatex">\(1, 2, \dots, t-1\)</span>.</p>
+</li>
+<li>
+<p><strong>Predict the next token</strong> using the distribution at the last position <span class="arithmatex">\(p_t\)</span>:</p>
+<div class="arithmatex">\[
+p_t(w) = \Pr(w \mid S, \hat{T}_1, \hat{T}_2, \dots, \hat{T}_{t-1}),
+\]</div>
+<div class="arithmatex">\[
+\hat{T}_t = \operatorname*{argmax}_{w \in \mathcal{V}} p_{t}(w)
+\quad
+(\text{greedy decoding}).
+\]</div>
+<p>(Alternatively, use beam search or sampling.)</p>
+</li>
+<li>
+<p><strong>Stopping criterion</strong> :<br />
+    If <span class="arithmatex">\(\hat{T}_t = \langle \mathrm{EOS}\rangle\)</span>, stop and output <span class="arithmatex">\((\hat{T}_1, \dots, \hat{T}_{t-1})\)</span>.</p>
+</li>
+<li>
+<p><strong>Append and continue</strong> :<br />
+Otherwise, append the predicted token to the decoder input:</p>
+<div class="arithmatex">\[
+T^{\text{in}}_{(t+1)} = \langle \mathrm{BOS}\rangle = \hat{T}_0, \hat{T}_1, \hat{T}_2, \dots, \hat{T}_t.
+\]</div>
+</li>
+</ol>
+</li>
+</ul>
+</div>
+<p>At step <span class="arithmatex">\(t\)</span>, naive implementations recompute <span class="arithmatex">\(p_1, p_2, \dots, p_{t-1}\)</span>, which were already computed in the previous steps.
+In practice, modern Transformer decoders avoid this redundancy using a <strong>key–value cache (KV-cache)</strong>.
+For each self-masked attention, we can observe that the key and values for each previous positions remain same for future steps.
+Therefore, by caching the previous key-value pairs, we can optimize the algorithm by only computing the new distribution.</p>
+<h2 id="why-self-attention">Why Self-Attention?<a class="headerlink" href="#why-self-attention" title="Permanent link">&para;</a></h2>
+<div class="admonition concept">
+<p class="admonition-title">Concept 5.15 : Why Self-Attention?</p>
+<p>The paper motivates self-attention by comparing it to recurrent and convolutional layers for sequence-to-sequence modeling using three criteria: </p>
+<ol>
+<li>
+<p><strong>Computational complexity per layer</strong> :<br />
+    Self-attention can be computationally favorable compared to recurrence when the sequence length <span class="arithmatex">\(n\)</span> is smaller than the representation dimension <span class="arithmatex">\(d\)</span> (a common case in MT with subword tokenization).
+    For very long sequences, the paper notes we can restrict self-attention to a local neighborhood of size <span class="arithmatex">\(r\)</span> to reduce cost, at the expense of longer dependency paths.</p>
+</li>
+<li>
+<p><strong>Parallelizability</strong> (sequential operations) :<br />
+    A self-attention layer connects all positions with a <span class="arithmatex">\(O(1)\)</span> number of sequential operations, while a recurrent layer needs <span class="arithmatex">\(O(n)\)</span> sequential steps (one per position).
+    This makes self-attention far more parallelizable on modern hardware.</p>
+</li>
+<li>
+<p><strong>Path length for long-range dependencies</strong> :<br />
+    Learning long-range dependencies becomes easier when the “path” between two positions is short.
+    Self-attention yields the shortest maximum path length between any two positions (essentially constant), whereas recurrence and convolution require longer paths (recurrence grows with <span class="arithmatex">\(n\)</span>, convolution needs multiple layers to connect distant positions).</p>
+</li>
+<li>
+<p>Side benefit: <strong>interpretability</strong> :<br />
+    The authors also point out that attention weights can be inspected, and different heads often learn distinct, sometimes syntactic/semantic behaviors.</p>
+</li>
+</ol>
+</div>
+<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
+<div style="text-align:center">
+<p><a href="https://github.com/arnold518/ai-study/tree/main/paper-review/3">Link to Code</a></p>
+</div>
+<p>We implemented a korean-english neural machine translator using the proposed transformer architecture, from scratch.</p>
+<div class="admonition code">
+<p class="admonition-title">Code 5.1</p>
+<ol>
+<li>
+<p><strong>Data</strong></p>
+<ul>
+<li>Sources : Moo, Tatoeba, AIHub datasets</li>
+<li>Training : 897,566 pairs (filtered from 1.7M raw)</li>
+<li>Validation : 1,896 pairs</li>
+<li>Test : 4,061 pairs</li>
+<li><strong>Preprocessing</strong> :  <ul>
+<li>Length filtering (1–200 chars)</li>
+<li>Length ratio threshold: 3.5</li>
+<li>Duplicate removal</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Tokenization</strong></p>
+<ul>
+<li>Method : SentencePiece (Unigram)</li>
+<li>Vocabulary : 16,000 tokens per language (separate Korean/English)</li>
+<li>Character Coverage : 0.9995</li>
+<li>Special Tokens : <code>&lt;pad&gt;</code>, <code>&lt;unk&gt;</code>, <code>&lt;s&gt;</code>, <code>&lt;/s&gt;</code> (built-in)</li>
+</ul>
+</li>
+<li>
+<p><strong>Transformer Architecture</strong></p>
+<div style="text-align:center" markdown>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>d_model</code></td>
+<td>512</td>
+</tr>
+<tr>
+<td><code>d_ff</code></td>
+<td>2048</td>
+</tr>
+<tr>
+<td><code>num_heads</code></td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>num_layers</code></td>
+<td>6 (encoder) + 6 (decoder)</td>
+</tr>
+<tr>
+<td><code>dropout</code></td>
+<td>0.3</td>
+</tr>
+<tr>
+<td><code>max_seq_length</code></td>
+<td>150 tokens</td>
+</tr>
+<tr>
+<td><code>total_parameters</code></td>
+<td>~60M</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>Key Design Choices</strong> :<ul>
+<li>Separate embeddings for Korean/English (linguistically distant)</li>
+<li>Weight tying between decoder embeddings and output projection</li>
+<li>Positional encoding: sinusoidal (max 5000 positions)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Training</strong></p>
+<ul>
+<li>Optimizer : Noam scheduler with warmup</li>
+<li>Learning Rate : factor = 2.0, warmup = 8,000 steps</li>
+<li>Batch Size : 128 (effective: 256 with 2-step gradient accumulation)</li>
+<li>Epochs : 50</li>
+<li>Training Time : ~19 hours</li>
+<li><strong>Final Metrics</strong> :<ul>
+<li>Train Loss : 1.374 (Perplexity: 3.95)</li>
+<li>Validation Loss : 1.785 (Perplexity: 5.96)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Inference</strong></p>
+<ul>
+<li>Method : Beam Search with KV Caching</li>
+<li>Beam Size : 8 (4 groups for diversity)</li>
+<li>Length Penalty : 0.6</li>
+<li>Repetition Penalty : 1.5 (window: 30 tokens)</li>
+<li>Diversity Penalty : 0.5</li>
+</ul>
+</li>
+<li>
+<p><strong>Evaluation</strong></p>
+<ul>
+<li>Test Set: 4,390 samples</li>
+</ul>
+<div style="text-align:center" markdown>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BLEU</td>
+<td>38.02</td>
+</tr>
+<tr>
+<td>BLEU-1/2/3/4</td>
+<td>95.24 / 50.00 / 26.32 / 16.67</td>
+</tr>
+<tr>
+<td>CHRF</td>
+<td>70.12</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>Error Analysis</strong>:<ul>
+<li>Repetition errors : 0.16%</li>
+<li>Number mismatches : 13.49%</li>
+<li>Unknown tokens : 0.00%</li>
+<li>Length ratio : 1.00 ± 0.33</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Core Codes</strong></p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config/base_config.py</code></td>
+<td>Shared settings: batch size, dropout, vocab size, paths</td>
+</tr>
+<tr>
+<td><code>config/transformer_config.py</code></td>
+<td>Transformer parameters: d_model, num_heads, num_layers, beam size</td>
+</tr>
+<tr>
+<td><code>scripts/download_data.py</code></td>
+<td>Download datasets (Moo, Tatoeba, AIHub)</td>
+</tr>
+<tr>
+<td><code>scripts/split_data.py</code></td>
+<td>Merge and clean datasets, create train/val/test splits</td>
+</tr>
+<tr>
+<td><code>scripts/train_tokenizer.py</code></td>
+<td>Train SentencePiece tokenizers for Korean and English</td>
+</tr>
+<tr>
+<td><code>scripts/train.py</code></td>
+<td>Main training script with mixed precision and checkpointing</td>
+</tr>
+<tr>
+<td><code>scripts/translate.py</code></td>
+<td>Translation CLI with greedy/beam search</td>
+</tr>
+<tr>
+<td><code>scripts/evaluate.py</code></td>
+<td>Evaluate model on test set, compute BLEU/CHRF</td>
+</tr>
+<tr>
+<td><code>scripts/visualize_attention.py</code></td>
+<td>Generate attention heatmaps for analysis</td>
+</tr>
+<tr>
+<td><code>src/data/tokenizer.py</code></td>
+<td>SentencePiece tokenizer wrapper (encode/decode)</td>
+</tr>
+<tr>
+<td><code>src/data/dataset.py</code></td>
+<td>PyTorch Dataset with batching and padding</td>
+</tr>
+<tr>
+<td><code>src/models/transformer/transformer.py</code></td>
+<td>Main Transformer model (combines encoder + decoder)</td>
+</tr>
+<tr>
+<td><code>src/models/transformer/encoder.py</code></td>
+<td>Encoder stack (N layers of self-attention + FFN)</td>
+</tr>
+<tr>
+<td><code>src/models/transformer/decoder.py</code></td>
+<td>Decoder stack (N layers of masked self-attention + cross-attention + FFN)</td>
+</tr>
+<tr>
+<td><code>src/models/transformer/attention.py</code></td>
+<td>Multi-head attention mechanism</td>
+</tr>
+<tr>
+<td><code>src/models/transformer/feedforward.py</code></td>
+<td>Position-wise feedforward network</td>
+</tr>
+<tr>
+<td><code>src/models/transformer/embeddings.py</code></td>
+<td>Token embeddings with weight tying</td>
+</tr>
+<tr>
+<td><code>src/models/transformer/positional_encoding.py</code></td>
+<td>Sinusoidal positional encoding</td>
+</tr>
+<tr>
+<td><code>src/training/trainer.py</code></td>
+<td>Training loop with AMP, gradient clipping, validation</td>
+</tr>
+<tr>
+<td><code>src/training/losses.py</code></td>
+<td>Label smoothing loss with KL divergence</td>
+</tr>
+<tr>
+<td><code>src/training/optimizer.py</code></td>
+<td>Noam learning rate scheduler with warmup</td>
+</tr>
+<tr>
+<td><code>src/inference/greedy_search.py</code></td>
+<td>Fast greedy decoding with KV caching</td>
+</tr>
+<tr>
+<td><code>src/inference/beam_search.py</code></td>
+<td>Beam search with diverse beams and length normalization</td>
+</tr>
+<tr>
+<td><code>src/inference/translator.py</code></td>
+<td>High-level translation API (tokenize → decode → detokenize)</td>
+</tr>
+<tr>
+<td><code>src/utils/masking.py</code></td>
+<td>Create padding and causal masks for attention</td>
+</tr>
+<tr>
+<td><code>src/utils/metrics.py</code></td>
+<td>Compute BLEU, CHRF, BERTScore</td>
+</tr>
+<tr>
+<td><code>src/utils/error_analysis.py</code></td>
+<td>Analyze repetitions, number errors in translations</td>
+</tr>
+<tr>
+<td><code>src/utils/checkpointing.py</code></td>
+<td>Save/load model checkpoints with optimizer state</td>
+</tr>
+<tr>
+<td><code>src/utils/visualization.py</code></td>
+<td>Plot attention weights as heatmaps</td>
+</tr>
+<tr>
+<td><code>src/utils/csv_logger.py</code></td>
+<td>Log training metrics to CSV files</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</div>
+<p>Overfitting was a major challenge during training.
+To address it, we applied a set of regularization strategies and practical training/inference optimizations that improved translation quality and made the training process more stable.</p>
+<div class="admonition concept">
+<p class="admonition-title">Concept 5.16 : Dealing with Overfitting</p>
+<p>Overfitting was constantly harming the model's accuracy while training.
+The final implementation used several regularization and stabilization techniques to prevent overfitting and keep training stable.</p>
+<ul>
+<li>
+<p><strong>Dropout</strong> (0.3) :<br />
+    Increased from 0.1 to 0.3 to regularize the model more strongly on a smaller dataset.</p>
+</li>
+<li>
+<p><strong>Label Smoothing</strong> (0.05) :<br />
+    Softened the one-hot target distribution to reduce overconfidence and improve generalization.</p>
+</li>
+<li>
+<p><strong>Gradient Clipping</strong> (max_norm = 1.0) :<br />
+    Prevented exploding gradients and improved training stability.</p>
+</li>
+<li>
+<p><strong>Early Stopping</strong> (patience = 10, min_delta = 0.001) :<br />
+    Stopped training when validation loss no longer improved meaningfully.</p>
+</li>
+<li>
+<p><strong>Gradient Accumulation</strong> (effective batch = 256) :<br />
+    Simulated a larger batch size to reduce gradient noise and stabilize updates.</p>
+</li>
+<li>
+<p><strong>Mixed Precision (AMP)</strong> :<br />
+    Sped up training and reduced memory usage, enabling larger effective batches.</p>
+</li>
+</ul>
+<figure>
+<p><img alt="" class="center" src="../assets/5.6.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 5.6 : Evidence of overfitting before applying regularization techniques.</p>
+</figcaption>
+</figure>
+<figure>
+<p><img alt="" class="center" src="../assets/5.7.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 5.7 : Stabilized training after applying regularization techniques.</p>
+</figcaption>
+</figure>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 5.17 : Key Implementation Techniques</p>
+<p>Here are the details of core methods and optimizations that improved training stability, inference speed, and decoding quality.</p>
+<ul>
+<li>
+<p><strong>Hyperparameter tuning</strong>  </p>
+<ul>
+<li><strong>Learning rate schedule</strong> :<ul>
+<li>Used the Noam scheduler with warmup = 8,000 steps (2× the paper default).</li>
+<li>Set LR factor = 2.0 to reach a higher peak learning rate.</li>
+<li>Used this because the dataset (897k pairs) was smaller than the paper’s (~4.5M), and a slower warmup helped prevent instability.</li>
+</ul>
+</li>
+<li><strong>Dropout strategy</strong> :<ul>
+<li>Started with dropout = 0.1 (paper default) and increased it to 0.3.</li>
+<li>Used higher dropout to compensate for the smaller dataset and reduce overfitting.</li>
+</ul>
+</li>
+<li><strong>Batch size optimization</strong> :<ul>
+<li>Used physical batch size = 128.</li>
+<li>Used gradient accumulation = 2 steps.</li>
+<li>Achieved effective batch size = 256, balancing memory usage and training stability.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Repetition control (decoding-time)</strong></p>
+<ul>
+<li><strong>Repetition penalty</strong> (1.5) :<ul>
+<li>Applied to tokens appearing within the last 30 positions.</li>
+<li>Penalized recently used tokens to reduce repeated phrases.</li>
+<li>Observed roughly 40–60% reduction in repetitions.</li>
+</ul>
+</li>
+<li><strong>Diverse beam search</strong> :<ul>
+<li>Used 8 beams divided into 4 groups.</li>
+<li>Applied a diversity penalty = 0.5 between groups.</li>
+<li>Prevented beams from collapsing to near-identical hypotheses and produced more varied, natural translations.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Training optimizations</strong></p>
+<ul>
+<li><strong>Mixed precision training (AMP)</strong> :<ul>
+<li>Achieved 2–3× speedup.</li>
+<li>Reduced GPU memory usage by about 40%.</li>
+<li>Observed no degradation in BLEU.</li>
+<li>Implemented using PyTorch native autocast + GradScaler.</li>
+</ul>
+</li>
+<li><strong>Gradient accumulation</strong> :<ul>
+<li>Simulated larger batch sizes without additional memory cost.</li>
+<li>Produced more stable gradients and improved convergence.</li>
+<li>Was essential under limited GPU memory.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Inference optimization</strong></p>
+<ul>
+<li><strong>KV caching</strong> :<ul>
+<li>Cached self-attention key/value projections during inference.</li>
+<li>Reduced autoregressive generation complexity from <span class="arithmatex">\(O(N^3)\)</span> to <span class="arithmatex">\(O(N^2)\)</span>.</li>
+<li>Used a design choice to cache only self-attention and recompute cross-attention (simpler, still fast).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Advanced decoding strategies</strong></p>
+<ul>
+<li><strong>Beam search configuration</strong> :<ul>
+<li>Beam size : 8</li>
+<li>Length penalty : 0.6</li>
+<li>Repetition penalty : 1.5</li>
+<li>Diverse beam groups : 4</li>
+</ul>
+</li>
+<li><strong>Length normalization</strong> :<ul>
+<li>Used the form <code>score / (length^α)</code> with α = 0.6.</li>
+<li>Prevented beam search from favoring shorter translations and enabled fair comparison across hypotheses of different lengths.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Here are some examples of trained translations and cross-attention visualization.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>--------------------------------------------------------------------------------
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Source:     WTI는 장중 한 때 145.85달러까지 올라가며 전날의 기록을 갈아치웠다.
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Prediction: WTI climbed to $145.85 a day during the market, breaking the previous day&#39;s record.
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Reference:  Earlier in the session, it rose as high as $145.85 a barrel, topping a trading record set the previous day.
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>--------------------------------------------------------------------------------
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Source:     무자히드는 사우디 아라비아 정부의 개입이 있었다는 사실은 부인했지만, 사태의 평화적인 해결을 위해서는 어떠한 움직임이라도 거부하지 않을 것이라고 밝혔다.
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Prediction: Mujahid denied the involvement of Saudi Arabia&#39;s Arabian government, but said he would not refuse any move to resolve the situation peacefully.
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>Reference:  Mujahid denied that there had been any mediation by the Saudi Arabian government, however, he said they would not reject any such move for a peaceful resolution of the problem.
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>--------------------------------------------------------------------------------
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>Source:     민주주의의 좋은 점은 바로 이렇다: 누구나 그들의 단편적인 생각을 말할 수 있지만 누구도 거기에 귀를 기울일 필요는 없다는 것이다
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>Prediction: The good thing about democracy is that everyone can express their short thoughts, but no one needs to listen to them.
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>Reference:  The good things about democracy is: anybody can say what&#39;s on their mind, but nobody has to listen to it.
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>--------------------------------------------------------------------------------
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>Source:     더 이상 경제적이지 않아서 여객선 운항을 멈췄다.
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>Prediction: It was no longer economical, so it stopped operating the passenger ship.
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>Reference:  They closed down the ferry service since it was no longer economical.
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>--------------------------------------------------------------------------------
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>Source:     이곳에서 모든 것이 시작됐다.
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>Prediction: Everything began here.
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>Reference:  This is where it began.
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>--------------------------------------------------------------------------------
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>Source:     그래서 나는 프랑스에 오래 머무르고 싶고, 그러기 위한 돈이 필요하다.
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>Prediction: So I want to stay in France for a long time, and I need money to do so.
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>Reference:  This is why I would like an extended visa as well as as funds for my stay.
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>--------------------------------------------------------------------------------
+</span></code></pre></div>
+<figure>
+<p><img alt="" class="center" src="../assets/5.8.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 5.8 : Cross-attention visualization.</p>
+</figcaption>
+</figure>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/arnold518" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "header.autohide", "navigation.instant", "navigation.tracking", "navigation.tabs", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "search.share", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../assets/javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

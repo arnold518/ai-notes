@@ -1,0 +1,3542 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://arnold518.github.io/cs-notes/paper-review/1/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>1. RNN - Computer Science Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%206a6%206%200%200%201%206%206c0%202.22-1.21%204.16-3%205.2V19a1%201%200%200%201-1%201h-4a1%201%200%200%201-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6%206%200%200%201%206-6m2%2015v1a1%201%200%200%201-1%201h-2a1%201%200%200%201-1-1v-1zm6-10h3v2h-3zM1%2011h3v2H1zM13%201v3h-2V1zM4.92%203.5l2.13%202.14-1.42%201.41L3.5%204.93zm12.03%202.13%202.12-2.13%201.43%201.43-2.13%202.12z%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20512%20512%22%3E%3C%21--%21%20Font%20Awesome%20Free%207.1.0%20by%20%40fontawesome%20-%20https%3A//fontawesome.com%20License%20-%20https%3A//fontawesome.com/license/free%20%28Icons%3A%20CC%20BY%204.0%2C%20Fonts%3A%20SIL%20OFL%201.1%2C%20Code%3A%20MIT%20License%29%20Copyright%202025%20Fonticons%2C%20Inc.--%3E%3Cpath%20d%3D%22M256%200a256%20256%200%201%201%200%20512%20256%20256%200%201%201%200-512m-24%20120v136c0%208%204%2015.5%2010.7%2020l96%2064c11%207.4%2025.9%204.4%2033.3-6.7s4.4-25.9-6.7-33.3L280%20243.2V120c0-13.3-10.7-24-24-24s-24%2010.7-24%2024%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans";--md-code-font:"Ubuntu Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-rnn" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="Computer Science Notes" class="md-header__button md-logo" aria-label="Computer Science Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computer Science Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. RNN
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="공유" aria-label="공유" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/arnold518/cs-notes" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arnold518/cs-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI Paper Review
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../mfdnn/format/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mathematical Foundations of Deep Neural Networks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rl/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reinforcement Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Computer Science Notes" class="md-nav__button md-logo" aria-label="Computer Science Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Computer Science Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/arnold518/cs-notes" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arnold518/cs-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Paper Review
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Paper Review
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. RNN
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. RNN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Papers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions-forward-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions &amp; Forward Pass
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gradient-computation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradient Computation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gradient Computation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#back-propagation-through-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Back Propagation Through Time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-recurrent-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real-Time Recurrent Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teacher-forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teacher Forcing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ptb-dataset-prediction-with-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. PTB Dataset Prediction with RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-solving-delayed-xor-task-with-various-rnn-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Solving Delayed XOR Task with Various RNN Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. LSTM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Sequence-to-Sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Attention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../mfdnn/format/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematical Foundations of Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mathematical Foundations of Deep Neural Networks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 1. Optimization and Stochastic Gradient Descent
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 1. Optimization and Stochastic Gradient Descent
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Optimization Problem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Gradient Descent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1PSpoeseUPIptYQOPuQpxNawxtZbVR_K6/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 2. Shallow Neural Networks to Multilayer Perceptrons
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 2. Shallow Neural Networks to Multilayer Perceptrons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Shallow Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/15kXC3cJUV63gZNfXK6JdPPuSrwQZBzI8/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 3. Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 3. Convolutional Neural Networks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Foundations of Design and Training of Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. ImageNet Challenge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/12O9fLasWDA-kOKBD-lE-1UhCl-PoDf0z/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 4. CNNs for Other Supervised Learning Tasks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 4. CNNs for Other Supervised Learning Tasks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. CNNs for Other Supervised Learning Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/16IOKVF6IiDMyUvL73pGKBaEMKyXvezLB/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 5. Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 5. Unsupervised Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Autoencoder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Flow Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Variational Autoencoders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Generative Adversarial Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1JM5k-e6LkhZ0vXRlfROWpiuw4YC85Jv1/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5 Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch A. Appendix - Basics of Monte Carlo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch A. Appendix - Basics of Monte Carlo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mfdnn/format/13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Basics of Monte Carlo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/18b01xoORd0LFQmpfc_4ou5Rv44MY1neg/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter A Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Basics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python Basics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1-iY9XfDhWNRDq3z_wVVvOzU04aRQWAfW/view?usp=drive_link" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Lecture 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1BANbCC6jBjPEUFSRJMFkcLbc4oVmoQHm/view?usp=sharing" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Lecture 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://drive.google.com/file/d/1-Bc11RZmno6yx37kfVLjsyY-XKpLK5Je/view?usp=drive_link" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Lecture 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../rl/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reinforcement Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 1. Tabular Solution Methods
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 1. Tabular Solution Methods
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/2.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Multi-armed Bandits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/3.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Finite Markov Decision Processes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/4.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Dynamic Programming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/5.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Monte Carlo Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/6.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Temporal-Difference Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/7.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. n-step Bootstrapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/8.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Planning and Learning with Tabular Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 2. Approximate Solution Methods
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 2. Approximate Solution Methods
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/9.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. On-policy Prediction with Approximation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/10.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. On-policy Control with Approximation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/11.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Off-policy Methods with Approximation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/12.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Eligibility Traces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/13.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Policy Gradient Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ch 3. Looking Deeper
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ch 3. Looking Deeper
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/14.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Psychology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/15.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. NeuroScience
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/16.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. Applications and Case Studies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rl/17.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Frontiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Papers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions-forward-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions &amp; Forward Pass
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gradient-computation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradient Computation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gradient Computation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#back-propagation-through-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Back Propagation Through Time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-recurrent-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real-Time Recurrent Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teacher-forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teacher Forcing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ptb-dataset-prediction-with-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. PTB Dataset Prediction with RNN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-solving-delayed-xor-task-with-various-rnn-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Solving Delayed XOR Task with Various RNN Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="1-rnn">1. RNN<a class="headerlink" href="#1-rnn" title="Permanent link">&para;</a></h1>
+<h2 id="papers">Papers<a class="headerlink" href="#papers" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../papers/1.1.pdf">R. J. Williams and D. Zipser, “A Learning Algorithm for Continually Running Fully Recurrent Neural Networks,” Neural Computation, vol. 1, no. 2, pp. 270–280, 1989.</a></li>
+<li><a href="../papers/1.2.pdf">R. J. Williams and D. Zipser, “Gradient-Based Learning Algorithms for Recurrent Networks and Their Computational Complexity,” in Backpropagation: Theory, Architectures, and Applications, Y. Chauvin and D. E. Rumelhart, Eds. Hillsdale, NJ: Lawrence Erlbaum Associates, 1995, pp. 433–486.</a></li>
+</ul>
+<h2 id="definitions-forward-pass">Definitions &amp; Forward Pass<a class="headerlink" href="#definitions-forward-pass" title="Permanent link">&para;</a></h2>
+<p>General forward pass through the network structure is defined as follows.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.1 : General Forward Pass</p>
+<ul>
+<li><strong>External inputs</strong> at time <span class="arithmatex">\(t\)</span> : <span class="arithmatex">\(x^{\text{in}}(t)\in\mathbb{R}^m\)</span></li>
+<li><strong>Unit outputs</strong> at time <span class="arithmatex">\(t\)</span> : <span class="arithmatex">\(y(t)\in\mathbb{R}^n\)</span></li>
+<li>
+<p><strong>Augmented input vector</strong> at time <span class="arithmatex">\(t\)</span> : <span class="arithmatex">\(x(t)\in\mathbb{R}^{m+n}\)</span></p>
+<div class="arithmatex">\[
+x_k(t)= \begin{cases}x_k^{\text {in }} &amp; \text { if } k \in I \\ y_k(t) &amp; \text { if } k \in U\end{cases}
+\]</div>
+<p><span class="arithmatex">\(x(t)\)</span> is a concatenation of inputs <span class="arithmatex">\(x^{\text{in}}(t)\)</span> and outputs <span class="arithmatex">\(y(t)\)</span>, where <span class="arithmatex">\(U\)</span> is the indices for <span class="arithmatex">\(y_k(t)\)</span>, and <span class="arithmatex">\(I\)</span> is the indices for <span class="arithmatex">\(x^{\text{in}}(t)\)</span>.
+We use the convention that <span class="arithmatex">\(x_k(t)\)</span> and <span class="arithmatex">\(y_k(t)\)</span> correspond to the same unit when <span class="arithmatex">\(k\in U\)</span>.</p>
+</li>
+<li>
+<p><strong>Weight matrix</strong> : <span class="arithmatex">\(W\in\mathbb{R}^{n\times(m+n)}\)</span>, Entry <span class="arithmatex">\(w_{kl}\)</span> connects <span class="arithmatex">\(x_l(t)\)</span> to unit <span class="arithmatex">\(k\)</span>.</p>
+</li>
+<li>
+<p>Pre-activation <strong>net input</strong> at time <span class="arithmatex">\(t+1\)</span> : <span class="arithmatex">\(s(t+1)\in\mathbb{R}^n\)</span></p>
+<div class="arithmatex">\[
+\begin{equation*}
+s_{k}(t+1)=\sum_{l \in U} w_{k l} y_{l}(t)+\sum_{l \in I} w_{k l} x_{l}^{\text {in }}(t)=\sum_{l \in U \cup I} w_{k l} x_{l}(t)
+\end{equation*}
+\]</div>
+</li>
+<li>
+<p><strong>Updated unit outputs</strong> at time <span class="arithmatex">\(t+1\)</span> : <span class="arithmatex">\(y(t+1)\in\mathbb{R}^n\)</span></p>
+<div class="arithmatex">\[
+\begin{equation*}
+y_{k}(t+1)=f_{k}\left(s_{k}(t+1)\right)
+\end{equation*}
+\]</div>
+</li>
+</ul>
+</div>
+<figure>
+<p><img alt="" class="center" src="./assets/1.1.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 1.1 : Forward pass diagram.</p>
+</figcaption>
+</figure>
+<p>Note that all connections are treated as having a <strong>one-time-step delay</strong>: inputs at time <span class="arithmatex">\(t\)</span> can influence outputs only at <span class="arithmatex">\(t+1\)</span>.</p>
+<p>Assuming our task is sequential supervised learning task, we define the network error as follows.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.2 : Network Error</p>
+<ul>
+<li>
+<p><strong>Error for unit <span class="arithmatex">\(k\)</span></strong> at time <span class="arithmatex">\(t\)</span> : <span class="arithmatex">\(e_{k}(t)\)</span></p>
+<p>Let <span class="arithmatex">\(T(t)\)</span> denote the set of indices <span class="arithmatex">\(k \in U\)</span> for which there exists a specified target value <span class="arithmatex">\(d_{k}(t)\)</span> that the output of the <span class="arithmatex">\(k\)</span> th unit should match at time <span class="arithmatex">\(t\)</span>.</p>
+<div class="arithmatex">\[
+e_{k}(t)= \begin{cases}d_{k}(t)-y_{k}(t) &amp; \text { if } k \in T(t) \\ 0 &amp; \text { otherwise }\end{cases}
+\]</div>
+</li>
+<li>
+<p><strong>Negative overall network error</strong> at time <span class="arithmatex">\(t\)</span> : <span class="arithmatex">\(J(t)\)</span></p>
+<div class="arithmatex">\[
+\begin{equation*}
+J(t)=-\frac{1}{2} \sum_{k \in U}\left[e_{k}(t)\right]^{2}
+\end{equation*}
+\]</div>
+</li>
+</ul>
+</div>
+<p>Our goal is to maximize the negative total error <span class="arithmatex">\(J^{\text {total }}\left(t^{\prime}, t\right)\)</span>, </p>
+<div class="arithmatex">\[
+\begin{equation*}
+J^{\text {total }}\left(t^{\prime}, t\right)=\sum_{\tau=t^{\prime}+1}^{t} J(\tau)
+\end{equation*}
+\]</div>
+<p>One natural way to make the weight changes is along a constant positive multiple of the performance measure gradient, so that</p>
+<div class="arithmatex">\[
+\begin{equation*}
+\Delta w_{i j}=\eta \frac{\partial J^{\operatorname{total}}\left(t^{\prime}, t\right)}{\partial w_{i j}}
+\end{equation*}
+\]</div>
+<h2 id="gradient-computation">Gradient Computation<a class="headerlink" href="#gradient-computation" title="Permanent link">&para;</a></h2>
+<h3 id="back-propagation-through-time">Back Propagation Through Time<a class="headerlink" href="#back-propagation-through-time" title="Permanent link">&para;</a></h3>
+<p>When we unroll the recurrent network through time, we obtain a feedforward network which has a layer for each time step.
+Note that each unit and connection in the orignal network has a copy in each layer in the unrolled network.
+The key value of this conceptualization is that it allows one to regard the problem of training a recurrent network as a corresponding problem of training a feedforward network with certain constraints imposed on its weights.</p>
+<figure>
+<p><img alt="Unrolled Network" class="center" src="../assets/1.2.png" style="width:40%;" /></p>
+<figcaption>
+<p>Figure 1.2 : Unrolled recurrent network across time steps.</p>
+</figcaption>
+</figure>
+<p>This also means that we can perform standard back propagation algorithm for feedforward nets in recurrent networks.
+We introduce a general form of back propagation through time (bptt), <span class="arithmatex">\(BPTT(h; h')\)</span>.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.3 : General Back Propagation Through Time</p>
+<div class="arithmatex">\[BPTT(h; h')\]</div>
+<ul>
+<li>
+<p><strong>Unroll length</strong> : <span class="arithmatex">\(h\)</span></p>
+<p>When we calculate the gradient at time <span class="arithmatex">\(t\)</span>, we only consider the last <span class="arithmatex">\(h\)</span> time steps, <span class="arithmatex">\([t-h+1, h]\)</span>, ignoring the contributions before <span class="arithmatex">\(t-h+1\)</span>.</p>
+<p>This factor controls the truncation length.
+When <span class="arithmatex">\(h=\infty\)</span>, we maintain the full history of the network, and thus we compute the exact gradient.
+Meanwhile, when <span class="arithmatex">\(h &lt; \infty\)</span>, since we truncate the history, we</p>
+</li>
+<li>
+<p><strong>Update period</strong> : <span class="arithmatex">\(h'\)</span></p>
+<p>We do not calculate the gradient every time, we compute the truncated gradient and update weights every <span class="arithmatex">\(h'\)</span> steps.</p>
+<p>This factor is for epochwise gradient computation.
+Also, it means that our objective is to maximize <span class="arithmatex">\(J^{\text{total}}(t-h'+1,t)\)</span>.</p>
+</li>
+</ul>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 1.4 : Base BPTT Equations</p>
+<p>For any differentiable objective <span class="arithmatex">\(F\)</span> that depends on outputs over an interval <span class="arithmatex">\((t',t]\)</span>, define</p>
+<div class="arithmatex">\[
+e_k(\tau;F)=\frac{\partial F}{\partial y_k(\tau)},\qquad
+\delta_k(\tau;F)=\frac{\partial F}{\partial s_k(\tau)}.
+\]</div>
+<p>They satisfy the backward recurrences (with <span class="arithmatex">\(\tau\)</span> stepping down from <span class="arithmatex">\(t\)</span> to <span class="arithmatex">\(t_0\)</span>)</p>
+<div class="arithmatex">\[
+e_k(\tau;F)=
+\begin{cases}
+\frac{\partial F}{\partial y_k(t)}, &amp; \tau=t, \\
+\frac{\partial F}{\partial y_k(\tau)}+\displaystyle\sum_{\ell\in U} w_{\ell k}\delta_\ell(\tau+1;F), &amp; \tau&lt;t,
+\end{cases}
+\]</div>
+<div class="arithmatex">\[
+\delta_k(\tau;F)=f'_k\big(s_k(\tau)\big)e_k(\tau;F).
+\]</div>
+<p>The weight-gradient then collects contributions from each unrolled step:</p>
+<div class="arithmatex">\[
+\frac{\partial F}{\partial w_{ij}}=\sum_{\tau=t_0}^{t-1}\delta_i(\tau+1;F)x_j(\tau)
+\]</div>
+</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 1.5 : <span class="arithmatex">\(BPTT(h; h')\)</span> Equations</p>
+<p>At an update time <span class="arithmatex">\(t\)</span> (performed once every <span class="arithmatex">\(h'\)</span> steps), <span class="arithmatex">\(BPTT(h; h')\)</span>:</p>
+<ol>
+<li>
+<p>Chooses the epoch objective</p>
+<div class="arithmatex">\[
+F = J^{\text{total}}(t-h'+1,t)=\sum_{\tau=t-h'+1}^{t} J(\tau),
+\]</div>
+</li>
+<li>
+<p>Backpropagates only through the last <span class="arithmatex">\(h\)</span> steps, i.e. it computes <strong>Concept 1.4</strong> but restricts the recursion to <span class="arithmatex">\(\tau\in[t-h+1,t]\)</span> and ignores contributions earlier than <span class="arithmatex">\(t-h\)</span>.
+Also, we only consider the error terms that occur in <span class="arithmatex">\([t-h'+1, t]\)</span></p>
+<div class="arithmatex">\[
+e_k(\tau;J^{\text{total}})=
+\begin{cases}
+\displaystyle \frac{\partial J(t)}{\partial y_k(t)}, &amp; \tau=t \\
+\displaystyle \frac{\partial J(\tau)}{\partial y_k(\tau)}+\sum_{\ell\in U} w_{\ell k}\delta_\ell(\tau+1;J^{\text{total}}), &amp; t-h'+1\le \tau &lt; t \\
+\displaystyle \sum_{\ell\in U} w_{\ell k}\delta_\ell(\tau+1;J^{\text{total}}), &amp; t-h+1 \le \tau &lt; t-h'+1 \\
+0, &amp; \tau &lt; t-h+1
+\end{cases}
+\]</div>
+<div class="arithmatex">\[
+\delta_k(\tau,J^{\text{total}})=
+\begin{cases}
+f'_k\big(s_k(\tau)\big)e_k(\tau;J^{\text{total}}), &amp; \tau\ge t-h+1 \\
+0, &amp; \tau&lt;t-h+1
+\end{cases}
+\]</div>
+</li>
+<li>
+<p>Uses the truncated sum:</p>
+<div class="arithmatex">\[
+\frac{\partial J^{\text{total}}(t-h'+1,t)}{\partial w_{ij}}
+\approx\sum_{\tau=t-h}^{t-1}\delta_i\big(\tau+1;J^{\text{total}}(t-h'+1,t)\big)x_j(\tau)
+\]</div>
+<p>(the approximation is precisely the truncation to the interval <span class="arithmatex">\([t-h, t]\)</span>).</p>
+</li>
+</ol>
+</div>
+<p>To summarize, <span class="arithmatex">\(BPTT(h; h')\)</span> maximizes <span class="arithmatex">\(J^{\text{total}}(t-h'+1,t)\)</span> by back propagating through the last <span class="arithmatex">\(h\)</span> timesteps, using only the error terms occuring in the last <span class="arithmatex">\(h'\)</span> timesteps.</p>
+<figure>
+<p><img alt="TBPTT" class="center" src="../assets/1.3.png" style="width:50%;" /></p>
+<figcaption>
+<p>Figure 1.3 : Truncated BPTT window over the unrolled sequence.</p>
+</figcaption>
+</figure>
+<hr />
+<p>By controlling parameters <span class="arithmatex">\(h\)</span> and <span class="arithmatex">\(h'\)</span>, we can acheive various forms of BPTT.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.6 : Real-Time BPTT</p>
+<div class="arithmatex">\[BPTT(\infty, 1)\]</div>
+<p><strong>Real-Time BPTT</strong> computes gradient for each timestep (<span class="arithmatex">\(h'=1\)</span>), while back propagating through full history (<span class="arithmatex">\(h=\infty\)</span>), which achieves real time exact gradient computation.</p>
+<figure>
+<p><img alt="RTBPTT" class="center" src="../assets/1.4.png" style="width:40%;" /></p>
+<figcaption>
+<p>Figure 1.4 : Real-time BPTT with full-history backprop each step.</p>
+</figcaption>
+</figure>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.7 : Epochwise BPTT</p>
+<div class="arithmatex">\[BPTT(\infty, \infty)\]</div>
+<p><strong>Epochwise BPTT</strong> run forward over an interval <span class="arithmatex">\([t_0, t_1]\)</span>, then do one backprop pass over the entire interval, updating once per epoch.</p>
+<figure>
+<p><img alt="EBPTT" class="center" src="../assets/1.5.png" style="width:40%;" /></p>
+<figcaption>
+<p>Figure 1.5 : Epochwise BPTT backpropagating over the full sequence.</p>
+</figcaption>
+</figure>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.8 : Truncated Real-Time BPTT</p>
+<div class="arithmatex">\[BPTT(h, 1)\]</div>
+<p><strong>Truncated Real-Time BPTT</strong> is the same as real-time bptt (<strong>Definition 1.6</strong>) but backprop only through the last <span class="arithmatex">\(h\)</span> steps.</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.9 : Truncated Epochwise BPTT</p>
+<div class="arithmatex">\[BPTT(h, \infty)\]</div>
+<p><strong>Truncated Epochwise BPTT</strong> is the same as epochwise bptt (<strong>Definition 1.7</strong>) but run an epoch, then backprop only <span class="arithmatex">\(h\)</span> steps from the end.</p>
+</div>
+<h3 id="real-time-recurrent-learning">Real-Time Recurrent Learning<a class="headerlink" href="#real-time-recurrent-learning" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.10 : Real-Time Recurrent Learning</p>
+<p>For each <span class="arithmatex">\(k \in U, i \in U, j \in U \cup I\)</span>, and <span class="arithmatex">\(t_{0} \leq t \leq t_{1}\)</span>, we define</p>
+<div class="arithmatex">\[
+p_{i j}^{k}(t)=\frac{\partial y_{k}(t)}{\partial w_{i j}}
+\]</div>
+<p>From chain rule and differentation of <strong>Definition 1.1</strong> and <strong>Definition 1.2</strong>, we find that</p>
+<div class="arithmatex">\[
+\frac{\partial J(t)}{\partial w_{i j}}=\sum_{k \in U} e_{k}(t) p_{i j}^{k}(t)
+\]</div>
+<div class="arithmatex">\[
+p_{i j}^{k}(t+1)=f_{k}^{\prime}\left(s_{k}(t+1)\right)\left[\sum_{l \in U} w_{k l} p_{i j}^{l}(t)+\delta_{i k} x_{j}(t)\right]
+\]</div>
+<p>with the initial condition</p>
+<div class="arithmatex">\[
+p_{i j}^{k}\left(t_{0}\right)=\frac{\partial y_{k}\left(t_{0}\right)}{\partial w_{i j}}=0.
+\]</div>
+<p>Using the recurrence formula of <span class="arithmatex">\(p_{i j}^{k}(t)\)</span>, we can compute the gradient <span class="arithmatex">\(\frac{\partial J(t)}{\partial w_{i j}}\)</span> in real time.</p>
+</div>
+<p>Unlike back propagation through time, real time recurrent learning allows gradient computation in the same direction as the forward pass, without maintaining specific history of the network.</p>
+<p>We have to compute and maintain the sensitivity matrix <span class="arithmatex">\(p_{i j}^{k}(t)\)</span>, which yields a space complexity of <span class="arithmatex">\(\Theta(n^3)\)</span> and a time complexity of <span class="arithmatex">\(\Theta(n^4)\)</span>.
+The paper introduces a hybrid algorithm with BPTT and RTRL mixed together, which shows <span class="arithmatex">\(\Theta(n^2)\)</span> time per step, which is asymptotically better than real-time RTRL’s <span class="arithmatex">\(\Theta(n^4)\)</span> time.</p>
+<h2 id="teacher-forcing">Teacher Forcing<a class="headerlink" href="#teacher-forcing" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.11 : Teacher Forcing</p>
+<p>During <strong>teacher forced</strong> training, whenever a target exists for unit <span class="arithmatex">\(k\)</span> at time <span class="arithmatex">\(t\)</span> (i.e., <span class="arithmatex">\(k\in T(t)\)</span>), the network feeds the target back in place of the unit’s own output for all subsequent computations at that time step.</p>
+<div class="arithmatex">\[
+x_k(t)=
+\begin{cases}
+x^{\text{in}}_k(t), &amp; k\in I,\\
+d_k(t), &amp; k\in T(t),\\\
+y_k(t), &amp; k\in U\setminus T(t).
+\end{cases}
+\]</div>
+</div>
+<p>In BPTT, we cut off the error flow from future timesteps into the teacher forced node, and uses only the direct loss term at that step.
+Thus <strong>Concept 1.5</strong> changes to</p>
+<div class="arithmatex">\[
+e_k(\tau;J^{\text{total}})=\displaystyle \frac{\partial J(t)}{\partial y_k(t)}, \quad k \in T(\tau)
+\]</div>
+<p>In RTRL, we treat the value of <span class="arithmatex">\(p_{i j}^{l}(t)\)</span> as zero for any <span class="arithmatex">\(l \in T(t)\)</span> when computing <span class="arithmatex">\(p_{i j}^{k}(t +1)\)</span> via <strong>Definition 1.10</strong>.</p>
+<div class="arithmatex">\[
+\begin{equation*}
+p_{i j}^{k}(t+1)=f_{k}^{\prime}\left(s_{k}(t)\right)\left[\sum_{l \in U \backslash T(t)} w_{k l} p_{i j}^{l}(t)+\delta_{i k} x_{j}(t)\right]
+\end{equation*}
+\]</div>
+<div class="admonition concept">
+<p class="admonition-title">Concept 1.12 : Pros and Cons of Teacher Forcing</p>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Speeds up and stabilizes training (less compounding of self-generated errors).</li>
+<li>Keeps trajectories on-target in continual/oscillatory tasks (helps learn correct phase/dynamics).</li>
+<li>Efficient in continually operating nets, since teacher forcing injects truth states to keep trajectories on track, so gradients carry the right information.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Train/test mismatch: model is fed ground truth during training but not at inference → weaker free-running behavior (“exposure bias”).</li>
+<li>Can mask error-recovery skills (model learns less about fixing its own mistakes).</li>
+<li>Cuts some gradient paths (through forced units), which can under-train long temporal dependencies if overused.</li>
+</ul>
+</div>
+<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
+<h3 id="1-ptb-dataset-prediction-with-rnn">1. PTB Dataset Prediction with RNN<a class="headerlink" href="#1-ptb-dataset-prediction-with-rnn" title="Permanent link">&para;</a></h3>
+<p><div style="text-align:center" markdown>
+<a href="https://github.com/arnold518/ai-study/tree/main/paper-review/1/1">Link to Code</a>
+</div></p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.13 : Pytorch RNN</p>
+<p><div style="text-align:center" markdown>
+<a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.RNN.html">Pytorch RNN Reference</a>
+</div></p>
+<div class="arithmatex">\[
+h_t = \tanh (x_t W_{ih}^T + b_{ih} + h_{t-1} W_{hh}^T + b_{hh})
+\]</div>
+<p>(<span class="arithmatex">\(h_t\)</span> is the hidden state at time <span class="arithmatex">\(t\)</span>, <span class="arithmatex">\(x_t\)</span> is the input at time <span class="arithmatex">\(t\)</span>, <span class="arithmatex">\(h_{t-1}\)</span> is the hidden state of the previous layer at time <span class="arithmatex">\(t-1\)</span> or the initial hidden state at time <span class="arithmatex">\(0\)</span>.)</p>
+<p>Parameters :</p>
+<ul>
+<li><code>input_size</code> : <span class="arithmatex">\(H_{in}\)</span>, the dimension of input <span class="arithmatex">\(x_t\)</span>.</li>
+<li><code>hidden_size</code> : <span class="arithmatex">\(H_{out}\)</span>, the dimension of hidden state <span class="arithmatex">\(h_t\)</span>.</li>
+<li><code>num_layers</code> : <span class="arithmatex">\(K\)</span>, the number of recurrent layers, setting 2 layers mean stacking two RNNs together to form a stacked RNN, with the second RNN taking the outputs of the first RNN and computing the final results.</li>
+</ul>
+<p>Other parameters (given when inputs are given) : </p>
+<ul>
+<li><code>sequence_length</code> : <span class="arithmatex">\(L\)</span>, the sequence length of input <span class="arithmatex">\(x_t\)</span>.</li>
+<li><code>batch_size</code> : <span class="arithmatex">\(N\)</span>, the batch size of input.</li>
+</ul>
+<p>Inputs : </p>
+<ul>
+<li><code>input</code> : <span class="arithmatex">\(x_t\)</span>, tensor of shape <span class="arithmatex">\((L, N, H_{in})\)</span> containing the features of the input sequence.</li>
+<li><code>hx</code> : <span class="arithmatex">\(h_0\)</span>, tensor of shape <span class="arithmatex">\((K, H_{out})\)</span>, containing the initial hidden state.</li>
+</ul>
+<p>Outputs : </p>
+<ul>
+<li><code>output</code> : <span class="arithmatex">\(h_t\)</span>, tensor of shape <span class="arithmatex">\((L, N, H_{out})\)</span> containing the output features from the last layer of the RNN, for each <span class="arithmatex">\(t\)</span>.</li>
+<li><code>h_n</code> : <span class="arithmatex">\(h_L\)</span>, tensor of shape <span class="arithmatex">\((K, N, H_{out})\)</span> containing the final hidden state for each element in the batch.</li>
+</ul>
+<p>Variables :</p>
+<ul>
+<li><code>weight_ih_l[k]</code> : input-hidden weights of the <span class="arithmatex">\(k\)</span>th layer, of shape <span class="arithmatex">\((H_{out}, H_{in})\)</span> for <span class="arithmatex">\(k=0\)</span>, <span class="arithmatex">\((H_{out}, H_{out})\)</span> for <span class="arithmatex">\(k&gt;0\)</span>.</li>
+<li><code>weight_hh_l[k]</code> : hidden-hidden weights of the <span class="arithmatex">\(k\)</span>th layer, of shape <span class="arithmatex">\((H_{out}, H_{out})\)</span>.</li>
+<li><code>bias_ih_l[k]</code> : input-hidden bias of the <span class="arithmatex">\(k\)</span>th layer, of shape <span class="arithmatex">\((H_{out})\)</span>.</li>
+<li><code>bias_hh_l[k]</code> : hidden-hidden bias of the <span class="arithmatex">\(k\)</span>th layer, of shape <span class="arithmatex">\((H_{out})\)</span>.</li>
+</ul>
+</div>
+<p>In order to predict the next word in the PTB dataset with RNN, we constructed an <code>embedding - rnn - linear</code> structured model.
+First, we transformed each word into a feature vector using the embedding layer.
+Secondly, after passing the sequence of feature vectors to the rnn layer, finally we used a linear layer to transform the results into a probability distribution to predict the following word.
+Naturally, we used cross entropy loss for training.</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># --- 4. RNN Model ---</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">RNNModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Minimal RNN LM: Embedding → RNN → Linear-to-Vocab.</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    Forward expects:</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">      tokens : [sequence_length, batch_size]</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">      h_0    : [num_layers,     batch_size, hidden_size] or None</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    Returns:</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">      logits : [sequence_length, batch_size, vocab_size]</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">      h_N    : [num_layers,     batch_size, hidden_size]</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">dict_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">RNN</span><span class="p">(</span><span class="n">embedding_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">dict_size</span><span class="p">)</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sd">        tokens   : [sequence_length, batch_size]</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sd">        h        : [num_layers, batch_size, hidden_size]</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="sd">        embedded : [sequence_length, batch_size, embedding_size]</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="sd">        out      : [sequence_length, batch_size, hidden_size]</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="sd">        logits   : [sequence_length, batch_size, vocab_size]</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="n">emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>            <span class="c1"># [seq_len, B, E]</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="n">out</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span><span class="p">(</span><span class="n">emb</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>          <span class="c1"># out: [seq_len, B, H]</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>          <span class="c1"># [seq_len, B, V]</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="k">return</span> <span class="n">logits</span><span class="p">,</span> <span class="n">h</span>
+</span></code></pre></div>
+<div class="admonition code">
+<p class="admonition-title">Code 1.1.1.py : Unstatefull TBPTT using Pytorch RNN</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># --- 3. Dataset Class ---</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">PTBSequenceDataset</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Slice a long 1D corpus into (input, target) pairs of fixed sequence length.&quot;&quot;&quot;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">):</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span> <span class="o">=</span> <span class="n">corpus</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span> <span class="o">=</span> <span class="n">sequence_length</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="n">inputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="p">[</span><span class="n">idx</span> <span class="p">:</span> <span class="n">idx</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span><span class="p">]</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="n">targets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">idx</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="k">return</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1"># --- 5. Setup ---</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">35</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">train_set</span> <span class="o">=</span> <span class="n">PTBSequenceDataset</span><span class="p">(</span><span class="n">train_corpus</span><span class="p">[:</span><span class="mi">100000</span><span class="p">],</span> <span class="n">sequence_length</span><span class="p">)</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">test_set</span> <span class="o">=</span> <span class="n">PTBSequenceDataset</span><span class="p">(</span><span class="n">test_corpus</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">)</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></code></pre></div>
+<p>For the training of the model with pytorch rnn, we first used the usual dataloader for the PTB dataset with <code>shuffle=True</code>.
+Since it is inefficient to put the whole dataset into the RNN model, and perform full backpropagation on it, we cut the sequence into sequences of length <span class="arithmatex">\(L\)</span>, and performed truncated bptt (<span class="arithmatex">\(bptt(L, L)\)</span>).</p>
+<p>This resulted in unstateful training, where the whole sequence is cut into pieces of length <span class="arithmatex">\(L\)</span>, but the computed hidden state from a former piece is not propagated into the following piece.
+In other words, it could not remember the information that was given before <span class="arithmatex">\(L\)</span> timesteps.</p>
+<p>This resulted in almost zero learning, and final test accuracy of 5.31%.</p>
+<figure>
+<p><img alt="1.1.1.py" class="center" src="../assets/1.6.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 1.6 : Unstateful TBPTT training curve with weak learning.</p>
+</figcaption>
+</figure>
+</div>
+<div class="admonition code">
+<p class="admonition-title">Code 1.1.2.py : Stateful TBPTT with Pytorch RNN</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># --- 3) Stream batching into [T, B] ---</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">batchify</span><span class="p">(</span><span class="n">data_1d</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    Reshape a 1D token stream into [T, B] where B=batch_size parallel streams.</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    Trims the tail so T*B divides the length exactly.</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">n_batches</span> <span class="o">=</span> <span class="n">data_1d</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">//</span> <span class="n">batch_size</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">data_1d</span> <span class="o">=</span> <span class="n">data_1d</span><span class="o">.</span><span class="n">narrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n_batches</span> <span class="o">*</span> <span class="n">batch_size</span><span class="p">)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">data_tb</span> <span class="o">=</span> <span class="n">data_1d</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">t</span><span class="p">()</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>  <span class="c1"># [T, B]</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">return</span> <span class="n">data_tb</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1"># --- 4) TBPTT windowing via IterableDataset (stateful order preserved) ---</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">class</span><span class="w"> </span><span class="nc">StreamBatchDataset</span><span class="p">(</span><span class="n">IterableDataset</span><span class="p">):</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="sd">    Iterates over a time-major source tensor [T, batch_size] and yields</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="sd">    (data_window, target_window) pairs for TBPTT:</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="sd">    data_window   : [seq_len, batch_size]</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="sd">    target_window : [seq_len * batch_size]  (flattened next-token labels)</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="sd">    NOTE: Order is sequential; do NOT shuffle if you want stateful training.</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_tb</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source_tb</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span> <span class="o">=</span> <span class="n">sequence_length</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        <span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span><span class="p">):</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>            <span class="n">cur_len</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span><span class="p">,</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">cur_len</span><span class="p">]</span>                   <span class="c1"># [cur_len, B]</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>            <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">cur_len</span><span class="p">]</span>         <span class="c1"># [cur_len, B]</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>            <span class="k">yield</span> <span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>                         <span class="c1"># [cur_len*B]</span>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="c1"># --- 6) Hyperparameters &amp; tensors ---</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">35</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="c1"># Create iterable datasets that yield TBPTT windows sequentially</span>
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="n">train_ds</span> <span class="o">=</span> <span class="n">StreamBatchDataset</span><span class="p">(</span><span class="n">train_tb</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">)</span>
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="n">test_ds</span>  <span class="o">=</span> <span class="n">StreamBatchDataset</span><span class="p">(</span><span class="n">test_tb</span><span class="p">,</span>  <span class="n">sequence_length</span><span class="p">)</span>
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>
+</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="c1"># DataLoaders: keep order, no auto-batching (each dataset item is already a batch window)</span>
+</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="c1"># num_workers=0 is safest when source tensors live on GPU</span>
+</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_ds</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="n">test_loader</span>  <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_ds</span><span class="p">,</span>  <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span>
+</span></code></pre></div>
+<p>For stateful training, we used iterable datasets.
+First, cut the whole sequence evenly into <span class="arithmatex">\(N\)</span> pieces for each batch.
+Then, for each batch, we created datasets by cutting each subsequence into continual pieces of length <span class="arithmatex">\(L\)</span>.
+This way, for each batch we can propagate the hidden state of the former piece into the following piece.</p>
+<p>Note that even in truncated BPTT, the forward pass should be propagated, while the backward error pass can be truncated.</p>
+<p>This resulted in a difference with <strong>Code 1.1.1.py</strong>, with final test accuracy of 23.66%.</p>
+<figure>
+<p><img alt="1.1.2.png" class="center" src="../assets/1.7.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 1.7 : Stateful TBPTT training curve with improved accuracy.</p>
+</figcaption>
+</figure>
+</div>
+<div class="admonition code">
+<p class="admonition-title">Code 1.1.3.py : Handmade RNN</p>
+<p>Replaced the pytorch RNN with handmade <code>class MinimalRNNCell(nn.Module)</code> and <code>class MinimalRNN(nn.Module)</code>.</p>
+<p>Showed almost same results as <strong>Code 1.1.2.py</strong></p>
+</div>
+<h3 id="2-solving-delayed-xor-task-with-various-rnn-algorithms">2. Solving Delayed XOR Task with Various RNN Algorithms<a class="headerlink" href="#2-solving-delayed-xor-task-with-various-rnn-algorithms" title="Permanent link">&para;</a></h3>
+<div style="text-align:center">
+<p><a href="https://github.com/arnold518/ai-study/tree/main/paper-review/1/2">Link to Code</a></p>
+</div>
+<p>There is a major difference in the forward pass described in the paper (<strong>Definition 1.1</strong>, <strong>Definition 1.2</strong>) with Pytorch's forward pass (<strong>Definition 1.13</strong>), because of the one timestep delay in <strong>Definition 1.1</strong>.
+Thus, we introduce a universal convention that is based mostly on the paper, but can be interpreted in both situations.</p>
+<div class="admonition definition">
+<p class="admonition-title">Definition 1.14 : Universal Forward Pass Convention</p>
+<p>Paper (<strong>Definition 1.1</strong>, <strong>Definition 1.2</strong>)</p>
+<ul>
+<li>Forward pass : 
+    <span class="arithmatex">\(x(t) = [x^{\text{in}}(t), y(t)], s(t+1)=Wx(t), y(t+1)=f(s(t+1))\)</span></li>
+<li>Supervision (targets) :
+    At timestep <span class="arithmatex">\(t\)</span>, we supervise <span class="arithmatex">\(y(t+1)\)</span> with <span class="arithmatex">\(d(t+1)\)</span>, which was produced after consuming <span class="arithmatex">\(x(t)\)</span>.</li>
+</ul>
+<p>Pytorch (<strong>Definition 1.13</strong>)</p>
+<ul>
+<li>Forward pass :
+    <span class="arithmatex">\(h_t= \text{RNN}(x_t, h_{t-1})\)</span></li>
+<li>Supervision (targets) :
+    At timestep <span class="arithmatex">\(t\)</span>, we supervise <span class="arithmatex">\(h_t\)</span>, which was produced after consuming <span class="arithmatex">\(x_t\)</span>.</li>
+<li>Alignment to the paper :
+    Identify <span class="arithmatex">\(h_t \equiv y(t+1), x_t \equiv x^{\text{in}}(t)\)</span></li>
+</ul>
+<p><strong>Universal Convention</strong></p>
+<ul>
+<li>Forward pass :
+    <code>x_list[t]</code> <span class="arithmatex">\(\equiv x(t)\)</span>, <code>s_list[t]</code> <span class="arithmatex">\(\equiv s(t+1)\)</span>, <code>y_list[t]</code><span class="arithmatex">\(\equiv y(t+1)\)</span><br />
+    (<span class="arithmatex">\(x(t), s(t+1), y(t+1)\)</span> is defined as the paper)</li>
+<li>Supervision (targets) : 
+    <code>D[t]</code> <span class="arithmatex">\(\equiv d(t+1)\)</span>, At timestep <span class="arithmatex">\(t\)</span>, we compare <code>y_list[t]</code> to <code>D[t]</code>, i.e. <span class="arithmatex">\(y(t+1)\)</span> to <span class="arithmatex">\(d(t+1)\)</span>.</li>
+</ul>
+<div style="text-align:center" markdown>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Paper</th>
+<th>PyTorch</th>
+<th>Universal Convention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>External input used</td>
+<td><span class="arithmatex">\(x^{\text{in}}(t)\)</span></td>
+<td><code>input[t]</code><span class="arithmatex">\(=x_t\)</span></td>
+<td><code>x_list[t][:m]</code></td>
+</tr>
+<tr>
+<td>Concatenated input</td>
+<td><span class="arithmatex">\(x(t)\)</span></td>
+<td>— (implicit)</td>
+<td><code>x_list[t] = [x_in(t), y(t)]</code></td>
+</tr>
+<tr>
+<td>Pre-activation</td>
+<td><span class="arithmatex">\(s(t+1)\)</span></td>
+<td>— (inside cell)</td>
+<td><code>s_list[t]</code></td>
+</tr>
+<tr>
+<td>Output/hidden</td>
+<td><span class="arithmatex">\(y(t+1)\)</span></td>
+<td><code>output[t]</code><span class="arithmatex">\(=h_t\)</span></td>
+<td><code>y_list[t] = x_list[t+1][m:]</code></td>
+</tr>
+<tr>
+<td>Previous state</td>
+<td><span class="arithmatex">\(y(t)\)</span></td>
+<td><code>output[t-1]</code><span class="arithmatex">\(=h_{t-1}\)</span></td>
+<td><code>x_list[t][m:]</code></td>
+</tr>
+<tr>
+<td>Target at timestep <span class="arithmatex">\(t\)</span></td>
+<td><span class="arithmatex">\(d(t+1)\)</span></td>
+<td><code>answer[t]</code></td>
+<td><code>D[t]</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Using the universal forward pass convention (<strong>Definition 1.14</strong>), we implemented and compared various algorithms of gradient computation in RNNs.
+We tackled the delayed XOR task, where for time <span class="arithmatex">\(t\)</span> two input cells carry randomly sampled bits, and the output at time <span class="arithmatex">\(t+\tau\)</span>, one output cell must match the xor of the two bits at time <span class="arithmatex">\(t\)</span>.</p>
+<div class="admonition code">
+<p class="admonition-title">Code 1.2</p>
+<ul>
+<li><code>alg_pytorch.py</code> : 
+    Used a single layer pytorch rnn module described in <strong>Definition 1.13</strong>, modified to match <strong>Definition 1.14</strong>.</li>
+<li>
+<p><code>alg_bptt.py</code> : 
+    Implemented <span class="arithmatex">\(BPTT(h, h')\)</span> described in <strong>Definition 1.3</strong> and <strong>Concept 1.5</strong>.
+    Achieved variants of the bptt algorithm by changing the parameters, <span class="arithmatex">\(h\)</span> and <span class="arithmatex">\(h'\)</span>.</p>
+<ul>
+<li>ebptt <span class="arithmatex">\(\equiv BPTT(\infty, \infty)\)</span> : Epochwise BPTT defined in <strong>Definition 1.7</strong>.</li>
+<li>rtbptt <span class="arithmatex">\(\equiv BPTT(\infty, 1)\)</span> : Real-Time BPTT defined in <strong>Definition 1.6</strong>.</li>
+<li>tbptt <span class="arithmatex">\(\equiv BPTT(h, h')\)</span> : general truncated BPTT.</li>
+</ul>
+</li>
+<li>
+<p><code>alg_rtrl.py</code> : 
+    Implemented RTRL described in <strong>Definition 1.10</strong>.
+    For analogy with BPTT, introduced <span class="arithmatex">\(RTRL(h')\)</span>, where we update the gradient every <span class="arithmatex">\(h'\)</span> timesteps.</p>
+<ul>
+<li>ertrl <span class="arithmatex">\(\equiv RTRL(\infty)\)</span> : Epochwise RTRL, update gradient after consuming an epoch.</li>
+<li>rtrl <span class="arithmatex">\(\equiv RTRL(1)\)</span> : update gradient every timestep.</li>
+</ul>
+</li>
+<li>
+<p><code>alg_hybrid.py</code> : 
+    Implemented the hybrid algorithm with BPTT and RTRL mixed together, as introduced in the paper.</p>
+</li>
+<li><code>core.py</code> :
+    File for dataclass definitions.</li>
+<li><code>helper.py</code> : 
+    File containing activation functions, their derivatives, delayed xor testbench, and scorers.</li>
+<li><code>main.py</code> : 
+    Main runner file, controls parameters, creates testdata, and runs the test on all algorithms.</li>
+</ul>
+<p>Test was done with the following parameters :</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">results</span> <span class="o">=</span> <span class="n">run_many</span><span class="p">(</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">alg_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ebptt&quot;</span><span class="p">,</span> <span class="s2">&quot;ertrl&quot;</span><span class="p">,</span> <span class="s2">&quot;rtbptt&quot;</span><span class="p">,</span> <span class="s2">&quot;tbptt&quot;</span><span class="p">,</span> <span class="s2">&quot;rtrl&quot;</span><span class="p">,</span> <span class="s2">&quot;pytorch&quot;</span><span class="p">,</span> <span class="s2">&quot;hybrid&quot;</span><span class="p">],</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">m</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">tau</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">Ttrain</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">Teval</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">eval_seqs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">quick_eval_seqs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">epochs</span><span class="o">=</span><span class="mi">7500</span><span class="p">,</span> <span class="n">log_every</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">truncation_h</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">update_every_hprime</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>   <span class="c1"># used only by tbptt</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">rtrl_hprime</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>                            <span class="c1"># used only by rtrl (continual)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">h_bucket</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>                              <span class="c1"># used only by hybrid</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">grad_clip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">metric_name</span><span class="o">=</span><span class="s2">&quot;acc&quot;</span><span class="p">,</span> <span class="n">metric_threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">)</span>
+</span></code></pre></div>
+</div>
+<figure>
+<p><img alt="tau=5" class="center" src="../assets/1.8.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 1.8 : Delayed XOR accuracy at tau=5.</p>
+</figcaption>
+</figure>
+<figure>
+<p><img alt="tau=7" class="center" src="../assets/1.9.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 1.9 : Delayed XOR accuracy at tau=7.</p>
+</figcaption>
+</figure>
+<figure>
+<p><img alt="tau=10" class="center" src="../assets/1.10.png" style="width:100%;" /></p>
+<figcaption>
+<p>Figure 1.10 : Delayed XOR accuracy at tau=10.</p>
+</figcaption>
+</figure>
+<p>In the result, all algorithms showed 100% success when <span class="arithmatex">\(\tau=5\)</span>, but they showed less and less accuracy when <span class="arithmatex">\(\tau\)</span> got larger.
+When <span class="arithmatex">\(\tau=10\)</span>, almost all algorithms failed to learn any meaningful informations from the data.</p>
+<p>This result shows that RNN are weak on remembering informations with large timesteps involved, it has a short short-term memory.
+This fatal issue will be improved through LSTMs, or GRUs later.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/arnold518" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "header.autohide", "navigation.instant", "navigation.tracking", "navigation.tabs", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "search.share", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../assets/javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
